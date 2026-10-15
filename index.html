@@ -86,6 +86,9 @@ a.wa{display:flex;align-items:center;justify-content:center;min-height:44px;padd
 .msg{white-space:pre-line;background:#fff;border:1px solid var(--line);border-radius:4px;padding:12px 14px;font-size:13px;line-height:1.5}
 ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 .mono{font-family:var(--mono)}
+[hidden]{display:none!important}
+.grp{width:100%;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.grp .lbl{font-size:13px;color:var(--muted);margin-right:2px}
 </style>
 </head>
 <body>
@@ -115,7 +118,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
   <ol class="steps">
     <li>Customer prepares any base: slab, piles or sleepers. Each foot node has a 200 × 200 base plate, so the kit is the same whatever it stands on.</li>
     <li>Base rails and base ties bolt into the foot nodes to make a level steel base frame.</li>
-    <li>Posts, eaves ties, rafters and king posts slide onto shop-welded spigot nodes: one M16 bolt per joint. Frames sit every 2.4 m. Temporary props hold the frame until the panels go on.</li>
+    <li>Posts, eaves ties, rafters and king posts slide onto shop-welded spigot nodes: one M16 bolt per joint. Frames sit every <span class="bayTxt">3.6</span> m. Temporary props hold the frame until the panels go on.</li>
     <li>Wall panels drop over the base rail with their 80 mm skin flaps, the top rail drops into the top flaps, and screws lock panel and steel together. The panels are what brace the house.</li>
     <li>Roof panels go over the rafters and purlin with a 300 mm eave overhang, then ridge capping, barges and trims.</li>
     <li>To make it permanent, fillet-weld each tube end to its node. The bolts stay in.</li>
@@ -127,7 +130,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 <section class="tab" id="tab-system">
   <div class="eyebrow">How it works</div>
   <h1>Frame, panels and joints</h1>
-  <p class="lead">An 80 × 80 × 3 SHS frame sits inside the 100 mm wall panels, with a 10 mm thermal-break strip on each face (10 + 80 + 10 = 100). Frames are 2.4 m apart so every second 1.2 m panel joint lands on a post. Roof panels sit over the rafters so the insulation is unbroken where the sun hits.</p>
+  <p class="lead">An 80 × 80 × 3 SHS frame sits inside the 100 mm wall panels, with a 10 mm thermal-break strip on each face (10 + 80 + 10 = 100). <span id="sysBay"></span> Roof panels sit over the rafters so the insulation is unbroken where the sun hits.</p>
   <h2>Cutaway</h2>
   <div class="dwgbox"><svg class="dwg" viewBox="0 0 1252 843" role="img" aria-label="Axonometric cutaway of the panel house: 2.4 metre walls under a 30 degree roof, six frames at 2.4 metres, front bay shown as bare steel frame, remaining bays clad">
 <polygon points="335.6,798.4 1201.4,509.8 916.5,328.5 50.7,617.1" fill="#E3E6E3"></polygon>
@@ -244,7 +247,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 <circle cx="252.5" cy="440.4" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="252.5" y="440.4" fill="#FFFFFF">8</text>
 </g>
 </svg></div>
-  <p class="note">1 ridge node · 2 eaves node · 3 foot node · 4 eaves tie · 5 purlin · 6 panel · 7 panel lock · 8 king post. Front bay drawn without panels to show the frame.</p>
+  <p class="note">1 ridge node · 2 eaves node · 3 foot node · 4 eaves tie · 5 purlin · 6 panel · 7 panel lock · 8 king post. Front bay drawn without panels to show the frame. Drawn at 2.4 m frame spacing.</p>
   <h2>End section, typical frame</h2>
   <div class="dwgbox"><svg class="dwg" viewBox="0 0 1000 780" role="img" aria-label="End section: 6 metre span, 2.4 metre posts, eaves tie, 30 degree rafters to a ridge at 4132, king post, knee braces, panel envelope with eave overhang">
 <polygon points="205,615 795,615 795,380 500,206.8 205,380" fill="rgba(43,108,176,0.12)"></polygon>
@@ -383,6 +386,11 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 </g>
 </svg></div>
   <p class="note">The factory leaves 80 mm of skin past the foam at the top and bottom of each wall panel. The panel drops over the base rail, the top rail drops into its top flaps, and screws through both skins lock panel and steel together.</p>
+  <h2>Frame spacing: 2.4 m or 3.6 m</h2>
+  <p class="lead">Wider spacing means fewer frames across the ceiling and a more open room. Each frame then carries 50% more roof, so the rafters and purlins go up a size. Everything else stays the same, including the 80 mm posts inside the 100 mm walls.</p>
+  <div class="row" id="baySys" style="margin-bottom:12px"></div>
+  <div class="scroll"><table id="bayTable"></table></div>
+  <p class="note">Rough hand checks, not a design: 0.5 kPa roof live load plus panel weight, 6 m span, 30° roof, factored loads. At 3.6 m the 80×80×3 rafter would be about 85% used and sag about 20 mm, and the 100×50×2 purlin would sag about 20 mm. The heavier sizes bring both back to about 50–65% used. The eaves ties stay: they stop the walls spreading. An engineer still needs to check it, including wind uplift on the purlins.</p>
   <h2>Open questions</h2>
   <ul class="qs">
     <li>Can the factory leave 80 mm skin flaps past the foam, top and bottom, and at edges that land on posts?</li>
@@ -390,13 +398,15 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
     <li>Engineer's check: 80 × 80 frame with panels as bracing walls, screw spacing, eaves node, hold-down.</li>
     <li>Local supply of 70 × 70 × 3 SHS for spigots, or spigots made up from plate.</li>
     <li>Price and availability of 50 mm panel for internal partitions.</li>
+    <li>At 3.6 m spacing: engineer to confirm the 80 × 80 × 4 rafter and 125 × 50 × 2.5 purlin, and the purlin bracing for wind uplift.</li>
+    <li>Does the 70 × 70 × 3 spigot slide into the 80 × 80 × 4 rafter (72 mm inside)? The inside weld seam may need grinding.</li>
   </ul>
 </section>
 
 <section class="tab" id="tab-layout">
   <div class="eyebrow">Layout planner</div>
   <h1>Doors and windows</h1>
-  <p class="lead">Every wall is a row of 1.2 m panels, two per 2.4 m bay. Tap a panel to make it a window, tap again for a door, again for solid. Your layout is saved on this phone and used by the 3D view and the costing.</p>
+  <p class="lead">Every wall is a row of 1.2 m panels, <span id="layBay"></span>. Tap a panel to make it a window, tap again for a door, again for solid. Your layout is saved on this phone and used by the 3D view and the costing.</p>
   <div class="grid2">
     <div>
       <div class="eyebrow" style="margin-bottom:6px">Plan · back wall at top, entrance front at bottom</div>
@@ -411,7 +421,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
         <div><span class="sw" style="background:#7F8A90;border:1.5px solid #5B656C"></span>Solid panel, 1.2 m</div>
         <div><span class="sw" style="background:#BFD8EE;border:1.5px solid #1F4E85"></span>Window 1000 × 1200, sill 900</div>
         <div><span class="sw" style="background:#C24A14;border:1.5px solid #8E3510"></span>Door 900 × 2100</div>
-        <div><span class="sw" style="background:#1F262B;width:12px;height:12px;margin:0 18px 0 8px"></span>Frame post, every 2.4 m</div>
+        <div><span class="sw" style="background:#1F262B;width:12px;height:12px;margin:0 18px 0 8px"></span>Frame post, every <span class="bayTxt">3.6</span> m</div>
       </div>
       <div class="stats" id="layStats" style="margin:0"></div>
       <div><label>Bracing check</label><div id="bracing"></div><div class="note">Rule of thumb for panels acting as bracing, to be confirmed by the engineer.</div></div>
@@ -423,20 +433,33 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 <section class="tab" id="tab-view3d">
   <div class="eyebrow">3D view</div>
   <h1>Walk round the house</h1>
-  <p class="lead">Drag the picture to turn it, or use the sliders. Floor plan lifts the roof off and cuts the walls at 1 m. X-ray shows the steel inside the panels; Frame shows the kit on its own.</p>
+  <p class="lead">Drag the picture to turn it, or use the sliders. Floor plan lifts the roof off and cuts the walls at 1 m. X-ray shows the steel inside the panels; Frame shows the kit on its own. Interior puts you inside the house at eye height, looking at the open ceiling.</p>
   <div class="grid2">
     <div class="v3d" id="v3d"></div>
     <div class="ctrl">
       <div class="row" id="pkg3d"></div>
       <div class="row" id="mode3d"></div>
-      <div><label>Cladding</label><div class="row" id="clad3d" style="margin-top:6px"></div></div>
-      <div><label for="yaw">Rotate</label><input id="yaw" type="range" min="0" max="359" step="1"></div>
-      <div><label for="pitch">Tilt</label><input id="pitch" type="range" min="6" max="70" step="1"></div>
+      <div id="cladCtl"><label>Cladding</label><div class="row" id="clad3d" style="margin-top:6px"></div></div>
+      <div id="inCtl" hidden>
+        <div><label for="standX">Stand at: along the house</label><input id="standX" type="range" min="0" max="1000" step="1"></div>
+        <div style="margin-top:14px"><label for="standY">Stand at: front to back</label><input id="standY" type="range" min="0" max="1000" step="1"></div>
+        <div style="margin-top:14px"><label>Steel colour</label><div class="row" id="steel3d" style="margin-top:6px"></div></div>
+      </div>
+      <div><label for="yaw" id="yawLbl">Rotate</label><input id="yaw" type="range" min="0" max="359" step="1"></div>
+      <div><label for="pitch" id="pitchLbl">Tilt</label><input id="pitch" type="range" min="6" max="70" step="1"></div>
       <div class="row" id="presets"></div>
       <button class="btn" data-action="spin" id="spinBtn">Spin</button>
     </div>
   </div>
   <p class="note" id="cap3d"></p>
+  <h2>Make a realistic picture</h2>
+  <ol class="steps">
+    <li>Set up the view you want above, then tap <b>Save picture</b>.</li>
+    <li>Open ChatGPT, attach the picture, then tap <b>Copy prompt</b> and paste it in as the message.</li>
+    <li>If ChatGPT moves a beam or window, reply: "Keep the steel frames, windows and doors exactly where they are in my picture."</li>
+  </ol>
+  <div class="row" style="margin:12px 0"><button class="btn primary" data-action="savePic">Save picture</button><button class="btn" data-action="copyPrompt">Copy prompt</button><span class="note" id="picNote"></span></div>
+  <div class="msg" id="aiPrompt"></div>
 </section>
 
 <section class="tab" id="tab-costing">
@@ -455,7 +478,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
   <p class="note">With no number entered, WhatsApp opens and lets you choose the contact.</p>
   <h2>Steel cutting list</h2>
   <div class="scroll"><table id="cutTable"></table></div>
-  <p class="note">Nesting from 6 m lengths: rafter + post from one length (5.63 m). Base and eaves ties one per length. Ridge, eaves and base rails two per length. Hubs from offcuts. Lengths are approximate until the nodes are detailed.</p>
+  <p class="note" id="nestNote"></p>
   <p class="note">Panels pre-filled at $38.40/m² for 100 mm. Screw and tape quantities are estimates. Excludes foundation, plumbing, electrical, finishes, transport and labour on site.</p>
 </section>
 
@@ -470,16 +493,26 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 
 </main>
 <script>
-const APP_VERSION = 'v1 · 14 Oct 2026';
+const APP_VERSION = 'v2 · 15 Oct 2026';
 const STORE = 'panelhouse.v1';
 const W_ = 'window';
+// one36 is the 10.8 m 1-bed used with 3.6 m bays; the 14.4 m 2-bed shares one layout at both spacings.
 const DEFAULTS = {
   one: { F1: W_, F3: W_, F5: 'door', F7: W_, F9: W_, B1: W_, B4: W_, B7: W_, B8: W_, A3: W_, G2: W_, G3: W_ },
+  one36: { F1: W_, F3: W_, F5: 'door', F7: W_, B1: W_, B4: W_, B7: W_, A3: W_, G2: W_, G3: W_ },
   two: { F1: W_, F3: W_, F5: 'door', F7: W_, F10: W_, B1: W_, B4: W_, B6: W_, B8: W_, B10: W_, A3: W_, G1: W_, G3: W_ }
 };
-const PKG = {
-  one: { n: 5, L: 12, label: '1 bedroom', sub: '12 m · 5 bays · 72 m²' },
-  two: { n: 6, L: 14.4, label: '2 bedrooms', sub: '14.4 m · 6 bays · 86 m²' }
+const PKG = { one: { label: '1 bedroom' }, two: { label: '2 bedrooms' } };
+const BAYS = [2.4, 3.6];
+function cfg(pkg = S.pkg, bay = S.bay) {
+  const L = pkg === 'two' ? 14.4 : (bay === 3.6 ? 10.8 : 12), n = Math.round(L / bay);
+  return { pkg, bay, L, n, F: n + 1, NM: Math.round(L / 1.2), ppb: Math.round(bay / 1.2), wide: bay === 3.6, key: pkg === 'one' && bay === 3.6 ? 'one36' : pkg, area: Math.round(L * 6) };
+}
+const STEELS = {
+  charcoal: { col: '#3A4248', name: 'Charcoal' },
+  black: { col: '#1C2024', name: 'Black' },
+  white: { col: '#E9EBE9', name: 'White' },
+  galv: { col: '#9AA3A6', name: 'Galvanised grey' }
 };
 const CLADS = {
   white: { wall: '#E2E6E6', roof: '#EDF0F0', seam: 'rgba(31,38,43,0.28)', name: 'White IBR' },
@@ -489,9 +522,10 @@ const CLADS = {
 };
 function freshState() {
   return {
-    tab: 'overview', pkg: 'one',
-    open: { one: Object.assign({}, DEFAULTS.one), two: Object.assign({}, DEFAULTS.two) },
+    tab: 'overview', pkg: 'one', bay: 3.6,
+    open: { one: Object.assign({}, DEFAULTS.one), one36: Object.assign({}, DEFAULTS.one36), two: Object.assign({}, DEFAULTS.two) },
     clad: 'white', view: { yaw: 35, pitch: 24, mode: 'fin' },
+    inside: { x: 10.3, y: 3.2, h: 180, t: 14 }, steel: 'charcoal',
     prices: { pr: ['38.40', '', ''], pw: ['38.40', '', ''], pg: ['38.40', '', ''] },
     names: ['George', 'Supplier 2', 'Supplier 3'], phones: ['', '', ''], cat: 'Steel'
   };
@@ -504,6 +538,8 @@ try {
     S = Object.assign(freshState(), saved);
     S.open = Object.assign(freshState().open, saved.open || {});
     S.view = Object.assign(freshState().view, saved.view || {});
+    S.inside = Object.assign(freshState().inside, saved.inside || {});
+    if (!BAYS.includes(S.bay)) S.bay = 3.6;
   }
 } catch (e) { /* storage unavailable: run with defaults */ }
 function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} }
@@ -514,13 +550,15 @@ const money = (v) => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2,
 const fmtQ = (q) => (Math.abs(q - Math.round(q)) < 0.05 ? String(Math.round(q)) : r1(q).toFixed(1));
 
 /* ---------- shared plan data (y measured from the back wall) ---------- */
-function plan(pkg) {
+function plan(c) {
+  const pkg = c.pkg, L = c.L;
   const rooms = [[0, 0, 3.6, 2.4, 'Bath + laundry', '#E3EFEA', '#D9EAE3'], [0, 2.4, 3.6, 6, 'Bedroom', '#E6ECF4', '#DDE5F0']];
   const parts = [[0, 2.4, 3.6, 2.4], [3.6, 0, 3.6, 0.6], [3.6, 1.5, 3.6, 2.9], [3.6, 3.8, 3.6, 6]];
   const items = [[0.15, 0.3, 1.05, 1.2, 'shower', 0.08, '#CFE3EC'], [1.4, 0.15, 1.8, 0.85, 'wc', 0.42, '#FFFFFF'], [2.2, 0.15, 2.8, 0.6, 'basin', 0.85, '#FFFFFF'], [2.85, 1.65, 3.45, 2.25, 'wash', 0.85, '#F1F1EE'], [0.15, 3.6, 2.15, 5.1, 'bed', 0.5, '#D9CBB5'], [2.9, 3.0, 3.5, 5.6, 'robe', 1.0, '#B79A7A'], [4.0, 3.5, 4.9, 5.7, 'sofa', 0.75, '#6F8796']];
   if (pkg === 'one') {
-    rooms.push([3.6, 0, 12, 6, 'Living · dining · kitchen', '#F3F0E6', '#F1EBDC']);
-    items.push([8.4, 0.15, 11.85, 0.75, 'kitchen', 0.9, '#8C7A66'], [11.25, 0.75, 11.85, 2.4, 'counter', 0.9, '#8C7A66'], [6.2, 2.2, 7.8, 3.1, 'table', 0.75, '#A88B6A']);
+    const tx = L === 12 ? 6.2 : 5.6;
+    rooms.push([3.6, 0, L, 6, 'Living · dining · kitchen', '#F3F0E6', '#F1EBDC']);
+    items.push([L - 3.6, 0.15, L - 0.15, 0.75, 'kitchen', 0.9, '#8C7A66'], [L - 0.75, 0.75, L - 0.15, 2.4, 'counter', 0.9, '#8C7A66'], [tx, 2.2, tx + 1.6, 3.1, 'table', 0.75, '#A88B6A']);
   } else {
     rooms.push([3.6, 0, 10.8, 6, 'Living · dining · kitchen', '#F3F0E6', '#F1EBDC'], [10.8, 0, 14.4, 2.4, 'Study / store', '#ECE9F2', '#E6E1EE'], [10.8, 2.4, 14.4, 6, 'Bedroom 2', '#E6ECF4', '#DDE5F0']);
     parts.push([10.8, 2.4, 14.4, 2.4], [10.8, 0, 10.8, 0.6], [10.8, 1.5, 10.8, 2.9], [10.8, 3.8, 10.8, 6]);
@@ -529,35 +567,67 @@ function plan(pkg) {
   return { rooms, parts, items };
 }
 function counts() {
-  const op = S.open[S.pkg]; let win = 0, door = 0;
+  const op = S.open[cfg().key]; let win = 0, door = 0;
   Object.keys(op).forEach((k) => { if (op[k] === 'window') win++; else if (op[k] === 'door') door++; });
   return { win, door };
 }
-function pkgButtons(el, action) {
-  $(el).innerHTML = ['one', 'two'].map((p) => `<button class="btn pk ${S.pkg === p ? 'on' : ''}" data-action="${action}" data-pkg="${p}"><span style="font-weight:600">${PKG[p].label}</span><small>${PKG[p].sub}</small></button>`).join('');
+function bayButtons() {
+  return `<div class="grp"><span class="lbl">Frames every</span>${BAYS.map((b) => `<button class="btn ${S.bay === b ? 'on' : ''}" data-action="bay" data-bay="${b}">${b} m</button>`).join('')}</div>`;
+}
+function pkgButtons(el) {
+  $(el).innerHTML = `<div class="grp">${['one', 'two'].map((p) => { const c = cfg(p); return `<button class="btn pk ${S.pkg === p ? 'on' : ''}" data-action="pkg" data-pkg="${p}"><span style="font-weight:600">${PKG[p].label}</span><small>${c.L} m · ${c.n} bays · ${c.area} m²</small></button>`; }).join('')}</div>${bayButtons()}`;
+}
+// Steel mass from the cutting list, plus base plates and 5% for cleats.
+const KGM = { '80×80×3': 7.07, '80×80×4': 9.22, '70×70×3': 6.13, '60×60×3': 5.19, '100×50 C': 3.77, '125×50 C': 5.2 };
+function steelT(c) { const b = build(c); return (b.cuts.reduce((s, k) => s + k[3] * k[4] * KGM[k[2]], 0) + 2 * c.F * 3.77) * 1.05 / 1000; }
+const tons = (c) => '≈ ' + steelT(c).toFixed(1) + ' t';
+function bayText() {
+  const c = cfg();
+  document.querySelectorAll('.bayTxt').forEach((e) => { e.textContent = c.bay; });
+  $('sysBay').textContent = `Frames are ${c.bay} m apart so every ${c.wide ? 'third' : 'second'} 1.2 m panel joint lands on a post.`;
+  $('layBay').textContent = `${c.ppb} per ${c.bay} m bay`;
 }
 
 /* ---------- overview ---------- */
 function renderOverview() {
-  const c = counts();
+  const c1 = cfg('one'), c2 = cfg('two');
   $('ovStats').innerHTML = [
-    ['1 bedroom', '72 m²', '12 × 6 m · 5 bays'], ['2 bedrooms', '86 m²', '14.4 × 6 m · 6 bays'],
+    ['1 bedroom', c1.area + ' m²', `${c1.L} × 6 m · ${c1.n} bays`], ['2 bedrooms', c2.area + ' m²', `${c2.L} × 6 m · ${c2.n} bays`],
     ['Walls', '2.4 m', 'ridge 4.13 m · 30° roof'], ['Panels', '1.2 m', '100 mm IBR / EPS'],
-    ['Frame', '80 × 80', 'frames every 2.4 m'], ['Steel, 1 bed', '≈ 1.9 t', 'frame + nodes']
+    ['Frame', '80 × 80', `frames every ${c1.bay} m`], ['Steel, 1 bed', tons(c1), 'frame + nodes']
   ].map((s) => `<div><small>${s[0]}</small><strong>${s[1]}</strong><em>${s[2]}</em></div>`).join('');
+}
+
+/* ---------- system: spacing comparison ---------- */
+function renderSystem() {
+  $('baySys').innerHTML = bayButtons();
+  const a1 = cfg('one', 2.4), b1 = cfg('one', 3.6), a2 = cfg('two', 2.4), b2 = cfg('two', 3.6);
+  const rows = [
+    ['Rafters', '80 × 80 × 3', '80 × 80 × 4'],
+    ['Purlins', '100 × 50 × 2 lipped channel', '125 × 50 × 2.5 lipped channel'],
+    ['Posts, ties, ridge, rails', '80 × 80 × 3', '80 × 80 × 3, no change'],
+    ['1 bedroom', `${a1.L} m · ${a1.F} frames`, `${b1.L} m · ${b1.F} frames`],
+    ['2 bedrooms', `${a2.L} m · ${a2.F} frames`, `${b2.L} m · ${b2.F} frames`],
+    ['Frames across the living room, 2 bed', '3', '1, plus one over each bedroom wall'],
+    ['Steel, 1 bedroom', tons(a1), tons(b1)],
+    ['Steel, 2 bedrooms', tons(a2), tons(b2)]
+  ];
+  const on = (b) => (S.bay === b ? ' style="background:#E2F0E5"' : '');
+  $('bayTable').innerHTML = `<thead><tr><th></th><th${on(2.4)}>Frames every 2.4 m</th><th${on(3.6)}>Frames every 3.6 m</th></tr></thead><tbody>` +
+    rows.map((r) => `<tr><td>${r[0]}</td><td${on(2.4)}>${r[1]}</td><td${on(3.6)}>${r[2]}</td></tr>`).join('') + '</tbody>';
 }
 
 /* ---------- layout planner ---------- */
 function renderLayout() {
-  pkgButtons('pkgLayout', 'pkg');
-  const pkg = S.pkg, L = PKG[pkg].L, NM = Math.round(L / 1.2), NB = Math.round(L / 2.4);
-  const open = S.open[pkg];
+  pkgButtons('pkgLayout');
+  const cf = cfg(), pkg = cf.pkg, L = cf.L, NM = cf.NM, NB = cf.n, ppb = cf.ppb;
+  const open = S.open[cf.key];
   const sc = 60, M = 72, ox = 60, oy = 60, VW = L * sc + 120, VH = 480;
   const X = (m) => ox + m * sc, Y = (m) => oy + m * sc;
   const col = { panel: ['#7F8A90', '#5B656C'], window: ['#BFD8EE', '#1F4E85'], door: ['#C24A14', '#8E3510'] };
-  const p = plan(pkg); const h = [];
+  const p = plan(cf); const h = [];
   h.push(`<rect x="${ox}" y="${oy}" width="${L * sc}" height="${6 * sc}" fill="#FAFAF8"/>`);
-  for (let b = 0; b < NB; b++) h.push(`<text x="${ox + b * 2 * M + M}" y="${oy - 32}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" fill="#5B656C">Bay ${b + 1}</text>`);
+  for (let b = 0; b < NB; b++) h.push(`<text x="${ox + (b + 0.5) * ppb * M}" y="${oy - 32}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" fill="#5B656C">Bay ${b + 1}</text>`);
   p.rooms.forEach((r) => {
     h.push(`<rect x="${X(r[0])}" y="${Y(r[1])}" width="${(r[2] - r[0]) * sc}" height="${(r[3] - r[1]) * sc}" fill="${r[5]}"/>`);
     h.push(`<text x="${X(r[0]) + 12}" y="${Y(r[1]) + 26}" font-size="13" font-weight="600" fill="#1F262B">${esc(r[4])}</text><text x="${X(r[0]) + 12}" y="${Y(r[1]) + 42}" font-family="IBM Plex Mono,monospace" font-size="12" fill="#5B656C">${((r[2] - r[0]) * (r[3] - r[1])).toFixed(1)} m²</text>`);
@@ -570,7 +640,7 @@ function renderLayout() {
     if (q[0] === q[2]) h.push(`<rect x="${X(q[0]) - 2}" y="${Y(q[1])}" width="4" height="${(q[3] - q[1]) * sc}" fill="#36414A"/>`);
     else h.push(`<rect x="${X(q[0])}" y="${Y(q[1]) - 2}" width="${(q[2] - q[0]) * sc}" height="4" fill="#36414A"/>`);
   });
-  for (let k = 0; k <= NB; k++) { const x = ox + k * 2 * M - 7; h.push(`<rect x="${x}" y="${oy - 7}" width="14" height="14" fill="#1F262B"/><rect x="${x}" y="${oy + 6 * sc - 7}" width="14" height="14" fill="#1F262B"/>`); }
+  for (let k = 0; k <= NB; k++) { const x = ox + k * ppb * M - 7; h.push(`<rect x="${x}" y="${oy - 7}" width="14" height="14" fill="#1F262B"/><rect x="${x}" y="${oy + 6 * sc - 7}" width="14" height="14" fill="#1F262B"/>`); }
   const mod = (id, x, y, w, hh, lab) => { const k = open[id] || 'panel', c = col[k]; h.push(`<rect class="mod" data-id="${id}" x="${x}" y="${y}" width="${w}" height="${hh}" rx="2" fill="${c[0]}" stroke="${c[1]}" stroke-width="1.5" style="cursor:pointer"><title>${lab}: ${k}</title></rect>`); };
   for (let i = 0; i < NM; i++) { mod('B' + i, ox + i * M + 3, oy - 11, M - 6, 22, 'Back wall panel ' + (i + 1)); mod('F' + i, ox + i * M + 3, oy + 6 * sc - 11, M - 6, 22, 'Front wall panel ' + (i + 1)); }
   for (let j = 0; j < 5; j++) { mod('A' + j, ox - 11, oy + j * M + 3, 22, M - 6, 'Gable A panel ' + (j + 1)); mod('G' + j, ox + L * sc - 11, oy + j * M + 3, 22, M - 6, 'Gable B panel ' + (j + 1)); }
@@ -595,29 +665,39 @@ function renderLayout() {
   const warn = []; const solid = (id) => !open[id];
   [['B', 'Back wall'], ['F', 'Front wall']].forEach((w) => {
     let tot = 0;
-    for (let b = 0; b < NB; b++) { let s = 0; for (let i = b * 2; i < b * 2 + 2; i++) if (solid(w[0] + i)) s++; tot += s; if (s < 1) warn.push(`${w[1]}, bay ${b + 1}: no solid panel left in this bay.`); }
+    for (let b = 0; b < NB; b++) { let s = 0; for (let i = b * ppb; i < (b + 1) * ppb; i++) if (solid(w[0] + i)) s++; tot += s; if (s < 1) warn.push(`${w[1]}, bay ${b + 1}: no solid panel left in this bay.`); }
     if (tot < NM / 2) warn.push(`${w[1]}: under half the wall is solid (${tot} of ${NM}).`);
   });
   [['A', 'Gable A'], ['G', 'Gable B']].forEach((w) => { let s = 0; for (let j = 0; j < 5; j++) if (solid(w[0] + j)) s++; if (s < 3) warn.push(`${w[1]}: keep at least 3 of 5 panels solid (now ${s}). The gables hold the house sideways.`); });
   if (!c.door) warn.push('No door placed yet.');
   $('bracing').innerHTML = warn.length ? warn.map((t) => `<div class="warn">${esc(t)}</div>`).join('') : '<div class="good">Every bay keeps a solid panel and each gable keeps 3 of 5 solid.</div>';
-  $('pkgNote').textContent = pkg === 'one' ? 'Base kit: 6 frames, 5 bays of 2.4 m. Bedroom and bathroom at Gable A, open-plan living for the rest.' : 'Adds one 2.4 m bay: 1 extra frame, ≈ 0.35 t more steel and ≈ 30 m² more panel (≈ $1,150 at $38.40/m²). Bedroom 2 and a study at the Gable B end.';
+  const c1 = cfg('one'), xb = cfg('two').n - c1.n, xm = (14.4 - c1.L) * 12.4;
+  $('pkgNote').textContent = pkg === 'one' ? `Base kit: ${c1.F} frames, ${c1.n} bays of ${c1.bay} m. Bedroom and bathroom at Gable A, open-plan living for the rest.` : `Adds ${xb === 1 ? 'one' : xb} ${cf.bay} m bay${xb === 1 ? '' : 's'}: ${xb} extra frame${xb === 1 ? '' : 's'}, ≈ ${(steelT(cf) - steelT(c1)).toFixed(2)} t more steel and ≈ ${Math.round(xm)} m² more panel (≈ ${money(Math.round(xm * 38.4))} at $38.40/m²). Bedroom 2 and a study at the Gable B end.`;
 }
 
 /* ---------- 3D view ---------- */
 let spinning = false, dragging = null, raf3d = 0;
 function req3d() { if (!raf3d) raf3d = requestAnimationFrame(() => { raf3d = 0; draw3d(); }); }
 function render3DControls() {
-  pkgButtons('pkg3d', 'pkg');
-  const m = S.view.mode;
-  $('mode3d').innerHTML = [['fin', 'Finished'], ['pl', 'Floor plan'], ['x', 'X-ray'], ['fr', 'Frame']].map((b) => `<button class="btn ${m === b[0] ? 'on' : ''}" data-action="mode" data-mode="${b[0]}">${b[1]}</button>`).join('');
+  pkgButtons('pkg3d');
+  const m = S.view.mode, inside = m === 'in';
+  $('mode3d').innerHTML = [['fin', 'Finished'], ['in', 'Interior'], ['pl', 'Floor plan'], ['x', 'X-ray'], ['fr', 'Frame']].map((b) => `<button class="btn ${m === b[0] ? 'on' : ''}" data-action="mode" data-mode="${b[0]}">${b[1]}</button>`).join('');
   $('clad3d').innerHTML = Object.keys(CLADS).map((k) => `<button class="swatch ${S.clad === k ? 'on' : ''}" style="background:${CLADS[k].wall}" data-action="clad" data-clad="${k}" aria-label="${CLADS[k].name}" title="${CLADS[k].name}"></button>`).join('') + `<span class="note" style="margin-left:6px">${CLADS[S.clad].name}</span>`;
-  $('presets').innerHTML = [['Front', 0], ['Corner A', 35], ['Gable A', 90], ['Back', 180], ['Corner B', 325]].map((p) => `<button class="btn" data-action="yaw" data-yaw="${p[1]}">${p[0]}</button>`).join('');
+  $('steel3d').innerHTML = Object.keys(STEELS).map((k) => `<button class="swatch ${S.steel === k ? 'on' : ''}" style="background:${STEELS[k].col}" data-action="steel" data-steel="${k}" aria-label="${STEELS[k].name}" title="${STEELS[k].name}"></button>`).join('') + `<span class="note" style="margin-left:6px">${STEELS[S.steel].name}</span>`;
+  $('cladCtl').hidden = inside; $('inCtl').hidden = !inside;
+  $('yawLbl').textContent = inside ? 'Look left / right' : 'Rotate';
+  $('pitchLbl').textContent = inside ? 'Look up / down' : 'Tilt';
+  $('pitch').min = inside ? -15 : 6; $('pitch').max = inside ? 60 : 70;
+  $('presets').innerHTML = inside
+    ? insidePresets().map((p, i) => `<button class="btn" data-action="inPreset" data-i="${i}">${p[0]}</button>`).join('')
+    : [['Front', 0], ['Corner A', 35], ['Gable A', 90], ['Back', 180], ['Corner B', 325]].map((p) => `<button class="btn" data-action="yaw" data-yaw="${p[1]}">${p[0]}</button>`).join('');
   $('spinBtn').textContent = spinning ? 'Stop spinning' : 'Spin';
   $('spinBtn').classList.toggle('on', spinning);
 }
 function draw3d() {
-  const st = S.view, pkg = S.pkg, n = PKG[pkg].n, L = PKG[pkg].L, NM = Math.round(L / 1.2), op = S.open[pkg];
+  if (S.view.mode === 'in') { drawInside(); $('aiPrompt').textContent = aiPrompt(); return; }
+  $('aiPrompt').textContent = aiPrompt();
+  const cf = cfg(), st = S.view, pkg = cf.pkg, n = cf.n, L = cf.L, NM = cf.NM, op = S.open[cf.key], bay = cf.bay;
   $('yaw').value = Math.round(st.yaw); $('pitch').value = Math.round(st.pitch);
   const th = st.yaw * Math.PI / 180, ph = st.pitch * Math.PI / 180;
   const ct = Math.cos(th), sn = Math.sin(th), cp = Math.cos(ph), sp = Math.sin(ph);
@@ -645,7 +725,7 @@ function draw3d() {
   ].forEach((f) => { if (vis(f.n)) face(f.p, shade('#9C9E97', f.n)); });
   const labels = [];
   if (mode === 'pl') {
-    const pl = plan(pkg);
+    const pl = plan(cf);
     face([[-0.1, -0.1, 0], [L + 0.1, -0.1, 0], [L + 0.1, 6.1, 0], [-0.1, 6.1, 0]], '#C9CBC4');
     pl.rooms.forEach((r) => face([[r[0], 6 - r[3], 0.002], [r[2], 6 - r[3], 0.002], [r[2], 6 - r[1], 0.002], [r[0], 6 - r[1], 0.002]], r[6]));
     const boxes = []; const bx = (b, top, side) => boxes.push({ b, top, side });
@@ -693,13 +773,13 @@ function draw3d() {
   if (mode === 'x' || mode === 'fr') {
     const add = (p, q, w) => frameLines.push({ p, q, w });
     for (let f = 0; f <= n; f++) {
-      const x = r1(f * 2.4);
+      const x = r1(f * bay);
       add([x, 0, 0], [x, 0, 2.4], 4); add([x, 6, 0], [x, 6, 2.4], 4); add([x, 0, 0], [x, 6, 0], 4); add([x, 0, 2.4], [x, 6, 2.4], 4);
       add([x, 0, 2.4], [x, 3, R], 4); add([x, 6, 2.4], [x, 3, R], 4); add([x, 3, 2.4], [x, 3, R], 3);
       [[x, 3, R], [x, 0, 2.4], [x, 6, 2.4], [x, 0, 0], [x, 6, 0]].forEach((p) => { const P = proj(p); nodes.push({ d: P[2], s: `<rect x="${(P[0] - 4).toFixed(1)}" y="${(P[1] - 4).toFixed(1)}" width="8" height="8" fill="#C24A14"/>` }); });
     }
     for (let b = 0; b < n; b++) {
-      const x0 = b * 2.4, x1 = x0 + 2.4, pz = 2.4 + 1.5 * t30;
+      const x0 = b * bay, x1 = x0 + bay, pz = 2.4 + 1.5 * t30;
       add([x0, 3, R], [x1, 3, R], 4); add([x0, 0, 2.4], [x1, 0, 2.4], 4); add([x0, 6, 2.4], [x1, 6, 2.4], 4);
       add([x0, 0, 0], [x1, 0, 0], 4); add([x0, 6, 0], [x1, 6, 0], 4); add([x0, 1.5, pz], [x1, 1.5, pz], 3); add([x0, 4.5, pz], [x1, 4.5, pz], 3);
     }
@@ -724,18 +804,209 @@ function draw3d() {
   if (mode === 'x' || mode === 'fr') nodes.sort((a, b) => b.d - a.d).forEach((nd) => out.push(nd.s));
   $('v3d').innerHTML = `<svg viewBox="0 0 1100 760" role="img" aria-label="3D view of the house">${out.join('')}${labels.join('')}</svg>`;
   const c = counts();
-  $('cap3d').textContent = `${L} m × 6 m · ${n + 1} frames at 2.4 m · ridge 4.13 m · ${c.win} windows · ${c.door} door${c.door === 1 ? '' : 's'}. Simplified model: 300 mm eave and 150 mm gable overhang, 300 mm plinth.`;
+  $('cap3d').textContent = `${L} m × 6 m · ${n + 1} frames at ${bay} m · ridge 4.13 m · ${c.win} windows · ${c.door} door${c.door === 1 ? '' : 's'}. Simplified model: 300 mm eave and 150 mm gable overhang, 300 mm plinth.`;
 }
-function spinLoop() { if (!spinning) return; S.view.yaw = (S.view.yaw + 0.6) % 360; draw3d(); requestAnimationFrame(spinLoop); }
+function spinLoop() {
+  if (!spinning) return;
+  if (S.view.mode === 'in') S.inside.h = (S.inside.h + 0.3) % 360; else S.view.yaw = (S.view.yaw + 0.6) % 360;
+  draw3d(); requestAnimationFrame(spinLoop);
+}
+
+/* ---------- interior: perspective camera standing inside ---------- */
+function clampInside() {
+  const L = cfg().L, I = S.inside;
+  I.x = Math.max(0.4, Math.min(L - 0.4, I.x)); I.y = Math.max(0.4, Math.min(5.6, I.y));
+  I.h = ((I.h % 360) + 360) % 360; I.t = Math.max(-15, Math.min(60, I.t));
+}
+function insidePresets() {
+  const c = cfg(), le = c.pkg === 'two' ? 10.8 : c.L, mid = (3.6 + le) / 2;
+  let dx = mid; const op = S.open[c.key];
+  for (let i = 0; i < c.NM; i++) if (op['F' + i] === 'door') { dx = i * 1.2 + 0.6; break; }
+  return [
+    ['Toward bedroom', { x: le - 0.5, y: 3.2, h: 180, t: 14 }],
+    ['Toward kitchen', { x: 4.0, y: 1.0, h: 22, t: 12 }],
+    ['From front door', { x: dx, y: 0.6, h: 90, t: 10 }],
+    ['Look up', { x: mid + c.bay / 2, y: 1.0, h: 160, t: 36 }]
+  ];
+}
+function drawInside() {
+  clampInside();
+  const cf = cfg(), L = cf.L, op = S.open[cf.key], I = S.inside;
+  $('yaw').value = Math.round(I.h); $('pitch').value = Math.round(I.t);
+  $('standX').value = Math.round((I.x - 0.4) / (L - 0.8) * 1000); $('standY').value = Math.round((I.y - 0.4) / 5.2 * 1000);
+  const hh = I.h * Math.PI / 180, tl = I.t * Math.PI / 180, C = [I.x, I.y, 1.6];
+  const f = [Math.cos(hh) * Math.cos(tl), Math.sin(hh) * Math.cos(tl), Math.sin(tl)];
+  const rt = [Math.sin(hh), -Math.cos(hh), 0];
+  const up = [rt[1] * f[2] - rt[2] * f[1], rt[2] * f[0] - rt[0] * f[2], rt[0] * f[1] - rt[1] * f[0]];
+  const FL = 600, CX = 550, CY = 380, NEAR = 0.05;
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const cam = (p) => { const d = [p[0] - C[0], p[1] - C[1], p[2] - C[2]]; return [dot(d, rt), dot(d, up), dot(d, f)]; };
+  const scr = (q) => [CX + FL * q[0] / q[2], CY - FL * q[1] / q[2]];
+  const cut = (a, b) => { const t = (NEAR - a[2]) / (b[2] - a[2]); return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, NEAR]; };
+  const clip = (P) => { const o = []; P.forEach((a, i) => { const b = P[(i + 1) % P.length], ai = a[2] >= NEAR, bi = b[2] >= NEAR; if (ai) o.push(a); if (ai !== bi) o.push(cut(a, b)); }); return o; };
+  const out = [];
+  const poly = (pts, color) => { const q = clip(pts.map(cam)); if (q.length < 3) return; out.push(`<polygon points="${q.map(scr).map((s) => s[0].toFixed(1) + ',' + s[1].toFixed(1)).join(' ')}" fill="${color}"/>`); };
+  const line = (p, q, w, color) => {
+    let a = cam(p), b = cam(q); if (a[2] < NEAR && b[2] < NEAR) return;
+    if (a[2] < NEAR) a = cut(a, b); else if (b[2] < NEAR) b = cut(b, a);
+    const A = scr(a), B = scr(b);
+    out.push(`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${color}" stroke-width="${w}"/>`);
+  };
+  const Lin = [0.35, -0.55, 0.75];
+  const shade = (hex, n) => { const k = 0.91 + 0.1 * dot(n, Lin); const ch = (i) => Math.max(0, Math.min(255, Math.round(parseInt(hex.slice(i, i + 2), 16) * k))); return `rgb(${ch(1)},${ch(3)},${ch(5)})`; };
+  const facing = (n, p) => dot(n, [C[0] - p[0], C[1] - p[1], C[2] - p[2]]) > 0;
+
+  // Shell: inner faces of walls, floor and the sloping ceiling (underside of the roof panels, on top of the rafters).
+  const e = 0.05, T30 = Math.tan(Math.PI / 6), zc = (y) => 2.446 + T30 * Math.min(y, 6 - y), Rz = zc(3), R = 2.4 + 3 * T30;
+  const WALL = '#EEEFEC', CEIL = '#F4F4F1', FLOOR = '#B9B4AA', SEAM = 'rgba(31,38,43,0.13)';
+  poly([[e, e, 0], [L - e, e, 0], [L - e, 6 - e, 0], [e, 6 - e, 0]], shade(FLOOR, [0, 0, 1]));
+  poly([[e, e, 0], [L - e, e, 0], [L - e, e, zc(e)], [e, e, zc(e)]], shade(WALL, [0, 1, 0]));
+  poly([[e, 6 - e, 0], [L - e, 6 - e, 0], [L - e, 6 - e, zc(e)], [e, 6 - e, zc(e)]], shade(WALL, [0, -1, 0]));
+  poly([[e, e, 0], [e, 6 - e, 0], [e, 6 - e, zc(e)], [e, 3, Rz], [e, e, zc(e)]], shade(WALL, [1, 0, 0]));
+  poly([[L - e, e, 0], [L - e, 6 - e, 0], [L - e, 6 - e, zc(e)], [L - e, 3, Rz], [L - e, e, zc(e)]], shade(WALL, [-1, 0, 0]));
+  poly([[e, e, zc(e)], [L - e, e, zc(e)], [L - e, 3, Rz], [e, 3, Rz]], shade(CEIL, [0, 0.5, -0.866]));
+  poly([[e, 6 - e, zc(e)], [L - e, 6 - e, zc(e)], [L - e, 3, Rz], [e, 3, Rz]], shade(CEIL, [0, -0.5, -0.866]));
+  for (let k = 1; k < cf.NM; k++) {
+    const x = k * 1.2;
+    line([x, e + 0.002, 0], [x, e + 0.002, zc(e)], 1, SEAM); line([x, 6 - e - 0.002, 0], [x, 6 - e - 0.002, zc(e)], 1, SEAM);
+    line([x, e, zc(e) - 0.002], [x, 3, Rz - 0.002], 1, SEAM); line([x, 6 - e, zc(e) - 0.002], [x, 3, Rz - 0.002], 1, SEAM);
+  }
+  for (let j = 1; j < 5; j++) { const y = j * 1.2; line([e + 0.002, y, 0], [e + 0.002, y, zc(y)], 1, SEAM); line([L - e - 0.002, y, 0], [L - e - 0.002, y, zc(y)], 1, SEAM); }
+  line([e, e + 0.002, 0.004], [L - e, e + 0.002, 0.004], 2, 'rgba(31,38,43,0.25)'); line([e, 6 - e - 0.002, 0.004], [L - e, 6 - e - 0.002, 0.004], 2, 'rgba(31,38,43,0.25)');
+
+  // Windows and doors on the inner wall faces. plane(a0, a1, z0, z1) gives the rectangle on that wall.
+  const o = 0.006, gAlong = (j) => 6 - (j + 1) * 1.2;
+  const walls = [
+    { key: 'F', count: cf.NM, along: (i) => i * 1.2, plane: (a0, a1, z0, z1, d) => [[a0, e + o + d, z0], [a1, e + o + d, z0], [a1, e + o + d, z1], [a0, e + o + d, z1]] },
+    { key: 'B', count: cf.NM, along: (i) => i * 1.2, plane: (a0, a1, z0, z1, d) => [[a0, 6 - e - o - d, z0], [a1, 6 - e - o - d, z0], [a1, 6 - e - o - d, z1], [a0, 6 - e - o - d, z1]] },
+    { key: 'A', count: 5, along: gAlong, plane: (a0, a1, z0, z1, d) => [[e + o + d, a0, z0], [e + o + d, a1, z0], [e + o + d, a1, z1], [e + o + d, a0, z1]] },
+    { key: 'G', count: 5, along: gAlong, plane: (a0, a1, z0, z1, d) => [[L - e - o - d, a0, z0], [L - e - o - d, a1, z0], [L - e - o - d, a1, z1], [L - e - o - d, a0, z1]] }
+  ];
+  walls.forEach((w) => {
+    for (let i = 0; i < w.count; i++) {
+      const kd = op[w.key + i], a = w.along(i); if (!kd) continue;
+      if (kd === 'door') { poly(w.plane(a + 0.12, a + 1.08, 0, 2.14, 0), '#2E3439'); poly(w.plane(a + 0.16, a + 1.04, 0, 2.1, 0.002), '#8A5A3A'); }
+      else {
+        poly(w.plane(a + 0.07, a + 1.13, 0.87, 2.13, 0), '#2E3439');
+        poly(w.plane(a + 0.11, a + 1.09, 0.91, 2.09, 0.002), '#D3E6F1');
+        poly(w.plane(a + 0.11, a + 1.09, 0.91, 1.32, 0.003), '#9FAF84');
+        poly(w.plane(a + 0.58, a + 0.62, 0.91, 2.09, 0.004), '#2E3439');
+      }
+    }
+  });
+
+  // Objects inside the room, drawn far to near.
+  const objs = [];
+  const boxFaces = (x0, x1, y0, y1, z0, z1, side, top) => [
+    { n: [0, -1, 0], p: [[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]], c: side }, { n: [0, 1, 0], p: [[x1, y1, z0], [x0, y1, z0], [x0, y1, z1], [x1, y1, z1]], c: side },
+    { n: [-1, 0, 0], p: [[x0, y1, z0], [x0, y0, z0], [x0, y0, z1], [x0, y1, z1]], c: side }, { n: [1, 0, 0], p: [[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]], c: side },
+    { n: [0, 0, 1], p: [[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]], c: top }, { n: [0, 0, -1], p: [[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0]], c: side }
+  ];
+  const addBox = (x0, x1, y0, y1, z0, z1, side, top) => objs.push({ ctr: [(x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2], faces: boxFaces(x0, x1, y0, y1, z0, z1, side, top || side) });
+  // A steel member from A to B, w wide and d deep, cut into short pieces so it sorts properly against everything else.
+  const member = (A, B, w, d, hint, col) => {
+    const ax = [B[0] - A[0], B[1] - A[1], B[2] - A[2]], len = Math.hypot(...ax), a = ax.map((v) => v / len);
+    let s = [a[1] * hint[2] - a[2] * hint[1], a[2] * hint[0] - a[0] * hint[2], a[0] * hint[1] - a[1] * hint[0]]; const sl = Math.hypot(...s); s = s.map((v) => v / sl);
+    const u = [s[1] * a[2] - s[2] * a[1], s[2] * a[0] - s[0] * a[2], s[0] * a[1] - s[1] * a[0]];
+    const N = Math.max(1, Math.ceil(len / 0.5));
+    for (let k = 0; k < N; k++) {
+      const P = A.map((v, i) => v + ax[i] * k / N), Q = A.map((v, i) => v + ax[i] * (k + 1) / N);
+      const cn = (base, ss, uu) => base.map((v, i) => v + s[i] * ss * w / 2 + u[i] * uu * d / 2);
+      const p00 = cn(P, -1, -1), p10 = cn(P, 1, -1), p11 = cn(P, 1, 1), p01 = cn(P, -1, 1), q00 = cn(Q, -1, -1), q10 = cn(Q, 1, -1), q11 = cn(Q, 1, 1), q01 = cn(Q, -1, 1);
+      const faces = [
+        { n: s, p: [p10, q10, q11, p11] }, { n: s.map((v) => -v), p: [p00, p01, q01, q00] },
+        { n: u, p: [p01, p11, q11, q01] }, { n: u.map((v) => -v), p: [p00, q00, q10, p10] }
+      ];
+      if (k === 0) faces.push({ n: a.map((v) => -v), p: [p00, p10, p11, p01] });
+      if (k === N - 1) faces.push({ n: a, p: [q00, q01, q11, q10] });
+      faces.forEach((fc) => { fc.c = col; });
+      objs.push({ ctr: P.map((v, i) => (v + Q[i]) / 2), faces });
+    }
+  };
+  const STL = STEELS[S.steel].col, Z = [0, 0, 1], X = [1, 0, 0];
+  // Frames inside the room; the two end frames are hidden in the gable walls.
+  for (let k = 1; k < cf.n; k++) {
+    const x = r1(k * cf.bay);
+    member([x, e, 2.4], [x, 6 - e, 2.4], 0.08, 0.08, Z, STL);
+    member([x, e, 2.4 + T30 * e], [x, 3, R], 0.08, 0.08, Z, STL);
+    member([x, 6 - e, 2.4 + T30 * e], [x, 3, R], 0.08, 0.08, Z, STL);
+    member([x, 3, 2.44], [x, 3, R - 0.04], 0.06, 0.06, X, STL);
+  }
+  const pd = cf.wide ? 0.125 : 0.1;
+  member([e, 3, R], [L - e, 3, R], 0.08, 0.08, Z, STL);
+  [1.5, 4.5].forEach((y) => member([e, y, zc(y) - pd / 2], [L - e, y, zc(y) - pd / 2], 0.05, pd, Z, STL));
+  // Partitions, 2.36 m high, in short pieces.
+  const pl = plan(cf);
+  pl.parts.forEach((q) => {
+    const x0 = q[0], x1 = q[2], y0 = 6 - q[3], y1 = 6 - q[1], alongX = x0 !== x1, len = alongX ? x1 - x0 : y1 - y0, N = Math.max(1, Math.ceil(len / 0.6));
+    for (let k = 0; k < N; k++) {
+      if (alongX) addBox(x0 + len * k / N, x0 + len * (k + 1) / N, y0 - 0.025, y0 + 0.025, 0, 2.36, '#EAEBE8');
+      else addBox(x0 - 0.025, x0 + 0.025, y0 + len * k / N, y0 + len * (k + 1) / N, 0, 2.36, '#EAEBE8');
+    }
+  });
+  const tall = { robe: 2.1 };
+  pl.items.forEach((it) => addBox(it[0], it[2], 6 - it[3], 6 - it[1], 0, tall[it[4]] || it[5], it[6], it[6]));
+  objs.map((ob) => ({ ob, d: Math.hypot(ob.ctr[0] - C[0], ob.ctr[1] - C[1], ob.ctr[2] - C[2]) })).sort((a, b) => b.d - a.d).forEach(({ ob }) => {
+    ob.faces.forEach((fc) => { if (facing(fc.n, fc.p[0])) poly(fc.p, shade(fc.c, fc.n)); });
+  });
+  $('v3d').innerHTML = `<svg viewBox="0 0 1100 760" role="img" aria-label="Interior view of the house">${out.join('')}</svg>`;
+  const inner = cf.n - 1;
+  $('cap3d').textContent = `Inside the ${cf.L} m house, frames every ${cf.bay} m: ${inner} frame${inner === 1 ? '' : 's'} cross the ceiling. The ceiling rises from 2.45 m at the walls to ${Rz.toFixed(2)} m at the ridge. Eye height 1.6 m. Simplified model: furniture shown as blocks.`;
+}
+
+/* ---------- picture and ChatGPT prompt ---------- */
+function aiPrompt() {
+  const c = cfg(), steel = STEELS[S.steel].name.toLowerCase(), ow = counts();
+  if (S.view.mode === 'in') return `Turn this simple 3D model into a photo-realistic interior photograph of a modern single-storey house in Zimbabwe. Keep exactly the same camera position and angle, the same room shape, and every window, door, wall and steel member exactly where it is in the model. Do not add or remove any beams, windows or doors.
+
+The house is ${c.L} m long and 6 m wide. There is no flat ceiling: the ceiling is the smooth white underside of insulated roof panels, sloping up at 30 degrees from 2.45 m at the walls to 4.2 m at the centre ridge. Exposed ${steel} square steel roof frames cross the room every ${c.bay} m. Each frame has a horizontal tie beam at 2.4 m, two sloping rafters, and a short vertical post in the middle up to the ridge. A steel ridge beam and two purlins run the length of the room, tight under the ceiling. The walls are smooth white panels with fine vertical joints every 1.2 m. The floor is polished grey concrete. The windows have dark aluminium frames, with a view of dry bush, msasa trees and granite kopjes outside.
+
+Replace the plain blocks with real furniture in the same places: an open-plan living, dining and kitchen space. Use natural materials: timber, linen, leather, woven baskets and a few plants. Warm late-afternoon light comes through the windows. Realistic architectural photography, wide-angle lens, natural colours.`;
+  return `Turn this simple 3D model into a photo-realistic architectural photograph. Keep exactly the same camera angle, house shape, roof pitch and the position of every window (${ow.win}) and door (${ow.door}). Do not add or remove windows or doors.
+
+The house is a single-storey kit-built home, ${c.L} m long and 6 m wide, with 2.4 m walls and a 30 degree gable roof. The walls and roof are ${CLADS[S.clad].name.toLowerCase()} IBR-profile insulated panels with a 300 mm eave overhang, dark aluminium windows and a timber front door. Set it in a dry Zimbabwean garden with aloes, rocks, gravel paths and msasa trees, with a granite kopje behind. Warm late-afternoon light, realistic architectural photography, natural colours.`;
+}
+function savePicture() {
+  const svg = $('v3d').querySelector('svg'), note = (s) => { $('picNote').textContent = s; };
+  if (!svg) return;
+  const W = 2200, H = 1520, cl = svg.cloneNode(true);
+  cl.setAttribute('xmlns', 'http://www.w3.org/2000/svg'); cl.setAttribute('width', W); cl.setAttribute('height', H);
+  const img = new Image();
+  img.onload = () => {
+    const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    const g = cv.getContext('2d'); g.fillStyle = '#E6ECEE'; g.fillRect(0, 0, W, H); g.drawImage(img, 0, 0, W, H);
+    cv.toBlob((blob) => {
+      if (!blob) { note('Could not make the picture. Take a screenshot instead.'); return; }
+      const name = `panel-house-${S.view.mode === 'in' ? 'interior' : 'exterior'}-${cfg().bay}m.png`;
+      const download = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); note('Picture saved to your downloads.'); };
+      const file = new File([blob], name, { type: 'image/png' });
+      if (matchMedia('(pointer: coarse)').matches && navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: 'Panel House' }).then(() => note('')).catch((err) => { if (err.name !== 'AbortError') download(); });
+      } else download();
+    }, 'image/png');
+  };
+  img.onerror = () => note('Could not make the picture. Take a screenshot instead.');
+  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(cl));
+}
 
 /* ---------- costing ---------- */
-function build() {
-  const n = PKG[S.pkg].n, F = n + 1, L = PKG[S.pkg].L, sp = 36 + 23 * (F - 2), c = counts();
-  const rows = [
+function build(cf = cfg()) {
+  const { n, F, L, bay, wide } = cf, sp = 36 + 23 * (F - 2), c = counts();
+  // 2.4 m: rafter + post per length, rails two per length. 3.6 m: rail + post per length, rafters (80×80×4) one per length.
+  const steel = wide ? [
+    ['s80', 'Steel', 'Square tube 80×80×3', '6 m lengths', 2 * F + 5 * n + 1, 'lengths'],
+    ['s84', 'Steel', 'Square tube 80×80×4, rafters', '6 m lengths', 2 * F, 'lengths'],
+    ['s70', 'Steel', 'Square tube 70×70×3, spigots', '6 m lengths', Math.ceil(sp / 26), 'lengths'],
+    ['s60', 'Steel', 'Square tube 60×60×3, king posts', '6 m lengths', Math.ceil(F / 3), 'lengths'],
+    ['pur125', 'Steel', 'Lipped channel 125×50×2.5, purlins', '6 m lengths', 2 * n, 'lengths']
+  ] : [
     ['s80', 'Steel', 'Square tube 80×80×3', '6 m lengths', 4 * F + Math.ceil(5 * n / 2) + 1, 'lengths'],
     ['s70', 'Steel', 'Square tube 70×70×3, spigots', '6 m lengths', Math.ceil(sp / 26), 'lengths'],
     ['s60', 'Steel', 'Square tube 60×60×3, king posts', '6 m lengths', Math.ceil(F / 3), 'lengths'],
-    ['pur', 'Steel', 'Lipped channel 100×50×2, purlins', '6 m lengths', n, 'lengths'],
+    ['pur', 'Steel', 'Lipped channel 100×50×2, purlins', '6 m lengths', n, 'lengths']
+  ];
+  const rows = [
+    ...steel,
     ['plt', 'Steel', 'Base plate 200×200×12', 'cut and drilled', 2 * F, 'pcs'],
     ['fab', 'Fabrication', 'Weld nodes, hub + spigots', sp + ' spigots in total', 5 * F, 'nodes'],
     ['clt', 'Fabrication', 'Weld cleats to members', 'flat bar / angle', 5 * F - 4, 'pcs'],
@@ -743,7 +1014,7 @@ function build() {
     ['pr', 'Panels', 'Roof panel 100 mm IBR / EPS', '3.8 m long', 7.6 * L, 'm²'],
     ['pw', 'Panels', 'Wall panel 100 mm, 80 mm skin flaps', '2.4 m + flaps', 4.8 * L, 'm²'],
     ['pg', 'Panels', 'End wall panel 100 mm, flapped', 'gable cut, to 4.1 m', 39.2, 'm²'],
-    ['pi', 'Panels', 'Internal partition panel 50 mm', '2.4 m high', S.pkg === 'one' ? 23 : 46, 'm²'],
+    ['pi', 'Panels', 'Internal partition panel 50 mm', '2.4 m high', cf.pkg === 'one' ? 23 : 46, 'm²'],
     ['b16', 'Fixings', 'Bolt M16 × 120, 8.8, nut + washer', 'spigot joints', sp, 'sets'],
     ['b12', 'Fixings', 'Bolt M12 × 90, 8.8, nut + washer', 'cleats', 2 * F + 8 * n, 'sets'],
     ['hd', 'Fixings', 'Hold-down anchor M16', 'to suit foundation', 8 * F, 'pcs'],
@@ -751,19 +1022,23 @@ function build() {
     ['tb', 'Fixings', 'Closed-cell foam tape 10 × 80 mm', 'thermal break', Math.round(18.3 * L), 'm'],
     ['win', 'Openings', 'Aluminium window 1000 × 1200', 'to fit 100 mm panel', c.win, 'pcs'],
     ['dr', 'Openings', 'External door 900 × 2100 + frame', '', c.door, 'pcs'],
-    ['idr', 'Openings', 'Internal door 800 × 2100 + frame', '', S.pkg === 'one' ? 2 : 4, 'pcs'],
+    ['idr', 'Openings', 'Internal door 800 × 2100 + frame', '', cf.pkg === 'one' ? 2 : 4, 'pcs'],
     ['rc', 'Flashings', 'Ridge capping 0.5 mm', 'colour to match', L, 'm'],
     ['bg', 'Flashings', 'Barge flashing', '', 15.2, 'm'],
     ['cn', 'Flashings', 'External corner flashing', '', 9.6, 'm'],
     ['bt', 'Flashings', 'Base trim / drip', '', 2 * L + 12, 'm']
   ].map((r) => ({ id: r[0], cat: r[1], item: r[2], spec: r[3], qty: r[4], unit: r[5] }));
-  const cuts = [['P', 'Wall post', '80×80×3', 2 * F, 2.30], ['B', 'Base tie', '80×80×3', F, 5.90], ['T', 'Eaves tie', '80×80×3', F, 5.90], ['R', 'Rafter', '80×80×3', 2 * F, 3.33],
-    ['RB', 'Ridge beam', '80×80×3', n, 2.30], ['ER', 'Eaves rail', '80×80×3', 2 * n, 2.30], ['BR', 'Base rail', '80×80×3', 2 * n, 2.30], ['H', 'Node hub', '80×80×3', 5 * F, 0.10],
-    ['SP', 'Spigot', '70×70×3', sp, 0.23], ['K', 'King post', '60×60×3', F, 1.63], ['PU', 'Purlin', '100×50 C', 2 * n, 2.28]];
+  const bl = r1(bay - 0.1);
+  const cuts = [['P', 'Wall post', '80×80×3', 2 * F, 2.30], ['B', 'Base tie', '80×80×3', F, 5.90], ['T', 'Eaves tie', '80×80×3', F, 5.90], ['R', 'Rafter', wide ? '80×80×4' : '80×80×3', 2 * F, 3.33],
+    ['RB', 'Ridge beam', '80×80×3', n, bl], ['ER', 'Eaves rail', '80×80×3', 2 * n, bl], ['BR', 'Base rail', '80×80×3', 2 * n, bl], ['H', 'Node hub', '80×80×3', 5 * F, 0.10],
+    ['SP', 'Spigot', '70×70×3', sp, 0.23], ['K', 'King post', '60×60×3', F, 1.63], ['PU', 'Purlin', wide ? '125×50 C' : '100×50 C', 2 * n, Math.round((bay - 0.12) * 100) / 100]];
   return { rows, cuts };
 }
 function renderCosting() {
-  pkgButtons('pkgCost', 'pkg');
+  pkgButtons('pkgCost');
+  $('nestNote').textContent = cfg().wide
+    ? 'Nesting from 6 m lengths: one rail (3.5 m) + one post (2.3 m) from each length. Base and eaves ties one per length. Rafters (80×80×4) one per length; keep the 2.67 m offcuts. Purlins one per length. Hubs from offcuts. Lengths are approximate until the nodes are detailed.'
+    : 'Nesting from 6 m lengths: rafter + post from one length (5.63 m). Base and eaves ties one per length. Ridge, eaves and base rails two per length. Hubs from offcuts. Lengths are approximate until the nodes are detailed.';
   const b = build();
   let h = `<thead><tr><th>Item</th><th class="n">Qty</th>${[0, 1, 2].map((i) => `<th id="sh${i}">${esc(S.names[i])}</th>`).join('')}<th class="n">Best line</th></tr></thead><tbody>`;
   let last = '';
@@ -800,7 +1075,7 @@ function updateCosting() {
   $('totBest').textContent = money(best);
   const full = [0, 1, 2].filter((i) => priced[i] === b.rows.length).sort((a, c) => sums[a] - sums[c]);
   $('bestNote').textContent = unpriced ? `Best-line total covers ${b.rows.length - unpriced} of ${b.rows.length} lines; ${unpriced} still need a price.` : (full.length ? `Cheapest single supplier for everything: ${S.names[full[0]]} at ${money(sums[full[0]])}. Mixing suppliers line by line: ${money(best)}.` : `Every line has at least one price. Mixing suppliers line by line: ${money(best)}.`);
-  const pkgLabel = S.pkg === 'one' ? '1-bedroom, 12 m x 6 m' : '2-bedroom, 14.4 m x 6 m';
+  const cf = cfg(), pkgLabel = `${cf.pkg === 'one' ? '1-bedroom' : '2-bedroom'}, ${cf.L} m x 6 m (frames at ${cf.bay} m)`;
   const chosen = b.rows.filter((r) => S.cat === 'Everything' || r.cat === S.cat);
   let body = chosen.map((r) => `- ${r.item}${r.spec ? ' (' + r.spec + ')' : ''}: ${fmtQ(r.qty)} ${r.unit}`).join('\n');
   if (S.cat === 'Fabrication' || S.cat === 'Everything') body += '\n\nCutting list:\n' + b.cuts.map((c) => `- ${c[3]} x ${c[1]}, ${c[2]} @ ${c[4].toFixed(2)} m`).join('\n');
@@ -814,7 +1089,9 @@ function showTab(t) {
   S.tab = t; save();
   document.querySelectorAll('nav.tabs button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === t)));
   document.querySelectorAll('section.tab').forEach((s) => s.classList.toggle('on', s.id === 'tab-' + t));
+  bayText();
   if (t === 'overview') renderOverview();
+  if (t === 'system') renderSystem();
   if (t === 'layout') renderLayout();
   if (t === 'view3d') { render3DControls(); draw3d(); }
   if (t === 'costing') renderCosting();
@@ -825,7 +1102,7 @@ document.addEventListener('click', (e) => {
   const tabBtn = e.target.closest('nav.tabs button'); if (tabBtn) { showTab(tabBtn.dataset.tab); return; }
   const mod = e.target.closest('.mod');
   if (mod) {
-    const id = mod.dataset.id, op = S.open[S.pkg], cur = op[id] || 'panel';
+    const id = mod.dataset.id, op = S.open[cfg().key], cur = op[id] || 'panel';
     const nx = { panel: 'window', window: 'door', door: 'panel' }[cur];
     if (nx === 'panel') delete op[id]; else op[id] = nx;
     save(); renderLayout(); return;
@@ -833,8 +1110,17 @@ document.addEventListener('click', (e) => {
   const a = e.target.closest('[data-action]'); if (!a) return;
   const act = a.dataset.action;
   if (act === 'pkg') { S.pkg = a.dataset.pkg; save(); showTab(S.tab); }
-  else if (act === 'resetLayout') { S.open[S.pkg] = Object.assign({}, DEFAULTS[S.pkg]); save(); renderLayout(); }
-  else if (act === 'mode') { const m = a.dataset.mode; if (m === 'pl' && S.view.mode !== 'pl') { S.view.yaw = 20; if (S.view.pitch < 40) S.view.pitch = 55; } S.view.mode = m; save(); render3DControls(); draw3d(); }
+  else if (act === 'resetLayout') { const k = cfg().key; S.open[k] = Object.assign({}, DEFAULTS[k]); save(); renderLayout(); }
+  else if (act === 'bay') { S.bay = Number(a.dataset.bay); clampInside(); save(); showTab(S.tab); }
+  else if (act === 'steel') { S.steel = a.dataset.steel; save(); render3DControls(); draw3d(); }
+  else if (act === 'inPreset') { Object.assign(S.inside, insidePresets()[Number(a.dataset.i)][1]); spinning = false; save(); render3DControls(); draw3d(); }
+  else if (act === 'savePic') savePicture();
+  else if (act === 'copyPrompt') {
+    const t = aiPrompt(), note = (s) => { $('picNote').textContent = s; };
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(() => note('Prompt copied. Paste it into ChatGPT.')).catch(() => note('Could not copy: press and hold the text below to copy it.'));
+    else note('Press and hold the text below to copy it.');
+  }
+  else if (act === 'mode') { const m = a.dataset.mode; if (m === 'pl' && S.view.mode !== 'pl') { S.view.yaw = 20; if (S.view.pitch < 40) S.view.pitch = 55; } if (S.view.mode === 'in' && m !== 'in') spinning = false; S.view.mode = m; save(); render3DControls(); draw3d(); }
   else if (act === 'clad') { S.clad = a.dataset.clad; save(); render3DControls(); draw3d(); }
   else if (act === 'yaw') { S.view.yaw = Number(a.dataset.yaw); save(); draw3d(); }
   else if (act === 'spin') { spinning = !spinning; render3DControls(); if (spinning) requestAnimationFrame(spinLoop); else save(); }
@@ -855,16 +1141,22 @@ document.addEventListener('input', (e) => {
   if (t.dataset.row) { const arr = (S.prices[t.dataset.row] || ['', '', '']).slice(); arr[Number(t.dataset.i)] = t.value; S.prices[t.dataset.row] = arr; save(); updateCosting(); }
   else if (t.dataset.name !== undefined) { S.names[Number(t.dataset.name)] = t.value; save(); updateCosting(); }
   else if (t.dataset.phone !== undefined) { S.phones[Number(t.dataset.phone)] = t.value; save(); updateCosting(); }
-  else if (t.id === 'yaw') { S.view.yaw = Number(t.value); req3d(); }
-  else if (t.id === 'pitch') { S.view.pitch = Number(t.value); req3d(); }
+  else if (t.id === 'yaw') { if (S.view.mode === 'in') S.inside.h = Number(t.value); else S.view.yaw = Number(t.value); req3d(); }
+  else if (t.id === 'pitch') { if (S.view.mode === 'in') S.inside.t = Number(t.value); else S.view.pitch = Number(t.value); req3d(); }
+  else if (t.id === 'standX') { S.inside.x = 0.4 + Number(t.value) / 1000 * (cfg().L - 0.8); req3d(); }
+  else if (t.id === 'standY') { S.inside.y = 0.4 + Number(t.value) / 1000 * 5.2; req3d(); }
 });
-document.addEventListener('change', (e) => { if (e.target.id === 'yaw' || e.target.id === 'pitch') save(); });
+document.addEventListener('change', (e) => { if (['yaw', 'pitch', 'standX', 'standY'].includes(e.target.id)) save(); });
 const v3 = $('v3d');
-v3.addEventListener('pointerdown', (e) => { dragging = { x: e.clientX, y: e.clientY, yaw: S.view.yaw, pitch: S.view.pitch }; v3.setPointerCapture(e.pointerId); spinning = false; });
+v3.addEventListener('pointerdown', (e) => { dragging = { x: e.clientX, y: e.clientY, yaw: S.view.yaw, pitch: S.view.pitch, h: S.inside.h, t: S.inside.t }; v3.setPointerCapture(e.pointerId); spinning = false; });
 v3.addEventListener('pointermove', (e) => {
   if (!dragging) return;
-  S.view.yaw = ((dragging.yaw - (e.clientX - dragging.x) * 0.4) % 360 + 360) % 360;
-  S.view.pitch = Math.max(6, Math.min(70, dragging.pitch + (e.clientY - dragging.y) * 0.25));
+  const dx = e.clientX - dragging.x, dy = e.clientY - dragging.y;
+  if (S.view.mode === 'in') { S.inside.h = ((dragging.h + dx * 0.25) % 360 + 360) % 360; S.inside.t = Math.max(-15, Math.min(60, dragging.t + dy * 0.2)); }
+  else {
+    S.view.yaw = ((dragging.yaw - dx * 0.4) % 360 + 360) % 360;
+    S.view.pitch = Math.max(6, Math.min(70, dragging.pitch + dy * 0.25));
+  }
   req3d();
 });
 const endDrag = () => { if (dragging) { dragging = null; save(); render3DControls(); } };

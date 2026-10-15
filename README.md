@@ -1,14 +1,16 @@
 # Kit-Built Panel House — PWA
 
-Concept app for the steel-kit + 100 mm IBR/EPS panel house. Version v1 · 14 Oct 2026.
+Concept app for the steel-kit + 100 mm IBR/EPS panel house. Version v2 · 15 Oct 2026.
 
 ## Tabs
 - **Overview** – render (artist's impression), key figures, assembly steps, Share button.
-- **System** – cutaway, end section, rail–panel–rail lock detail, open questions for the factory.
+- **System** – cutaway, end section, rail–panel–rail lock detail, 2.4 m vs 3.6 m frame spacing comparison, open questions for the factory.
 - **Layout** – tap wall panels to make windows/doors; bracing check; front elevation.
-- **3D** – drag to rotate; Finished / Floor plan / X-ray / Frame; cladding colours.
+- **3D** – drag to rotate; Finished / Interior / Floor plan / X-ray / Frame; cladding and steel colours; Save picture + ChatGPT prompt for realistic renders.
 - **Costing** – price comparison for 3 suppliers, WhatsApp quote requests, steel cutting list.
 - **Info** – version, clear saved data.
+
+Frame spacing switch (2.4 m or 3.6 m) on the Layout, 3D and Costing tabs. At 3.6 m the 1-bed is 10.8 m (3 bays) and rafters/purlins go up a size.
 
 Layout, prices, supplier names and numbers are saved on the device (localStorage).
 The 3D view and costing use whatever layout is set on the Layout tab.
