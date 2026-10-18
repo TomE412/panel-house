@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Panel House</title>
+<title>Spine-and-Pillar Panel House</title>
 <meta name="description" content="Kit-built steel and insulated-panel house: design, layout, 3D view, costing and quote requests.">
 <meta name="theme-color" content="#1F262B">
 <link rel="manifest" href="./manifest.json">
@@ -63,8 +63,8 @@ svg.dwg{display:block;width:100%;height:auto}
 .legend span.sw{display:inline-block;width:28px;height:12px;border-radius:2px;margin-right:10px;vertical-align:middle}
 .warn{font-size:14px;line-height:1.45;color:#A33A0E;padding-left:10px;border-left:3px solid var(--accent);margin:4px 0}
 .good{font-size:14px;color:var(--ok)}
-.v3d{position:relative;border:1px solid var(--line);background:#E6ECEE;touch-action:none;user-select:none}
-.v3d svg{display:block;width:100%;height:auto}
+.v3d{position:relative;border:1px solid var(--line);background:#E6ECEE;touch-action:none;user-select:none;overflow:hidden}
+#v3dInner{position:absolute;left:0;top:0;width:1100px;height:760px;transform-origin:0 0}
 .ctrl{display:flex;flex-direction:column;gap:14px}
 .ctrl label{font-size:14px;font-weight:600}
 .ctrl input[type=range]{width:100%;min-height:32px}
@@ -86,16 +86,14 @@ a.wa{display:flex;align-items:center;justify-content:center;min-height:44px;padd
 .msg{white-space:pre-line;background:#fff;border:1px solid var(--line);border-radius:4px;padding:12px 14px;font-size:13px;line-height:1.5}
 ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 .mono{font-family:var(--mono)}
-[hidden]{display:none!important}
-.grp{width:100%;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.grp .lbl{font-size:13px;color:var(--muted);margin-right:2px}
 </style>
 </head>
 <body>
 <header class="top">
-  <div class="brand"><b>Kit-Built Panel House</b><span id="ver"></span></div>
+  <div class="brand"><b>Spine-and-Pillar Panel House</b><span id="ver"></span></div>
   <nav class="tabs" role="tablist" aria-label="Sections">
     <button role="tab" data-tab="overview">Overview</button>
+    <button role="tab" data-tab="gallery">Gallery</button>
     <button role="tab" data-tab="system">System</button>
     <button role="tab" data-tab="layout">Layout</button>
     <button role="tab" data-tab="view3d">3D</button>
@@ -107,174 +105,138 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 
 <section class="tab" id="tab-overview">
   <div class="eyebrow">Concept · for discussion</div>
-  <h1>Kit-Built Panel House</h1>
-  <p class="lead">A single-storey house built from a bolted steel kit and 100 mm IBR / EPS cold-room panels. The frame comes to site ready to bolt together; the panels lock over the steel and brace the house. Walls finish flush inside and out, and the kit can be welded out later to make it permanent.</p>
+  <h1>Spine-and-Pillar Panel House</h1>
+  <p class="lead">A single-storey house where the only structural steel is a ridge beam (the spine) on pillars every 6 m. The walls are 100 mm IBR / EPS cold-room panels standing in folded U-tracks, and the roof panels span from the walls up to the spine. Two versions: A with the door in the long wall, B with a glass slider in the gable end and a covered verandah.</p>
   <figure class="hero">
-    <img src="./render.jpg" alt="Artist's impression of the house in a dry garden with aloes, rocks and a granite kopje behind" width="1515" height="1038">
-    <figcaption>Artist's impression only. The image shows a plastered finish and stone plinth; the base design is IBR-faced panel. Finishes, windows and landscaping are indicative.</figcaption>
+    <img src="./finishes.jpg" alt="Artist's impressions of version B: panel and plastered finishes and three colour palettes" width="1536" height="1024">
+    <figcaption>Artist's impressions of version B. Option 1 is the base panel finish; plastered and colour options are upgrades. More in the Gallery tab.</figcaption>
   </figure>
   <div class="stats" id="ovStats"></div>
-  <h2>How it goes together</h2>
+  <h2>How it goes up</h2>
   <ol class="steps">
-    <li>Customer prepares any base: slab, piles or sleepers. Each foot node has a 200 × 200 base plate, so the kit is the same whatever it stands on.</li>
-    <li>Base rails and base ties bolt into the foot nodes to make a level steel base frame.</li>
-    <li>Posts, eaves ties, rafters and king posts slide onto shop-welded spigot nodes: one M16 bolt per joint. Frames sit every <span class="bayTxt">3.6</span> m. Temporary props hold the frame until the panels go on.</li>
-    <li>Wall panels drop over the base rail with their 80 mm skin flaps, the top rail drops into the top flaps, and screws lock panel and steel together. The panels are what brace the house.</li>
-    <li>Roof panels go over the rafters and purlin with a 300 mm eave overhang, then ridge capping, barges and trims.</li>
-    <li>To make it permanent, fillet-weld each tube end to its node. The bolts stay in.</li>
+    <li>Footing: a slab or strip footing under all the walls, with a pad under each pillar. The base U-track is bolted down round the edge.</li>
+    <li>Steel: the pillars stand on their base plates and the 200 × 100 ridge beam sits on their cap plates. In version B the Gable A pillar stands on a welded door frame instead, and the spine runs on over the verandah to an open steel A-truss.</li>
+    <li>Walls: the 1.2 m wall panels stand in the base track and a top U-track caps them. The panels carry the roof edge and hold the house square, so keep enough solid panel in every wall.</li>
+    <li>Roof: the roof panels span 3.46 m from the wall track up to the spine, screwed at both ends, with a 300 mm eave overhang.</li>
+    <li>Windows, door or glass slider into the panel openings; ridge capping, barges and trims.</li>
   </ol>
   <h2>Share</h2>
   <div class="row"><button class="btn primary" data-action="share">Share this app</button><span class="note" id="shareNote"></span></div>
 </section>
 
+<section class="tab" id="tab-gallery">
+  <div class="eyebrow">Gallery · artist's impressions</div>
+  <h1>What it could look like</h1>
+  <p class="lead">AI-generated impressions made from the 3D model. They show the mood and the finish options, not a built house: details such as gutters, lights, joinery and landscaping are illustrative.</p>
+  <figure class="hero">
+    <img src="./interior.jpg" alt="Artist's impression of the open-plan living, dining and kitchen, with a vaulted ceiling, central pillar and glass sliding doors to the verandah" width="1509" height="1042" loading="lazy">
+    <figcaption>Version B interior, looking to the glass slider and verandah. In the design the spine and pillar are steel; the timber look shown here would be a timber cladding finish on the steel, at extra cost.</figcaption>
+  </figure>
+  <h2>Walkthrough, version B</h2>
+  <figure class="hero">
+    <video src="./walkthrough.mp4" poster="./walkthrough-poster.jpg" controls playsinline preload="metadata" style="display:block;width:100%;height:auto" aria-label="Walkthrough of version B from the verandah through the living area into the bedroom"></video>
+    <figcaption>26-second walk from the verandah, through the glass slider and living area, into the bedroom. Simple block model: proportions are right, finishes are not shown. Needs a connection to play.</figcaption>
+  </figure>
+  <h2>3D model views</h2>
+  <figure class="hero"><img src="./model-living-B.jpg" alt="3D model view of the version B living area looking to the glass slider" width="1100" height="760" loading="lazy"><figcaption>Version B living area, looking to the glass slider. This is the view the interior impression above was made from.</figcaption></figure>
+  <figure class="hero"><img src="./model-bedroom-B.jpg" alt="3D model view of the version B bedroom from the doorway" width="1100" height="760" loading="lazy"><figcaption>Version B bedroom from the doorway.</figcaption></figure>
+  <figure class="hero"><img src="./model-bedroom-A.jpg" alt="3D model view of the version A bedroom from the doorway" width="1100" height="760" loading="lazy"><figcaption>Version A bedroom from the doorway.</figcaption></figure>
+  <h2>Exterior finishes</h2>
+  <figure class="hero">
+    <img src="./finishes.jpg" alt="Five exterior impressions: panel look, plastered look, and three colour palettes" width="1536" height="1024" loading="lazy">
+    <figcaption>Version B exterior finish options. Option 1 is the base panel finish; option 2 (plastered) and the colour palettes are upgrades to price separately.</figcaption>
+  </figure>
+  <figure class="hero">
+    <img src="./render.jpg" alt="Earlier artist's impression of the house in a dry garden" width="1515" height="1038" loading="lazy">
+    <figcaption>Earlier impression of version A with a plastered finish.</figcaption>
+  </figure>
+</section>
+
 <section class="tab" id="tab-system">
   <div class="eyebrow">How it works</div>
-  <h1>Frame, panels and joints</h1>
-  <p class="lead">An 80 × 80 × 3 SHS frame sits inside the 100 mm wall panels, with a 10 mm thermal-break strip on each face (10 + 80 + 10 = 100). <span id="sysBay"></span> Roof panels sit over the rafters so the insulation is unbroken where the sun hits.</p>
-  <h2>Cutaway</h2>
-  <div class="dwgbox"><svg class="dwg" viewBox="0 0 1252 843" role="img" aria-label="Axonometric cutaway of the panel house: 2.4 metre walls under a 30 degree roof, six frames at 2.4 metres, front bay shown as bare steel frame, remaining bays clad">
+  <h1>Spine, pillars and panel walls</h1>
+  <p class="lead">The ridge beam is held up by pillars, so the roof does not push the walls outwards and there are no rafters, ties or purlins. The walls are load-bearing panels held top and bottom by light folded U-tracks, as in a cold room. Structural steel for version A is about 0.33 t.</p>
+  <h2>Cutaway, version A</h2>
+  <div class="dwgbox"><svg class="dwg" viewBox="0 0 1252 843" role="img" aria-label="Cutaway of the spine-and-pillar house: ridge beam on three pillars, panel walls in U-tracks, roof panels from wall to ridge; front part drawn without panels">
 <polygon points="335.6,798.4 1201.4,509.8 916.5,328.5 50.7,617.1" fill="#E3E6E3"></polygon>
+<polygon points="344.7,781.5 1163.9,508.5 907.5,345.3 88.3,618.3" fill="#CDCFC8" stroke="#9C9E97" stroke-width="1"></polygon>
 <polygon points="1147.8,507.9 903.6,352.5 903.6,174.9 1025.7,124.4 1147.8,330.3" fill="#D5DADA" stroke="#9AA3A6" stroke-width="1"></polygon>
-<polygon points="264.2,565.6 903.6,352.5 903.6,174.9 264.2,388.0" fill="#DCE0E0" stroke="#9AA3A6" stroke-width="1"></polygon>
-<polygon points="264.2,388.0 903.6,174.9 1025.7,124.4 386.3,337.5" fill="#E6E9E9" stroke="#9AA3A6" stroke-width="1"></polygon>
-<g stroke="#36414A" stroke-linecap="square" fill="none">
-<line x1="104.4" y1="618.9" x2="903.6" y2="352.5" stroke-width="6"></line>
-<line x1="104.4" y1="441.3" x2="903.6" y2="174.9" stroke-width="6"></line>
-<line x1="165.4" y1="416.1" x2="964.6" y2="149.7" stroke-width="4"></line>
-<line x1="226.5" y1="390.8" x2="1025.7" y2="124.4" stroke-width="6"></line>
-<line x1="903.6" y1="352.5" x2="903.6" y2="174.9" stroke-width="6"></line>
-<line x1="1147.8" y1="507.9" x2="903.6" y2="352.5" stroke-width="6"></line>
-<line x1="1147.8" y1="330.3" x2="903.6" y2="174.9" stroke-width="6"></line>
-<line x1="903.6" y1="174.9" x2="1025.7" y2="124.4" stroke-width="6"></line>
-<line x1="1025.7" y1="252.6" x2="1025.7" y2="124.4" stroke-width="4"></line>
-<line x1="743.7" y1="405.8" x2="743.7" y2="228.2" stroke-width="6"></line>
-<line x1="987.9" y1="561.2" x2="743.7" y2="405.8" stroke-width="6"></line>
-<line x1="987.9" y1="383.6" x2="743.7" y2="228.2" stroke-width="6"></line>
-<line x1="743.7" y1="228.2" x2="865.8" y2="177.7" stroke-width="6"></line>
-<line x1="865.8" y1="305.9" x2="865.8" y2="177.7" stroke-width="4"></line>
-<line x1="583.9" y1="459.1" x2="583.9" y2="281.5" stroke-width="6"></line>
-<line x1="828.1" y1="614.5" x2="583.9" y2="459.1" stroke-width="6"></line>
-<line x1="828.1" y1="436.9" x2="583.9" y2="281.5" stroke-width="6"></line>
-<line x1="583.9" y1="281.5" x2="706.0" y2="231.0" stroke-width="6"></line>
-<line x1="706.0" y1="359.2" x2="706.0" y2="231.0" stroke-width="4"></line>
-<line x1="424.1" y1="512.3" x2="424.1" y2="334.7" stroke-width="6"></line>
-<line x1="668.3" y1="667.7" x2="424.1" y2="512.3" stroke-width="6"></line>
-<line x1="668.3" y1="490.1" x2="424.1" y2="334.7" stroke-width="6"></line>
-<line x1="424.1" y1="334.7" x2="546.2" y2="284.3" stroke-width="6"></line>
-<line x1="546.2" y1="412.4" x2="546.2" y2="284.3" stroke-width="4"></line>
+<polygon points="583.9,459.1 903.6,352.5 903.6,174.9 583.9,281.5" fill="#DCE0E0" stroke="#9AA3A6" stroke-width="1"></polygon>
+<polygon points="583.9,281.5 903.6,174.9 1025.7,124.4 706.0,231.0" fill="#E6E9E9" stroke="#9AA3A6" stroke-width="1"></polygon>
+<g stroke-linecap="square" fill="none">
+<line x1="104.4" y1="618.9" x2="903.6" y2="352.5" stroke-width="3" stroke="#7F8A90"></line>
+<line x1="348.6" y1="774.3" x2="104.4" y2="618.9" stroke-width="3" stroke="#7F8A90"></line>
+<line x1="1147.8" y1="507.9" x2="903.6" y2="352.5" stroke-width="3" stroke="#7F8A90"></line>
+<line x1="348.6" y1="774.3" x2="828.1" y2="614.5" stroke-width="3" stroke="#7F8A90"></line>
+<line x1="1025.7" y1="430.2" x2="1025.7" y2="139.2" stroke-width="5" stroke="#36414A"></line>
+<line x1="626.1" y1="563.4" x2="626.1" y2="272.4" stroke-width="5" stroke="#36414A"></line>
+<line x1="226.5" y1="398.2" x2="1025.7" y2="131.8" stroke-width="9" stroke="#2E363C"></line>
 </g>
-<polygon points="508.4,721.0 1147.8,507.9 1147.8,330.3 508.4,543.4" fill="#DADFDF" stroke="#3A4248" stroke-width="1.2"></polygon>
+<polygon points="828.1,614.5 1147.8,507.9 1147.8,330.3 828.1,436.9" fill="#DADFDF" stroke="#3A4248" stroke-width="1.2"></polygon>
 <g stroke="rgba(31,38,43,0.22)" stroke-width="1.2">
-<line x1="588.3" y1="694.4" x2="588.3" y2="516.8"></line>
-<line x1="668.3" y1="667.7" x2="668.3" y2="490.1"></line>
-<line x1="748.2" y1="641.1" x2="748.2" y2="463.5"></line>
-<line x1="828.1" y1="614.5" x2="828.1" y2="436.9"></line>
 <line x1="908.0" y1="587.8" x2="908.0" y2="410.2"></line>
 <line x1="987.9" y1="561.2" x2="987.9" y2="383.6"></line>
 <line x1="1067.9" y1="534.5" x2="1067.9" y2="356.9"></line>
-<line x1="1147.8" y1="507.9" x2="1147.8" y2="330.3"></line>
 </g>
-<polygon points="508.4,721.0 508.4,543.4 513.3,546.5 513.3,724.1" fill="#AEB6B8" stroke="#3A4248" stroke-width="0.8"></polygon>
-<polygon points="519.0,561.2 1158.4,348.1 1025.7,124.4 386.3,337.5" fill="#E9ECEC" stroke="#3A4248" stroke-width="1.2"></polygon>
+<polygon points="828.1,614.5 828.1,436.9 833.0,440.0 833.0,617.6" fill="#AEB6B8" stroke="#3A4248" stroke-width="0.8"></polygon>
+<polygon points="838.7,454.7 1158.4,348.1 1025.7,124.4 706.0,231.0" fill="#E9ECEC" stroke="#3A4248" stroke-width="1.2"></polygon>
 <g stroke="rgba(31,38,43,0.22)" stroke-width="1.2">
-<line x1="598.9" y1="534.6" x2="466.2" y2="310.9"></line>
-<line x1="678.8" y1="508.0" x2="546.2" y2="284.3"></line>
-<line x1="758.8" y1="481.3" x2="626.1" y2="257.6"></line>
-<line x1="838.7" y1="454.7" x2="706.0" y2="231.0"></line>
 <line x1="918.6" y1="428.0" x2="785.9" y2="204.3"></line>
 <line x1="998.5" y1="401.4" x2="865.8" y2="177.7"></line>
 <line x1="1078.4" y1="374.8" x2="945.8" y2="151.1"></line>
-<line x1="1158.4" y1="348.1" x2="1025.7" y2="124.4"></line>
 </g>
-<polygon points="519.0,561.2 386.3,337.5 388.8,331.4 521.4,555.1" fill="#AEB6B8" stroke="#3A4248" stroke-width="0.8"></polygon>
-<line x1="386.3" y1="337.5" x2="1025.7" y2="124.4" stroke="#2A3237" stroke-width="5" stroke-linecap="round"></line>
-<g stroke="#36414A" stroke-linecap="square" fill="none">
-<line x1="264.2" y1="565.6" x2="264.2" y2="388.0" stroke-width="6"></line>
-<line x1="508.4" y1="721.0" x2="264.2" y2="565.6" stroke-width="6"></line>
-<line x1="508.4" y1="543.4" x2="264.2" y2="388.0" stroke-width="6"></line>
-<line x1="264.2" y1="388.0" x2="386.3" y2="337.5" stroke-width="6"></line>
-<line x1="386.3" y1="465.7" x2="386.3" y2="337.5" stroke-width="4"></line>
-<line x1="348.6" y1="774.3" x2="508.4" y2="721.0" stroke-width="6"></line>
-<line x1="348.6" y1="596.7" x2="508.4" y2="543.4" stroke-width="6"></line>
-<line x1="287.5" y1="493.8" x2="447.4" y2="440.5" stroke-width="4"></line>
-<line x1="104.4" y1="618.9" x2="104.4" y2="441.3" stroke-width="6"></line>
-<line x1="348.6" y1="774.3" x2="104.4" y2="618.9" stroke-width="6"></line>
-<line x1="348.6" y1="596.7" x2="104.4" y2="441.3" stroke-width="6"></line>
-<line x1="104.4" y1="441.3" x2="226.5" y2="390.8" stroke-width="6"></line>
-<line x1="226.5" y1="519.0" x2="226.5" y2="390.8" stroke-width="4"></line>
-<line x1="226.5" y1="390.8" x2="386.3" y2="337.5" stroke-width="6"></line>
-<line x1="348.6" y1="774.3" x2="348.6" y2="596.7" stroke-width="6"></line>
-<line x1="348.6" y1="596.7" x2="226.5" y2="390.8" stroke-width="6"></line>
+<polygon points="838.7,454.7 706.0,231.0 708.4,224.9 841.1,448.6" fill="#AEB6B8" stroke="#3A4248" stroke-width="0.8"></polygon>
+<line x1="706.0" y1="231.0" x2="1025.7" y2="124.4" stroke="#2A3237" stroke-width="5" stroke-linecap="round"></line>
+<path d="M 824.7 440.4 L 824.7 436.0 L 832.9 441.2 L 832.9 445.6" stroke="#7F8A90" stroke-width="2.5" fill="none"></path>
+<g stroke-linecap="square" fill="none">
+<line x1="226.5" y1="696.6" x2="226.5" y2="405.6" stroke-width="5" stroke="#36414A"></line>
 </g>
 <g fill="#C24A14">
-<rect x="219.5" y="383.8" width="14" height="14"></rect>
-<rect x="379.3" y="330.5" width="14" height="14"></rect>
-<rect x="539.2" y="277.3" width="14" height="14"></rect>
-<rect x="699.0" y="224.0" width="14" height="14"></rect>
-<rect x="858.8" y="170.7" width="14" height="14"></rect>
-<rect x="1018.7" y="117.4" width="14" height="14"></rect>
-<rect x="341.6" y="589.7" width="14" height="14"></rect>
-<rect x="341.6" y="767.3" width="14" height="14"></rect>
-<rect x="97.4" y="434.3" width="14" height="14"></rect>
-<rect x="97.4" y="611.9" width="14" height="14"></rect>
-<rect x="257.2" y="381.0" width="14" height="14"></rect>
-<rect x="257.2" y="558.6" width="14" height="14"></rect>
-<rect x="501.4" y="714.0" width="14" height="14"></rect>
-<rect x="661.3" y="660.7" width="14" height="14"></rect>
-<rect x="821.1" y="607.5" width="14" height="14"></rect>
-<rect x="980.9" y="554.2" width="14" height="14"></rect>
-<rect x="1140.8" y="500.9" width="14" height="14"></rect>
-<rect x="222.5" y="515.0" width="8" height="8"></rect>
-<rect x="382.3" y="461.7" width="8" height="8"></rect>
+<rect x="220.5" y="693.6" width="12" height="6"></rect>
+<rect x="620.1" y="560.4" width="12" height="6"></rect>
+<rect x="220.5" y="402.6" width="12" height="6"></rect>
+<rect x="620.1" y="269.4" width="12" height="6"></rect>
+<rect x="1019.7" y="136.2" width="12" height="6"></rect>
 </g>
 <g stroke="#C24A14" stroke-width="1.5">
-<line x1="226.5" y1="390.8" x2="196.5" y2="358.8"></line>
-<line x1="348.6" y1="596.7" x2="386.6" y2="618.7"></line>
-<line x1="348.6" y1="774.3" x2="388.6" y2="800.3"></line>
-<line x1="275.3" y1="550.1" x2="263.3" y2="586.1"></line>
-<line x1="367.4" y1="467.1" x2="371.4" y2="433.1"></line>
-<line x1="908.0" y1="584.1" x2="918.0" y2="618.1"></line>
-<line x1="226.5" y1="452.4" x2="252.5" y2="440.4"></line>
-</g>
-<g font-family="IBM Plex Sans, sans-serif" font-size="14" font-weight="600" text-anchor="middle" dominant-baseline="central">
-<circle cx="196.5" cy="358.8" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="196.5" y="358.8" fill="#FFFFFF">1</text>
-<circle cx="386.6" cy="618.7" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="386.6" y="618.7" fill="#FFFFFF">2</text>
-<circle cx="388.6" cy="800.3" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="388.6" y="800.3" fill="#FFFFFF">3</text>
-<circle cx="263.3" cy="586.1" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="263.3" y="586.1" fill="#FFFFFF">4</text>
-<circle cx="371.4" cy="433.1" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="371.4" y="433.1" fill="#FFFFFF">5</text>
-<circle cx="859.2" cy="302.2" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="859.2" y="302.2" fill="#FFFFFF">6</text>
-<circle cx="918.0" cy="618.1" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="918.0" y="618.1" fill="#FFFFFF">7</text>
-<circle cx="252.5" cy="440.4" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="252.5" y="440.4" fill="#FFFFFF">8</text>
+<line x1="426.3" y1="331.6" x2="426.3" y2="291.6"></line>
+<line x1="226.5" y1="578.2" x2="186.5" y2="578.2"></line>
+<line x1="626.1" y1="459.8" x2="662.1" y2="449.8"></line>
+<line x1="588.3" y1="694.4" x2="598.3" y2="728.4"></line>
+<line x1="830.1" y1="438.2" x2="800.1" y2="412.2"></line>
+<line x1="265.7" y1="644.1" x2="235.7" y2="668.1"></line>
+</g><g font-family="IBM Plex Sans, sans-serif" font-size="14" font-weight="600" text-anchor="middle" dominant-baseline="central">
+<circle cx="426.3" cy="291.6" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="426.3" y="291.6" fill="#FFFFFF">1</text>
+<circle cx="186.5" cy="578.2" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="186.5" y="578.2" fill="#FFFFFF">2</text>
+<circle cx="662.1" cy="449.8" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="662.1" y="449.8" fill="#FFFFFF">3</text>
+<circle cx="598.3" cy="728.4" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="598.3" y="728.4" fill="#FFFFFF">4</text>
+<circle cx="800.1" cy="412.2" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="800.1" y="412.2" fill="#FFFFFF">5</text>
+<circle cx="931.0" cy="287.5" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="931.0" y="287.5" fill="#FFFFFF">6</text>
+<circle cx="948.0" cy="500.5" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="948.0" y="500.5" fill="#FFFFFF">7</text>
+<circle cx="235.7" cy="668.1" r="14" fill="#C24A14" stroke="#F2F3F1" stroke-width="2"></circle><text x="235.7" y="668.1" fill="#FFFFFF">8</text>
 </g>
 </svg></div>
-  <p class="note">1 ridge node · 2 eaves node · 3 foot node · 4 eaves tie · 5 purlin · 6 panel · 7 panel lock · 8 king post. Front bay drawn without panels to show the frame. Drawn at 2.4 m frame spacing.</p>
-  <h2>End section, typical frame</h2>
-  <div class="dwgbox"><svg class="dwg" viewBox="0 0 1000 780" role="img" aria-label="End section: 6 metre span, 2.4 metre posts, eaves tie, 30 degree rafters to a ridge at 4132, king post, knee braces, panel envelope with eave overhang">
-<polygon points="205,615 795,615 795,380 500,206.8 205,380" fill="rgba(43,108,176,0.12)"></polygon>
+  <p class="note">1 ridge beam · 2 gable pillar · 3 middle pillar · 4 base U-track · 5 top U-track · 6 roof panel · 7 wall panel · 8 footing. Front 7.2 m drawn without panels to show the structure.</p>
+  <h2>End section through a pillar</h2>
+  <div class="dwgbox"><svg class="dwg" viewBox="0 0 1000 780" role="img" aria-label="End section of the ridge-beam design: 6 metre span, 2.4 metre panel walls, roof panels spanning to a ridge beam on a central post, ridge at 4132">
+<polygon points="205,615 795,615 795,380 500,226.8 205,380" fill="rgba(43,108,176,0.10)"></polygon>
 <line x1="110" y1="620" x2="890" y2="620" stroke="#8A9297" stroke-width="1" stroke-dasharray="10 6"></line>
-<polygon points="174,377.7 500,189.5 826,377.7 826,389.2 500,201.0 174,389.2" fill="#D6DCDC" stroke="#3A4248" stroke-width="1.2"></polygon>
-<rect x="195" y="372" width="10" height="252" fill="#D6DCDC" stroke="#3A4248" stroke-width="1.2"></rect>
-<rect x="795" y="372" width="10" height="252" fill="#D6DCDC" stroke="#3A4248" stroke-width="1.2"></rect>
-<g stroke="#36414A" stroke-linecap="square">
-<line x1="200" y1="620" x2="800" y2="620" stroke-width="7"></line>
-<line x1="200" y1="620" x2="200" y2="380" stroke-width="7"></line>
-<line x1="800" y1="620" x2="800" y2="380" stroke-width="7"></line>
-<line x1="200" y1="380" x2="800" y2="380" stroke-width="7"></line>
-<line x1="200" y1="380" x2="500" y2="206.8" stroke-width="7"></line>
-<line x1="800" y1="380" x2="500" y2="206.8" stroke-width="7"></line>
-<line x1="500" y1="380" x2="500" y2="206.8" stroke-width="6"></line>
+<polygon points="174,395 500,206.8 826,395 826,383.5 500,195.3 174,383.5" fill="#D6DCDC" stroke="#3A4248" stroke-width="1.2"></polygon>
+<rect x="195" y="372" width="10" height="248" fill="#D6DCDC" stroke="#3A4248" stroke-width="1.2"></rect>
+<rect x="795" y="372" width="10" height="248" fill="#D6DCDC" stroke="#3A4248" stroke-width="1.2"></rect>
+<g fill="#36414A">
+<rect x="496" y="226.8" width="8" height="385.2"></rect>
+<rect x="495" y="206.8" width="10" height="20"></rect>
 </g>
-<g fill="#FFFFFF" stroke="#36414A" stroke-width="2">
-<rect x="344" y="287.4" width="12" height="12" transform="rotate(-30 350 293.4)"></rect>
-<rect x="644" y="287.4" width="12" height="12" transform="rotate(30 650 293.4)"></rect>
+<g stroke="#36414A" stroke-width="1.8" fill="none">
+<path d="M 192 386 L 192 370 L 208 370 L 208 386"></path>
+<path d="M 792 386 L 792 370 L 808 370 L 808 386"></path>
+<path d="M 192 604 L 192 621 L 208 621 L 208 604"></path>
+<path d="M 792 604 L 792 621 L 808 621 L 808 604"></path>
 </g>
 <g fill="#C24A14">
-<rect x="492" y="198.8" width="16" height="16"></rect>
-<rect x="192" y="372" width="16" height="16"></rect>
-<rect x="792" y="372" width="16" height="16"></rect>
-<rect x="192" y="612" width="16" height="16"></rect>
-<rect x="792" y="612" width="16" height="16"></rect>
-<rect x="495" y="375" width="10" height="10"></rect>
+<rect x="490" y="226.8" width="20" height="4"></rect>
+<rect x="490" y="612" width="20" height="4"></rect>
 </g>
 <g stroke="#5B656C" stroke-width="3" stroke-linecap="round" fill="none">
 <circle cx="320" cy="462" r="11"></circle>
@@ -300,113 +262,150 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 <line x1="900" y1="206.8" x2="900" y2="620"></line>
 <line x1="895" y1="211.8" x2="905" y2="201.8"></line>
 <line x1="895" y1="625" x2="905" y2="615"></line>
-<line x1="626" y1="265" x2="600" y2="176"></line>
-<line x1="646" y1="299" x2="620" y2="322"></line>
+<line x1="507" y1="214" x2="560" y2="160"></line>
+<line x1="504" y1="420" x2="560" y2="420"></line>
+<line x1="505" y1="229" x2="560" y2="260"></line>
+<line x1="636" y1="268" x2="660" y2="300"></line>
 <line x1="174" y1="392" x2="164" y2="408"></line>
+<line x1="204" y1="376" x2="240" y2="340"></line>
 </g>
 <g font-family="IBM Plex Mono, monospace" font-size="13" fill="#1F262B">
 <text x="500" y="687" text-anchor="middle">6 000 span</text>
-<text x="500" y="560" text-anchor="middle" fill="#1F4E85">2 400 clear across the full 6 000</text>
-<text x="400" y="370" text-anchor="middle" fill="#5B656C">eaves tie, exposed</text>
-<text x="512" y="300" fill="#5B656C">king post</text>
-<text x="520" y="334" fill="#5B656C">purlin at mid-slope</text>
 <text x="888" y="413" text-anchor="middle" transform="rotate(-90 888 413)">4 132 ridge</text>
 <text x="848" y="500" text-anchor="middle" transform="rotate(-90 848 500)">2 400 wall</text>
-<text x="330" y="259" text-anchor="middle" transform="rotate(-30 330 259)">3 464 rafter c/l</text>
+<text x="330" y="264" text-anchor="middle" transform="rotate(-30 330 264)">3 464 panel span</text>
 <text x="266" y="364">30°</text>
-<text x="600" y="168" fill="#5B656C">100 mm IBR / EPS panel</text>
+<text x="566" y="156" fill="#1F262B">ridge beam 200×100×4</text>
+<text x="566" y="424" fill="#1F262B">post 80×80×3, every 6 m</text>
+<text x="566" y="264" fill="#5B656C">cap plate, bolted</text>
+<text x="666" y="312" fill="#5B656C">100 mm roof panel</text>
 <text x="168" y="424" text-anchor="end" fill="#5B656C">300 overhang</text>
-<text x="212" y="458" fill="#5B656C">panel in frame plane</text>
-<text x="106" y="642" fill="#5B656C">top of base frame ±0</text>
-<text x="106" y="662" fill="#5B656C">foundation to suit site</text>
+<text x="246" y="336" fill="#5B656C">folded U-track caps the panel</text>
+<text x="106" y="642" fill="#5B656C">base U-track bolted down ±0</text>
+<text x="106" y="662" fill="#5B656C">continuous slab or strip footing</text>
 </g>
 </svg></div>
-  <h2>Panel lock: rail, panel, rail</h2>
-  <div class="dwgbox"><svg class="dwg" viewBox="0 0 692 400" role="img" aria-label="Wall section: 100 millimetre panel whose skins extend past the foam and drop over an 80 by 80 base rail and top rail, with 10 millimetre thermal-break strips between steel and skins, screwed through both skins">
-<rect x="60" y="380" width="300" height="18" fill="#E1E4E1"></rect>
-<rect x="151" y="120" width="98" height="60" fill="#F1EEDF"></rect>
-<rect x="151" y="210" width="98" height="90" fill="#F1EEDF"></rect>
-<rect x="160" y="40" width="80" height="80" fill="#D5DADA" stroke="#36414A" stroke-width="1.5"></rect>
-<rect x="163" y="43" width="74" height="74" fill="#FAFAF8"></rect>
-<rect x="160" y="300" width="80" height="80" fill="#D5DADA" stroke="#36414A" stroke-width="1.5"></rect>
-<rect x="163" y="303" width="74" height="74" fill="#FAFAF8"></rect>
-<g fill="#8FBFAE">
-<rect x="150" y="40" width="10" height="80"></rect>
-<rect x="240" y="40" width="10" height="80"></rect>
-<rect x="150" y="300" width="10" height="80"></rect>
-<rect x="240" y="300" width="10" height="80"></rect>
+  <h2>Version A vs version B</h2>
+  <div class="scroll"><table style="width: 100%; border-collapse: collapse; font-size: 14px; line-height: 20px; background: #FAFAF8; border: 1px solid #C8CDCB">
+<thead><tr><th></th><th>A · LONG-WALL DOOR</th><th>B · GLASS GABLE + VERANDAH</th></tr></thead>
+<tbody>
+<tr><td style="color: #5B656C">Entrance</td><td>900 × 2100 door in the front wall</td><td>3.6 × 2.1 m glass slider in Gable A</td></tr>
+<tr><td style="color: #5B656C">Outdoor space</td><td>None</td><td>6 × 2.4 m covered verandah, 14.4 m²</td></tr>
+<tr><td style="color: #5B656C">Structural steel</td><td style="font-family: 'IBM Plex Mono', monospace">≈ 0.33 t</td><td style="font-family: 'IBM Plex Mono', monospace">≈ 0.65 t</td></tr>
+<tr><td style="color: #5B656C">Steel pieces</td><td>Spine 2 × 6 m, 3 pillars</td><td>Spine 2 × 6 m + 2.4 m, 2 pillars, door frame (2 legs + head), short pillar on the head, A-truss (2 rafters + tie), 2 verandah posts, 2 eave beams</td></tr>
+<tr><td style="color: #5B656C">Roof panel</td><td style="font-family: 'IBM Plex Mono', monospace">91 m²</td><td style="font-family: 'IBM Plex Mono', monospace">109 m²</td></tr>
+<tr><td style="color: #5B656C">Wall panel</td><td style="font-family: 'IBM Plex Mono', monospace">97 m²</td><td style="font-family: 'IBM Plex Mono', monospace">89 m²</td></tr>
+<tr><td style="color: #5B656C">Glazing</td><td>11 windows</td><td>7 windows + 7.6 m² slider</td></tr>
+<tr><td style="color: #5B656C">Gable A bracing</td><td>5 solid panels</td><td>2 solid panels; the welded door frame must brace the rest</td></tr>
+<tr><td style="color: #5B656C">Footings</td><td>Strip or slab + 3 pillar pads</td><td>+ 4 pads (door legs, verandah posts) + deck</td></tr>
+<tr><td style="color: #5B656C">Layout</td><td>Bedroom and bath at Gable A</td><td>Living opens onto the verandah at Gable A; bedroom and bath move to Gable B</td></tr>
+<tr><td style="color: #5B656C">Biggest extra cost</td><td>—</td><td>Slider unit, then the welded frame and deck</td></tr>
+</tbody>
+</table></div>
+  <div class="dwgbox" style="margin-top:16px"><svg class="dwg" viewBox="0 0 800 470" role="img" aria-label="Gable A elevation of version B: 3.6 metre sliding glass door in a steel frame, short pillar from the door head up to the ridge beam">
+<polygon points="60,400 540,400 540,208 300,69.4 60,208" fill="#DADFDF" stroke="#3A4248" stroke-width="1.2"></polygon>
+<polygon points="36,219 300,66.6 564,219 564,210 300,57.4 36,210" fill="#E9ECEC" stroke="#3A4248" stroke-width="1.2"></polygon>
+<g stroke="rgba(31,38,43,0.25)" stroke-width="1">
+<line x1="156" y1="232" x2="156" y2="152.6"></line>
+<line x1="252" y1="232" x2="252" y2="97.2"></line>
+<line x1="348" y1="232" x2="348" y2="97.2"></line>
+<line x1="444" y1="232" x2="444" y2="152.6"></line>
 </g>
-<g fill="#36414A">
-<rect x="148" y="40" width="2" height="140"></rect>
-<rect x="250" y="40" width="2" height="140"></rect>
-<rect x="148" y="210" width="2" height="170"></rect>
-<rect x="250" y="210" width="2" height="170"></rect>
-<rect x="132" y="58" width="6" height="10"></rect>
-<rect x="132" y="93" width="6" height="10"></rect>
-<rect x="262" y="58" width="6" height="10"></rect>
-<rect x="262" y="93" width="6" height="10"></rect>
-<rect x="132" y="318" width="6" height="10"></rect>
-<rect x="132" y="353" width="6" height="10"></rect>
-<rect x="262" y="318" width="6" height="10"></rect>
-<rect x="262" y="353" width="6" height="10"></rect>
+<rect x="156" y="232" width="288" height="168" fill="#2E3439"></rect>
+<rect x="161" y="236" width="137" height="160" fill="#9CC3DD"></rect>
+<rect x="302" y="236" width="137" height="160" fill="#8DB6D2"></rect>
+<g fill="none" stroke="#C24A14" stroke-width="2" stroke-dasharray="6 4">
+<rect x="150" y="216" width="300" height="16"></rect>
+<rect x="296" y="85.4" width="8" height="130.6"></rect>
 </g>
-<g stroke="#36414A" stroke-width="2.5">
-<line x1="138" y1="63" x2="175" y2="63"></line>
-<line x1="138" y1="98" x2="175" y2="98"></line>
-<line x1="225" y1="63" x2="262" y2="63"></line>
-<line x1="225" y1="98" x2="262" y2="98"></line>
-<line x1="138" y1="323" x2="175" y2="323"></line>
-<line x1="138" y1="358" x2="175" y2="358"></line>
-<line x1="225" y1="323" x2="262" y2="323"></line>
-<line x1="225" y1="358" x2="262" y2="358"></line>
+<g fill="#2E363C">
+<rect x="150" y="224" width="8" height="176"></rect>
+<rect x="442" y="224" width="8" height="176"></rect>
+<rect x="292" y="69.4" width="16" height="16"></rect>
 </g>
-<g stroke="#5B656C" stroke-width="1" fill="none">
-<path d="M 140 182 L 160 178 L 180 186 L 200 178 L 220 186 L 240 178 L 260 182"></path>
-<path d="M 140 208 L 160 204 L 180 212 L 200 204 L 220 212 L 240 204 L 260 208"></path>
-<line x1="150" y1="28" x2="250" y2="28"></line>
-<line x1="145" y1="33" x2="155" y2="23"></line>
-<line x1="245" y1="33" x2="255" y2="23"></line>
-<line x1="252" y1="80" x2="374" y2="60"></line>
-<line x1="240" y1="240" x2="374" y2="200"></line>
-<line x1="252" y1="305" x2="374" y2="250"></line>
-<line x1="247" y1="320" x2="374" y2="296"></line>
-<line x1="237" y1="365" x2="374" y2="350"></line>
-<line x1="270" y1="363" x2="374" y2="388"></line>
+<line x1="20" y1="400" x2="580" y2="400" stroke="#8A9297" stroke-width="1.5"></line>
+<g stroke="#5B656C" stroke-width="1">
+<line x1="156" y1="412" x2="156" y2="440"></line>
+<line x1="444" y1="412" x2="444" y2="440"></line>
+<line x1="156" y1="432" x2="444" y2="432"></line>
+<line x1="151" y1="437" x2="161" y2="427"></line>
+<line x1="439" y1="437" x2="449" y2="427"></line>
+<line x1="60" y1="412" x2="60" y2="462"></line>
+<line x1="540" y1="412" x2="540" y2="462"></line>
+<line x1="60" y1="456" x2="540" y2="456"></line>
+<line x1="55" y1="461" x2="65" y2="451"></line>
+<line x1="535" y1="461" x2="545" y2="451"></line>
+<line x1="308" y1="78" x2="600" y2="78"></line>
+<line x1="304" y1="150" x2="600" y2="150"></line>
+<line x1="450" y1="224" x2="600" y2="224"></line>
+<line x1="450" y1="330" x2="600" y2="330"></line>
+<line x1="440" y1="300" x2="600" y2="290"></line>
 </g>
 <g font-family="IBM Plex Mono, monospace" font-size="12" fill="#1F262B">
-<text x="200" y="20" text-anchor="middle">100 = 10 + 80 + 10</text>
-<text x="138" y="254" text-anchor="end" fill="#5B656C">OUTSIDE</text>
-<text x="262" y="254" fill="#5B656C">INSIDE</text>
-<text x="380" y="64">top / eaves rail 80×80×3</text>
-<text x="380" y="204">98 mm EPS core</text>
-<text x="380" y="254">skin flap, 80 past the foam</text>
-<text x="380" y="300">10 mm thermal-break strip</text>
-<text x="380" y="354">base rail 80×80×3</text>
-<text x="380" y="392">screw through both skins @ 300</text>
+<text x="300" y="426" text-anchor="middle">3 600 opening</text>
+<text x="300" y="450" text-anchor="middle">6 000</text>
+<text x="606" y="82">spine 200×100</text>
+<text x="606" y="154">pillar continues to spine</text>
+<text x="606" y="228">door head 200×100, welded</text>
+<text x="606" y="334">door leg, own pad</text>
+<text x="606" y="294">2-leaf glass slider</text>
 </g>
 </svg></div>
-  <p class="note">The factory leaves 80 mm of skin past the foam at the top and bottom of each wall panel. The panel drops over the base rail, the top rail drops into its top flaps, and screws through both skins lock panel and steel together.</p>
-  <h2>Frame spacing: 2.4 m or 3.6 m</h2>
-  <p class="lead">Wider spacing means fewer frames across the ceiling and a more open room. Each frame then carries 50% more roof, so the rafters and purlins go up a size. Everything else stays the same, including the 80 mm posts inside the 100 mm walls.</p>
-  <div class="row" id="baySys" style="margin-bottom:12px"></div>
-  <div class="scroll"><table id="bayTable"></table></div>
-  <p class="note">Rough hand checks, not a design: 0.5 kPa roof live load plus panel weight, 6 m span, 30° roof, factored loads. At 3.6 m the 80×80×3 rafter would be about 85% used and sag about 20 mm, and the 100×50×2 purlin would sag about 20 mm. The heavier sizes bring both back to about 50–65% used. The eaves ties stay: they stop the walls spreading. An engineer still needs to check it, including wind uplift on the purlins.</p>
+  <div class="dwgbox"><svg class="dwg" viewBox="0 0 800 380" role="img" aria-label="Side elevation of version B: roof extended 2.4 metres over a timber verandah deck at Gable A, held by a front post">
+<rect x="180" y="210" width="600" height="120" fill="#DADFDF" stroke="#3A4248" stroke-width="1.2"></rect>
+<g fill="#9CC3DD" stroke="#2E3439" stroke-width="2">
+<rect x="305" y="225" width="50" height="60"></rect>
+<rect x="425" y="225" width="50" height="60"></rect>
+<rect x="665" y="225" width="50" height="60"></rect>
+</g>
+<rect x="52.5" y="123.4" width="735" height="95" fill="#E9ECEC" stroke="#3A4248" stroke-width="1.2"></rect>
+<line x1="52.5" y1="123.4" x2="787.5" y2="123.4" stroke="#2A3237" stroke-width="4"></line>
+<rect x="60" y="330" width="120" height="14" fill="#B48C66" stroke="#7A5A3E" stroke-width="1"></rect>
+<rect x="56" y="218" width="8" height="112" fill="#2E363C"></rect>
+<g stroke="#C24A14" stroke-width="1.5" stroke-dasharray="6 4">
+<line x1="180" y1="330" x2="180" y2="218"></line>
+<line x1="480" y1="330" x2="480" y2="218"></line>
+<line x1="780" y1="330" x2="780" y2="218"></line>
+</g>
+<line x1="20" y1="330" x2="790" y2="330" stroke="#8A9297" stroke-width="1.5"></line>
+<g stroke="#5B656C" stroke-width="1">
+<line x1="60" y1="350" x2="60" y2="372"></line>
+<line x1="180" y1="350" x2="180" y2="372"></line>
+<line x1="780" y1="350" x2="780" y2="372"></line>
+<line x1="60" y1="366" x2="780" y2="366"></line>
+<line x1="55" y1="371" x2="65" y2="361"></line>
+<line x1="175" y1="371" x2="185" y2="361"></line>
+<line x1="775" y1="371" x2="785" y2="361"></line>
+</g>
+<g font-family="IBM Plex Mono, monospace" font-size="12" fill="#1F262B">
+<text x="120" y="360" text-anchor="middle">2 400</text>
+<text x="480" y="360" text-anchor="middle">12 000</text>
+<text x="74" y="300">verandah</text>
+<text x="74" y="316">post</text>
+<text x="486" y="246" fill="#A33A0E">pillar</text>
+</g>
+</svg></div>
+  <div style="background: #FAFAF8; border: 1px solid #C8CDCB; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: 17px; font-weight: 600">Will the door frame flex?</div>
+<div style="font-size: 14px; line-height: 21px; color: #3A444B"><b>Downwards, not much.</b> The short pillar brings about 6 kN (≈ 600 kg) from the spine onto the middle of the 3.6 m head. A slider jams if the head sags more than about 1/500 of the span, roughly 7 mm. A 200 × 100 × 4 head, the same section as the spine, should sag about 2 mm.</div>
+<div style="font-size: 14px; line-height: 21px; color: #3A444B"><b>Sideways is the real problem.</b> The glass removes 3 of the 5 panels that hold the house square at that end. The door frame has to take over: welded or haunched corners, and each leg bolted to its own pad with four bolts so it cannot rock.</div>
+<div style="font-size: 14px; line-height: 21px; color: #3A444B"><b>Wind on the glass.</b> 7.6 m² of glass catches a lot of wind. The slider needs a wind rating, and the verandah roof shelters it.</div>
+<div style="font-size: 12px; line-height: 18px; color: #5B656C">First estimates for the engineer to check, not a design.</div>
+</div>
   <h2>Open questions</h2>
   <ul class="qs">
-    <li>Can the factory leave 80 mm skin flaps past the foam, top and bottom, and at edges that land on posts?</li>
-    <li>Panel span: roof panel 1.7 m to the purlin plus a 300 mm overhang. Is that within the 100 mm panel's rating?</li>
-    <li>Engineer's check: 80 × 80 frame with panels as bracing walls, screw spacing, eaves node, hold-down.</li>
-    <li>Local supply of 70 × 70 × 3 SHS for spigots, or spigots made up from plate.</li>
-    <li>Price and availability of 50 mm panel for internal partitions.</li>
-    <li>At 3.6 m spacing: engineer to confirm the 80 × 80 × 4 rafter and 125 × 50 × 2.5 purlin, and the purlin bracing for wind uplift.</li>
-    <li>Does the 70 × 70 × 3 spigot slide into the 80 × 80 × 4 rafter (72 mm inside)? The inside weld seam may need grinding.</li>
+    <li>Panel figures from the factory: load a 2.4 m wall panel can carry, roof panel span (3.46 m here), and racking strength of a gable wall.</li>
+    <li>Engineer: spine size (200 × 100 × 4 RHS assumed), pillar size, cap and base plates, roof tie-down for wind uplift.</li>
+    <li>Version B: welded door frame design (corners and leg bases) and the verandah A-truss.</li>
+    <li>Gable panel layout: start each gable with a half panel so a joint lands on the centre pillar.</li>
+    <li>Price and availability of folded U-track and of 50 mm panel for internal partitions.</li>
   </ul>
 </section>
 
 <section class="tab" id="tab-layout">
   <div class="eyebrow">Layout planner</div>
   <h1>Doors and windows</h1>
-  <p class="lead">Every wall is a row of 1.2 m panels, <span id="layBay"></span>. Tap a panel to make it a window, tap again for a door, again for solid. Your layout is saved on this phone and used by the 3D view and the costing.</p>
+  <p class="lead">This is version A. Every wall is a row of 1.2 m panels. Tap a panel to make it a window, tap again for a door, again for solid. Your layout is saved on this phone and used by the 3D view and the costing.</p>
   <div class="grid2">
     <div>
       <div class="eyebrow" style="margin-bottom:6px">Plan · back wall at top, entrance front at bottom</div>
@@ -421,7 +420,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
         <div><span class="sw" style="background:#7F8A90;border:1.5px solid #5B656C"></span>Solid panel, 1.2 m</div>
         <div><span class="sw" style="background:#BFD8EE;border:1.5px solid #1F4E85"></span>Window 1000 × 1200, sill 900</div>
         <div><span class="sw" style="background:#C24A14;border:1.5px solid #8E3510"></span>Door 900 × 2100</div>
-        <div><span class="sw" style="background:#1F262B;width:12px;height:12px;margin:0 18px 0 8px"></span>Frame post, every <span class="bayTxt">3.6</span> m</div>
+        <div><span class="sw" style="background:#1F262B;width:12px;height:12px;margin:0 18px 0 8px"></span>Pillar under the spine, every 6 m</div>
       </div>
       <div class="stats" id="layStats" style="margin:0"></div>
       <div><label>Bracing check</label><div id="bracing"></div><div class="note">Rule of thumb for panels acting as bracing, to be confirmed by the engineer.</div></div>
@@ -433,40 +432,29 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 <section class="tab" id="tab-view3d">
   <div class="eyebrow">3D view</div>
   <h1>Walk round the house</h1>
-  <p class="lead">Drag the picture to turn it, or use the sliders. Floor plan lifts the roof off and cuts the walls at 1 m. X-ray shows the steel inside the panels; Frame shows the kit on its own. Interior puts you inside the house at eye height, looking at the open ceiling.</p>
+  <p class="lead">Drag the picture to turn it. Switch between version A and B, use the build steps to see it go up layer by layer, or lift the roof off with Floor plan. Version A uses your layout from the Layout tab.</p>
   <div class="grid2">
-    <div class="v3d" id="v3d"></div>
+    <div><div class="v3d" id="v3d"><div id="v3dInner"></div></div><p class="note" id="cap3d"></p></div>
     <div class="ctrl">
+      <div><label>Version</label><div class="row" id="ver3d" style="margin-top:6px"></div></div>
       <div class="row" id="pkg3d"></div>
-      <div class="row" id="mode3d"></div>
-      <div id="cladCtl"><label>Cladding</label><div class="row" id="clad3d" style="margin-top:6px"></div></div>
-      <div id="inCtl" hidden>
-        <div><label for="standX">Stand at: along the house</label><input id="standX" type="range" min="0" max="1000" step="1"></div>
-        <div style="margin-top:14px"><label for="standY">Stand at: front to back</label><input id="standY" type="range" min="0" max="1000" step="1"></div>
-        <div style="margin-top:14px"><label>Steel colour</label><div class="row" id="steel3d" style="margin-top:6px"></div></div>
-      </div>
-      <div><label for="yaw" id="yawLbl">Rotate</label><input id="yaw" type="range" min="0" max="359" step="1"></div>
-      <div><label for="pitch" id="pitchLbl">Tilt</label><input id="pitch" type="range" min="6" max="70" step="1"></div>
+      <div><label>Show</label><div class="row" id="mode3d" style="margin-top:6px"></div></div>
+      <div><label>Build it step by step</label><div class="row" id="stage3d" style="margin-top:6px"></div><p class="note" id="stageNote" style="margin:6px 0 0"></p></div>
+      <div><label>Cladding</label><div class="row" id="clad3d" style="margin-top:6px"></div></div>
+      <div><label for="yaw">Rotate</label><input id="yaw" type="range" min="0" max="359" step="1"></div>
+      <div><label for="pitch">Tilt</label><input id="pitch" type="range" min="6" max="70" step="1"></div>
       <div class="row" id="presets"></div>
       <button class="btn" data-action="spin" id="spinBtn">Spin</button>
     </div>
   </div>
-  <p class="note" id="cap3d"></p>
-  <h2>Make a realistic picture</h2>
-  <ol class="steps">
-    <li>Set up the view you want above, then tap <b>Save picture</b>.</li>
-    <li>Open ChatGPT, attach the picture, then tap <b>Copy prompt</b> and paste it in as the message.</li>
-    <li>If ChatGPT moves a beam or window, reply: "Keep the steel frames, windows and doors exactly where they are in my picture."</li>
-  </ol>
-  <div class="row" style="margin:12px 0"><button class="btn primary" data-action="savePic">Save picture</button><button class="btn" data-action="copyPrompt">Copy prompt</button><span class="note" id="picNote"></span></div>
-  <div class="msg" id="aiPrompt"></div>
 </section>
 
 <section class="tab" id="tab-costing">
   <div class="eyebrow">Costing</div>
   <h1>Cutting list, prices and quotes</h1>
-  <p class="lead">Quantities follow the package and your window layout. Type each supplier's unit price (US$) to compare; the cheapest per line turns green. Prices, names and numbers are saved on this phone.</p>
-  <div class="row" id="pkgCost" style="margin-bottom:16px"></div>
+  <p class="lead">Quantities follow the package, the version and your window layout. Type each supplier's unit price (US$) to compare; the cheapest per line turns green. Prices, names and numbers are saved on this phone.</p>
+  <div class="row" id="pkgCost" style="margin-bottom:10px"></div>
+  <div class="row" id="verCost" style="margin-bottom:16px"></div>
   <h2>Price comparison</h2>
   <div class="scroll"><table id="priceTable"></table></div>
   <p class="note" id="bestNote"></p>
@@ -478,8 +466,8 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
   <p class="note">With no number entered, WhatsApp opens and lets you choose the contact.</p>
   <h2>Steel cutting list</h2>
   <div class="scroll"><table id="cutTable"></table></div>
-  <p class="note" id="nestNote"></p>
-  <p class="note">Panels pre-filled at $38.40/m² for 100 mm. Screw and tape quantities are estimates. Excludes foundation, plumbing, electrical, finishes, transport and labour on site.</p>
+  <p class="note">Spine pieces are cut to the pillar spacing (6 m, or 4.8 m for the 2-bed). Lengths are approximate until the engineer sizes the steel and the plates are detailed.</p>
+  <p class="note">Panels pre-filled at $38.40/m² for 100 mm. Screw and track quantities are estimates. Excludes foundation, plumbing, electrical, finishes, transport and labour on site.</p>
 </section>
 
 <section class="tab" id="tab-info">
@@ -493,26 +481,16 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 
 </main>
 <script>
-const APP_VERSION = 'v2 · 15 Oct 2026';
+const APP_VERSION = 'v4 · 18 Oct 2026 · walkthrough + bedroom views';
 const STORE = 'panelhouse.v1';
 const W_ = 'window';
-// one36 is the 10.8 m 1-bed used with 3.6 m bays; the 14.4 m 2-bed shares one layout at both spacings.
 const DEFAULTS = {
   one: { F1: W_, F3: W_, F5: 'door', F7: W_, F9: W_, B1: W_, B4: W_, B7: W_, B8: W_, A3: W_, G2: W_, G3: W_ },
-  one36: { F1: W_, F3: W_, F5: 'door', F7: W_, B1: W_, B4: W_, B7: W_, A3: W_, G2: W_, G3: W_ },
   two: { F1: W_, F3: W_, F5: 'door', F7: W_, F10: W_, B1: W_, B4: W_, B6: W_, B8: W_, B10: W_, A3: W_, G1: W_, G3: W_ }
 };
-const PKG = { one: { label: '1 bedroom' }, two: { label: '2 bedrooms' } };
-const BAYS = [2.4, 3.6];
-function cfg(pkg = S.pkg, bay = S.bay) {
-  const L = pkg === 'two' ? 14.4 : (bay === 3.6 ? 10.8 : 12), n = Math.round(L / bay);
-  return { pkg, bay, L, n, F: n + 1, NM: Math.round(L / 1.2), ppb: Math.round(bay / 1.2), wide: bay === 3.6, key: pkg === 'one' && bay === 3.6 ? 'one36' : pkg, area: Math.round(L * 6) };
-}
-const STEELS = {
-  charcoal: { col: '#3A4248', name: 'Charcoal' },
-  black: { col: '#1C2024', name: 'Black' },
-  white: { col: '#E9EBE9', name: 'White' },
-  galv: { col: '#9AA3A6', name: 'Galvanised grey' }
+const PKG = {
+  one: { n: 5, L: 12, label: '1 bedroom', sub: '12 × 6 m · 72 m²' },
+  two: { n: 6, L: 14.4, label: '2 bedrooms', sub: '14.4 × 6 m · 86 m²' }
 };
 const CLADS = {
   white: { wall: '#E2E6E6', roof: '#EDF0F0', seam: 'rgba(31,38,43,0.28)', name: 'White IBR' },
@@ -522,10 +500,9 @@ const CLADS = {
 };
 function freshState() {
   return {
-    tab: 'overview', pkg: 'one', bay: 3.6,
-    open: { one: Object.assign({}, DEFAULTS.one), one36: Object.assign({}, DEFAULTS.one36), two: Object.assign({}, DEFAULTS.two) },
+    tab: 'overview', pkg: 'one',
+    open: { one: Object.assign({}, DEFAULTS.one), two: Object.assign({}, DEFAULTS.two) },
     clad: 'white', view: { yaw: 35, pitch: 24, mode: 'fin' },
-    inside: { x: 10.3, y: 3.2, h: 180, t: 14 }, steel: 'charcoal',
     prices: { pr: ['38.40', '', ''], pw: ['38.40', '', ''], pg: ['38.40', '', ''] },
     names: ['George', 'Supplier 2', 'Supplier 3'], phones: ['', '', ''], cat: 'Steel'
   };
@@ -538,8 +515,6 @@ try {
     S = Object.assign(freshState(), saved);
     S.open = Object.assign(freshState().open, saved.open || {});
     S.view = Object.assign(freshState().view, saved.view || {});
-    S.inside = Object.assign(freshState().inside, saved.inside || {});
-    if (!BAYS.includes(S.bay)) S.bay = 3.6;
   }
 } catch (e) { /* storage unavailable: run with defaults */ }
 function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} }
@@ -550,84 +525,49 @@ const money = (v) => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2,
 const fmtQ = (q) => (Math.abs(q - Math.round(q)) < 0.05 ? String(Math.round(q)) : r1(q).toFixed(1));
 
 /* ---------- shared plan data (y measured from the back wall) ---------- */
-function plan(c) {
-  const pkg = c.pkg, L = c.L;
+function plan(pkg) {
   const rooms = [[0, 0, 3.6, 2.4, 'Bath + laundry', '#E3EFEA', '#D9EAE3'], [0, 2.4, 3.6, 6, 'Bedroom', '#E6ECF4', '#DDE5F0']];
   const parts = [[0, 2.4, 3.6, 2.4], [3.6, 0, 3.6, 0.6], [3.6, 1.5, 3.6, 2.9], [3.6, 3.8, 3.6, 6]];
-  const items = [[0.15, 0.3, 1.05, 1.2, 'shower', 0.08, '#CFE3EC'], [1.4, 0.15, 1.8, 0.85, 'wc', 0.42, '#FFFFFF'], [2.2, 0.15, 2.8, 0.6, 'basin', 0.85, '#FFFFFF'], [2.85, 1.65, 3.45, 2.25, 'wash', 0.85, '#F1F1EE'], [0.15, 3.6, 2.15, 5.1, 'bed', 0.5, '#D9CBB5'], [2.9, 3.0, 3.5, 5.6, 'robe', 1.0, '#B79A7A'], [4.0, 3.5, 4.9, 5.7, 'sofa', 0.75, '#6F8796']];
+  const items = [[0.15, 0.3, 1.05, 1.2, 'shower', 0.08, '#CFE3EC'], [1.4, 0.15, 1.8, 0.85, 'wc', 0.42, '#FFFFFF'], [2.2, 0.15, 2.8, 0.6, 'basin', 0.85, '#FFFFFF'], [2.85, 1.65, 3.45, 2.25, 'wash', 0.85, '#F1F1EE'], [0.15, 3.6, 2.15, 5.1, 'bed', 0.5, '#D9CBB5'], [2.9, 4.0, 3.5, 5.6, 'robe', 1.0, '#B79A7A'], [4.0, 3.5, 4.9, 5.7, 'sofa', 0.75, '#6F8796']];
   if (pkg === 'one') {
-    const tx = L === 12 ? 6.2 : 5.6;
-    rooms.push([3.6, 0, L, 6, 'Living · dining · kitchen', '#F3F0E6', '#F1EBDC']);
-    items.push([L - 3.6, 0.15, L - 0.15, 0.75, 'kitchen', 0.9, '#8C7A66'], [L - 0.75, 0.75, L - 0.15, 2.4, 'counter', 0.9, '#8C7A66'], [tx, 2.2, tx + 1.6, 3.1, 'table', 0.75, '#A88B6A']);
+    rooms.push([3.6, 0, 12, 6, 'Living · dining · kitchen', '#F3F0E6', '#F1EBDC']);
+    items.push([8.4, 0.15, 11.85, 0.75, 'kitchen', 0.9, '#8C7A66'], [11.25, 0.75, 11.85, 2.4, 'counter', 0.9, '#8C7A66'], [6.6, 2.2, 8.2, 3.1, 'table', 0.75, '#A88B6A']);
   } else {
     rooms.push([3.6, 0, 10.8, 6, 'Living · dining · kitchen', '#F3F0E6', '#F1EBDC'], [10.8, 0, 14.4, 2.4, 'Study / store', '#ECE9F2', '#E6E1EE'], [10.8, 2.4, 14.4, 6, 'Bedroom 2', '#E6ECF4', '#DDE5F0']);
     parts.push([10.8, 2.4, 14.4, 2.4], [10.8, 0, 10.8, 0.6], [10.8, 1.5, 10.8, 2.9], [10.8, 3.8, 10.8, 6]);
-    items.push([7.2, 0.15, 10.65, 0.75, 'kitchen', 0.9, '#8C7A66'], [5.4, 2.2, 7.0, 3.1, 'table', 0.75, '#A88B6A'], [12.25, 3.6, 14.25, 5.1, 'bed', 0.5, '#D9CBB5'], [10.9, 3.0, 11.5, 5.6, 'robe', 1.0, '#B79A7A'], [12.6, 0.15, 14.25, 0.75, 'desk', 0.75, '#A88B6A']);
+    items.push([7.2, 0.15, 10.65, 0.75, 'kitchen', 0.9, '#8C7A66'], [5.4, 2.2, 7.0, 3.1, 'table', 0.75, '#A88B6A'], [12.25, 3.6, 14.25, 5.1, 'bed', 0.5, '#D9CBB5'], [10.9, 4.0, 11.5, 5.6, 'robe', 1.0, '#B79A7A'], [12.6, 0.15, 14.25, 0.75, 'desk', 0.75, '#A88B6A']);
   }
   return { rooms, parts, items };
 }
 function counts() {
-  const op = S.open[cfg().key]; let win = 0, door = 0;
+  const op = S.open[S.pkg]; let win = 0, door = 0;
   Object.keys(op).forEach((k) => { if (op[k] === 'window') win++; else if (op[k] === 'door') door++; });
   return { win, door };
 }
-function bayButtons() {
-  return `<div class="grp"><span class="lbl">Frames every</span>${BAYS.map((b) => `<button class="btn ${S.bay === b ? 'on' : ''}" data-action="bay" data-bay="${b}">${b} m</button>`).join('')}</div>`;
-}
-function pkgButtons(el) {
-  $(el).innerHTML = `<div class="grp">${['one', 'two'].map((p) => { const c = cfg(p); return `<button class="btn pk ${S.pkg === p ? 'on' : ''}" data-action="pkg" data-pkg="${p}"><span style="font-weight:600">${PKG[p].label}</span><small>${c.L} m · ${c.n} bays · ${c.area} m²</small></button>`; }).join('')}</div>${bayButtons()}`;
-}
-// Steel mass from the cutting list, plus base plates and 5% for cleats.
-const KGM = { '80×80×3': 7.07, '80×80×4': 9.22, '70×70×3': 6.13, '60×60×3': 5.19, '100×50 C': 3.77, '125×50 C': 5.2 };
-function steelT(c) { const b = build(c); return (b.cuts.reduce((s, k) => s + k[3] * k[4] * KGM[k[2]], 0) + 2 * c.F * 3.77) * 1.05 / 1000; }
-const tons = (c) => '≈ ' + steelT(c).toFixed(1) + ' t';
-function bayText() {
-  const c = cfg();
-  document.querySelectorAll('.bayTxt').forEach((e) => { e.textContent = c.bay; });
-  $('sysBay').textContent = `Frames are ${c.bay} m apart so every ${c.wide ? 'third' : 'second'} 1.2 m panel joint lands on a post.`;
-  $('layBay').textContent = `${c.ppb} per ${c.bay} m bay`;
+function pkgButtons(el, action) {
+  $(el).innerHTML = ['one', 'two'].map((p) => `<button class="btn pk ${S.pkg === p ? 'on' : ''}" data-action="${action}" data-pkg="${p}"><span style="font-weight:600">${PKG[p].label}</span><small>${PKG[p].sub}</small></button>`).join('');
 }
 
 /* ---------- overview ---------- */
 function renderOverview() {
-  const c1 = cfg('one'), c2 = cfg('two');
   $('ovStats').innerHTML = [
-    ['1 bedroom', c1.area + ' m²', `${c1.L} × 6 m · ${c1.n} bays`], ['2 bedrooms', c2.area + ' m²', `${c2.L} × 6 m · ${c2.n} bays`],
+    ['1 bedroom', '72 m²', '12 × 6 m'], ['2 bedrooms', '86 m²', '14.4 × 6 m'],
     ['Walls', '2.4 m', 'ridge 4.13 m · 30° roof'], ['Panels', '1.2 m', '100 mm IBR / EPS'],
-    ['Frame', '80 × 80', `frames every ${c1.bay} m`], ['Steel, 1 bed', tons(c1), 'frame + nodes']
+    ['Steel, version A', '≈ 0.33 t', 'spine + 3 pillars'], ['Steel, version B', '≈ 0.65 t', '+ door frame, verandah']
   ].map((s) => `<div><small>${s[0]}</small><strong>${s[1]}</strong><em>${s[2]}</em></div>`).join('');
-}
-
-/* ---------- system: spacing comparison ---------- */
-function renderSystem() {
-  $('baySys').innerHTML = bayButtons();
-  const a1 = cfg('one', 2.4), b1 = cfg('one', 3.6), a2 = cfg('two', 2.4), b2 = cfg('two', 3.6);
-  const rows = [
-    ['Rafters', '80 × 80 × 3', '80 × 80 × 4'],
-    ['Purlins', '100 × 50 × 2 lipped channel', '125 × 50 × 2.5 lipped channel'],
-    ['Posts, ties, ridge, rails', '80 × 80 × 3', '80 × 80 × 3, no change'],
-    ['1 bedroom', `${a1.L} m · ${a1.F} frames`, `${b1.L} m · ${b1.F} frames`],
-    ['2 bedrooms', `${a2.L} m · ${a2.F} frames`, `${b2.L} m · ${b2.F} frames`],
-    ['Frames across the living room, 2 bed', '3', '1, plus one over each bedroom wall'],
-    ['Steel, 1 bedroom', tons(a1), tons(b1)],
-    ['Steel, 2 bedrooms', tons(a2), tons(b2)]
-  ];
-  const on = (b) => (S.bay === b ? ' style="background:#E2F0E5"' : '');
-  $('bayTable').innerHTML = `<thead><tr><th></th><th${on(2.4)}>Frames every 2.4 m</th><th${on(3.6)}>Frames every 3.6 m</th></tr></thead><tbody>` +
-    rows.map((r) => `<tr><td>${r[0]}</td><td${on(2.4)}>${r[1]}</td><td${on(3.6)}>${r[2]}</td></tr>`).join('') + '</tbody>';
 }
 
 /* ---------- layout planner ---------- */
 function renderLayout() {
-  pkgButtons('pkgLayout');
-  const cf = cfg(), pkg = cf.pkg, L = cf.L, NM = cf.NM, NB = cf.n, ppb = cf.ppb;
-  const open = S.open[cf.key];
+  pkgButtons('pkgLayout', 'pkg');
+  const pkg = S.pkg, L = PKG[pkg].L, NM = Math.round(L / 1.2), NB = Math.round(L / 2.4);
+  const open = S.open[pkg];
   const sc = 60, M = 72, ox = 60, oy = 60, VW = L * sc + 120, VH = 480;
   const X = (m) => ox + m * sc, Y = (m) => oy + m * sc;
   const col = { panel: ['#7F8A90', '#5B656C'], window: ['#BFD8EE', '#1F4E85'], door: ['#C24A14', '#8E3510'] };
-  const p = plan(cf); const h = [];
+  const p = plan(pkg); const h = [];
   h.push(`<rect x="${ox}" y="${oy}" width="${L * sc}" height="${6 * sc}" fill="#FAFAF8"/>`);
-  for (let b = 0; b < NB; b++) h.push(`<text x="${ox + (b + 0.5) * ppb * M}" y="${oy - 32}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" fill="#5B656C">Bay ${b + 1}</text>`);
+  for (let b = 0; b < NB; b++) h.push(`<text x="${ox + b * 2 * M + M}" y="${oy - 32}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" fill="#5B656C">Bay ${b + 1}</text>`);
   p.rooms.forEach((r) => {
     h.push(`<rect x="${X(r[0])}" y="${Y(r[1])}" width="${(r[2] - r[0]) * sc}" height="${(r[3] - r[1]) * sc}" fill="${r[5]}"/>`);
     h.push(`<text x="${X(r[0]) + 12}" y="${Y(r[1]) + 26}" font-size="13" font-weight="600" fill="#1F262B">${esc(r[4])}</text><text x="${X(r[0]) + 12}" y="${Y(r[1]) + 42}" font-family="IBM Plex Mono,monospace" font-size="12" fill="#5B656C">${((r[2] - r[0]) * (r[3] - r[1])).toFixed(1)} m²</text>`);
@@ -640,7 +580,7 @@ function renderLayout() {
     if (q[0] === q[2]) h.push(`<rect x="${X(q[0]) - 2}" y="${Y(q[1])}" width="4" height="${(q[3] - q[1]) * sc}" fill="#36414A"/>`);
     else h.push(`<rect x="${X(q[0])}" y="${Y(q[1]) - 2}" width="${(q[2] - q[0]) * sc}" height="4" fill="#36414A"/>`);
   });
-  for (let k = 0; k <= NB; k++) { const x = ox + k * ppb * M - 7; h.push(`<rect x="${x}" y="${oy - 7}" width="14" height="14" fill="#1F262B"/><rect x="${x}" y="${oy + 6 * sc - 7}" width="14" height="14" fill="#1F262B"/>`); }
+  (pkg === 'one' ? [0, 6, 12] : [0, 4.8, 9.6, 14.4]).forEach((px) => h.push(`<rect x="${X(px) - 7}" y="${Y(3) - 7}" width="14" height="14" fill="#1F262B"/>`));
   const mod = (id, x, y, w, hh, lab) => { const k = open[id] || 'panel', c = col[k]; h.push(`<rect class="mod" data-id="${id}" x="${x}" y="${y}" width="${w}" height="${hh}" rx="2" fill="${c[0]}" stroke="${c[1]}" stroke-width="1.5" style="cursor:pointer"><title>${lab}: ${k}</title></rect>`); };
   for (let i = 0; i < NM; i++) { mod('B' + i, ox + i * M + 3, oy - 11, M - 6, 22, 'Back wall panel ' + (i + 1)); mod('F' + i, ox + i * M + 3, oy + 6 * sc - 11, M - 6, 22, 'Front wall panel ' + (i + 1)); }
   for (let j = 0; j < 5; j++) { mod('A' + j, ox - 11, oy + j * M + 3, 22, M - 6, 'Gable A panel ' + (j + 1)); mod('G' + j, ox + L * sc - 11, oy + j * M + 3, 22, M - 6, 'Gable B panel ' + (j + 1)); }
@@ -665,380 +605,409 @@ function renderLayout() {
   const warn = []; const solid = (id) => !open[id];
   [['B', 'Back wall'], ['F', 'Front wall']].forEach((w) => {
     let tot = 0;
-    for (let b = 0; b < NB; b++) { let s = 0; for (let i = b * ppb; i < (b + 1) * ppb; i++) if (solid(w[0] + i)) s++; tot += s; if (s < 1) warn.push(`${w[1]}, bay ${b + 1}: no solid panel left in this bay.`); }
+    for (let b = 0; b < NB; b++) { let s = 0; for (let i = b * 2; i < b * 2 + 2; i++) if (solid(w[0] + i)) s++; tot += s; if (s < 1) warn.push(`${w[1]}, bay ${b + 1}: no solid panel left in this bay.`); }
     if (tot < NM / 2) warn.push(`${w[1]}: under half the wall is solid (${tot} of ${NM}).`);
   });
   [['A', 'Gable A'], ['G', 'Gable B']].forEach((w) => { let s = 0; for (let j = 0; j < 5; j++) if (solid(w[0] + j)) s++; if (s < 3) warn.push(`${w[1]}: keep at least 3 of 5 panels solid (now ${s}). The gables hold the house sideways.`); });
   if (!c.door) warn.push('No door placed yet.');
   $('bracing').innerHTML = warn.length ? warn.map((t) => `<div class="warn">${esc(t)}</div>`).join('') : '<div class="good">Every bay keeps a solid panel and each gable keeps 3 of 5 solid.</div>';
-  const c1 = cfg('one'), xb = cfg('two').n - c1.n, xm = (14.4 - c1.L) * 12.4;
-  $('pkgNote').textContent = pkg === 'one' ? `Base kit: ${c1.F} frames, ${c1.n} bays of ${c1.bay} m. Bedroom and bathroom at Gable A, open-plan living for the rest.` : `Adds ${xb === 1 ? 'one' : xb} ${cf.bay} m bay${xb === 1 ? '' : 's'}: ${xb} extra frame${xb === 1 ? '' : 's'}, ≈ ${(steelT(cf) - steelT(c1)).toFixed(2)} t more steel and ≈ ${Math.round(xm)} m² more panel (≈ ${money(Math.round(xm * 38.4))} at $38.40/m²). Bedroom 2 and a study at the Gable B end.`;
+  $('pkgNote').textContent = pkg === 'one' ? 'Version A: spine on 3 pillars at 6 m. Bedroom and bathroom at Gable A, open-plan living for the rest; the middle pillar stands in the living room.' : 'Adds 2.4 m: spine on 4 pillars at 4.8 m and ≈ 30 m² more panel (≈ $1,150 at $38.40/m²). Bedroom 2 and a study at the Gable B end.';
 }
 
-/* ---------- 3D view ---------- */
+/* ---------- 3D view (same model as the design canvas) ---------- */
+class DCLogic { constructor(p) { this.props = p || {}; this.state = {}; } setState(u) { const v = typeof u === 'function' ? u(this.state) : u; Object.assign(this.state, v); if (!this.quiet) rerender3d(); } }
+
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { ver: 'B', pkg: 'one', yaw: 40, pitch: 22, mode: 'fin', stage: 2, clad: 'white', spin: false };
+this.timer = null;
+}
+componentWillUnmount() {
+if (this.timer) { clearInterval(this.timer); this.timer = null; }
+}
+toggleSpin() {
+if (this.state.spin) {
+clearInterval(this.timer); this.timer = null; this.setState({ spin: false });
+} else {
+this.timer = setInterval(() => { this.setState((s) => ({ yaw: (s.yaw + 1) % 360 })); }, 50);
+this.setState({ spin: true });
+}
+}
+openings(pkg, ver) {
+const w = 'window';
+if (ver === 'B') {
+if (pkg === 'one') return { F2: w, F4: w, F8: w, B3: w, B5: w, B8: w, G3: w };
+return { F1: w, F3: w, F7: w, F10: w, B2: w, B4: w, B7: w, B10: w, G3: w };
+}
+if (pkg === 'one') return { F1: w, F3: w, F5: 'door', F7: w, F9: w, B1: w, B4: w, B7: w, B8: w, A3: w, G2: w, G3: w };
+return { F1: w, F3: w, F5: 'door', F7: w, F10: w, B1: w, B4: w, B6: w, B8: w, B10: w, A3: w, G1: w, G3: w };
+}
+plan(pkg, ver) {
+const BED = '#DDE5F0', BATH = '#D9EAE3', LIV = '#F1EBDC', STU = '#E6E1EE';
+if (ver === 'B') {
+const L = pkg === 'one' ? 12 : 14.4, e = L - 3.6;
+const rooms = [[e, 0, L, 2.4, 'Bath + laundry', BATH], [e, 2.4, L, 6, 'Bedroom', BED]];
+const parts = [[e, 2.4, L, 2.4], [e, 0, e, 0.6], [e, 1.5, e, 2.9], [e, 3.8, e, 6]];
+const items = [[L - 1.05, 0.3, L - 0.15, 1.2, 0.08, '#CFE3EC'], [L - 1.8, 0.15, L - 1.4, 0.85, 0.42, '#FFFFFF'], [L - 2.8, 0.15, L - 2.2, 0.6, 0.85, '#FFFFFF'], [L - 3.45, 1.65, L - 2.85, 2.25, 0.85, '#F1F1EE'], [L - 2.15, 3.6, L - 0.15, 5.1, 0.5, '#D9CBB5'], [e + 0.1, 4.0, e + 0.7, 5.6, 1.0, '#B79A7A']];
+if (pkg === 'one') {
+rooms.push([0, 0, e, 6, 'Living · dining · kitchen', LIV]);
+items.push([3.0, 0.15, 6.45, 0.75, 0.9, '#8C7A66'], [4.2, 2.6, 5.8, 3.5, 0.75, '#A88B6A'], [1.2, 4.4, 3.4, 5.3, 0.75, '#6F8796']);
+} else {
+rooms.push([0, 0, 7.2, 6, 'Living · dining · kitchen', LIV], [7.2, 0, 10.8, 2.4, 'Study / store', STU], [7.2, 2.4, 10.8, 6, 'Bedroom 2', BED]);
+parts.push([7.2, 2.4, 10.8, 2.4], [7.2, 0, 7.2, 0.6], [7.2, 1.5, 7.2, 2.9], [7.2, 3.8, 7.2, 6]);
+items.push([2.4, 0.15, 5.85, 0.75, 0.9, '#8C7A66'], [2.6, 2.6, 4.2, 3.5, 0.75, '#A88B6A'], [0.8, 4.4, 3.0, 5.3, 0.75, '#6F8796'], [8.65, 3.6, 10.65, 5.1, 0.5, '#D9CBB5'], [7.3, 4.0, 7.9, 5.6, 1.0, '#B79A7A'], [8.6, 0.15, 10.25, 0.75, 0.75, '#A88B6A']);
+}
+return { rooms: rooms, parts: parts, items: items };
+}
+const rooms = [[0, 0, 3.6, 2.4, 'Bath + laundry', BATH], [0, 2.4, 3.6, 6, 'Bedroom', BED]];
+const parts = [[0, 2.4, 3.6, 2.4], [3.6, 0, 3.6, 0.6], [3.6, 1.5, 3.6, 2.9], [3.6, 3.8, 3.6, 6]];
+const items = [[0.15, 0.3, 1.05, 1.2, 0.08, '#CFE3EC'], [1.4, 0.15, 1.8, 0.85, 0.42, '#FFFFFF'], [2.2, 0.15, 2.8, 0.6, 0.85, '#FFFFFF'], [2.85, 1.65, 3.45, 2.25, 0.85, '#F1F1EE'], [0.15, 3.6, 2.15, 5.1, 0.5, '#D9CBB5'], [2.9, 4.0, 3.5, 5.6, 1.0, '#B79A7A'], [4.0, 3.5, 4.9, 5.7, 0.75, '#6F8796']];
+if (pkg === 'one') {
+rooms.push([3.6, 0, 12, 6, 'Living · dining · kitchen', LIV]);
+items.push([8.4, 0.15, 11.85, 0.75, 0.9, '#8C7A66'], [11.25, 0.75, 11.85, 2.4, 0.9, '#8C7A66'], [6.6, 2.2, 8.2, 3.1, 0.75, '#A88B6A']);
+} else {
+rooms.push([3.6, 0, 10.8, 6, 'Living · dining · kitchen', LIV], [10.8, 0, 14.4, 2.4, 'Study / store', STU], [10.8, 2.4, 14.4, 6, 'Bedroom 2', BED]);
+parts.push([10.8, 2.4, 14.4, 2.4], [10.8, 0, 10.8, 0.6], [10.8, 1.5, 10.8, 2.9], [10.8, 3.8, 10.8, 6]);
+items.push([7.2, 0.15, 10.65, 0.75, 0.9, '#8C7A66'], [5.4, 2.2, 7.0, 3.1, 0.75, '#A88B6A'], [12.25, 3.6, 14.25, 5.1, 0.5, '#D9CBB5'], [10.9, 4.0, 11.5, 5.6, 1.0, '#B79A7A'], [12.6, 0.15, 14.25, 0.75, 0.75, '#A88B6A']);
+}
+return { rooms: rooms, parts: parts, items: items };
+}
+renderVals() {
+const st = this.state;
+const isB = st.ver === 'B';
+const L = st.pkg === 'one' ? 12 : 14.4;
+const NM = Math.round(L / 1.2);
+const op = this.openings(st.pkg, st.ver);
+const posts = st.pkg === 'one' ? [0, 6, 12] : [0, 4.8, 9.6, 14.4];
+const mode = st.mode;
+const stg = mode === 'bd' ? st.stage : 5;
+const V = isB ? 2.4 : 0;
+const th = st.yaw * Math.PI / 180, ph = st.pitch * Math.PI / 180;
+const ct = Math.cos(th), sn = Math.sin(th), cp = Math.cos(ph), sp = Math.sin(ph);
+const cx = (L - V) / 2, cy = 3, cz = mode === 'pl' ? 0.6 : 1.6, k = mode === 'pl' ? 52 : 46, CX = 550, CY = 410;
+const W = 1100, H = 760;
+const proj = (p) => {
+const dx = p[0] - cx, dy = p[1] - cy, dz = p[2] - cz;
+const xr = dx * ct - dy * sn, yr = dx * sn + dy * ct;
+return [CX + xr * k, CY - (dz * cp + yr * sp) * k, yr * cp - dz * sp];
+};
+const vis = (nv) => (-cp * (nv[0] * sn + nv[1] * ct) + sp * nv[2]) > 0.0001;
+const Lt = [-0.45, -0.65, 0.62];
+const shade = (hex, nv) => {
+const d = Math.max(0, nv[0] * Lt[0] + nv[1] * Lt[1] + nv[2] * Lt[2]);
+const I = 0.66 + 0.36 * d;
+const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+const c = (v) => Math.max(0, Math.min(255, Math.round(v * I)));
+return 'rgb(' + c(r) + ',' + c(g) + ',' + c(b) + ')';
+};
+const faces = [];
+const poly2 = (P, color, alpha) => {
+const cpth = 'polygon(' + P.map((q) => q[0].toFixed(1) + 'px ' + q[1].toFixed(1) + 'px').join(',') + ')';
+faces.push({ style: 'position:absolute;left:0;top:0;width:' + W + 'px;height:' + H + 'px;background:' + color + ';clip-path:' + cpth + ';-webkit-clip-path:' + cpth + (alpha < 1 ? ';opacity:' + alpha : '') });
+};
+const face = (pts, color, alpha) => poly2(pts.map(proj), color, alpha === undefined ? 1 : alpha);
+const line2 = (a, b, w, color, alpha) => {
+const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.sqrt(dx * dx + dy * dy) || 1;
+const nx = -dy / len * w / 2, ny = dx / len * w / 2;
+poly2([[a[0] + nx, a[1] + ny], [b[0] + nx, b[1] + ny], [b[0] - nx, b[1] - ny], [a[0] - nx, a[1] - ny]], color, alpha === undefined ? 1 : alpha);
+};
+const line3 = (p, q, w, color, alpha) => line2(proj(p), proj(q), w, color, alpha);
+const clads = {
+white: { wall: '#E2E6E6', roof: '#EDF0F0', seam: 'rgba(31,38,43,0.28)', name: 'White IBR' },
+charcoal: { wall: '#50585E', roof: '#464D52', seam: 'rgba(255,255,255,0.18)', name: 'Charcoal' },
+green: { wall: '#557259', roof: '#4A644E', seam: 'rgba(255,255,255,0.18)', name: 'Bottle green' },
+oxide: { wall: '#8E5038', roof: '#7E4631', seam: 'rgba(255,255,255,0.18)', name: 'Red oxide' }
+};
+const cl = clads[st.clad];
+const fa = mode === 'x' ? 0.3 : 1;
+const t30 = Math.tan(Math.PI / 6), R = 2.4 + 3 * t30;
+const zTop = (y) => 2.4 + (y <= 3 ? y : 6 - y) * t30;
+const gAlong = (j) => 6 - (j + 1) * 1.2;
+const showWalls = mode === 'fin' || mode === 'x' || (mode === 'bd' && stg >= 3);
+const showRoof = mode === 'fin' || mode === 'x' || (mode === 'bd' && stg >= 4);
+const showSteel = mode === 'x' || mode === 'fr' || (mode === 'bd' && stg >= 2);
+const steelCol = '#2E363C';
+face([[-10, -8, -0.3], [L + 8, -8, -0.3], [L + 8, 14, -0.3], [-10, 14, -0.3]], '#D7DACF', 1);
+if (showWalls) face([[-0.3 - V, -0.3, -0.3], [L + 0.3, -0.3, -0.3], [L + 1.4, 1.4, -0.3], [L + 1.4, 8.0, -0.3], [0.8 - V, 8.0, -0.3], [-0.3 - V, 6.3, -0.3]], 'rgba(31,38,43,0.16)', 1);
+[{ n: [0, -1, 0], p: [[-0.1, -0.1, -0.3], [L + 0.1, -0.1, -0.3], [L + 0.1, -0.1, 0], [-0.1, -0.1, 0]] },
+{ n: [0, 1, 0], p: [[L + 0.1, 6.1, -0.3], [-0.1, 6.1, -0.3], [-0.1, 6.1, 0], [L + 0.1, 6.1, 0]] },
+{ n: [-1, 0, 0], p: [[-0.1, 6.1, -0.3], [-0.1, -0.1, -0.3], [-0.1, -0.1, 0], [-0.1, 6.1, 0]] },
+{ n: [1, 0, 0], p: [[L + 0.1, -0.1, -0.3], [L + 0.1, 6.1, -0.3], [L + 0.1, 6.1, 0], [L + 0.1, -0.1, 0]] }
+].forEach((f) => { if (vis(f.n)) face(f.p, shade('#9C9E97', f.n), 1); });
+if (isB) {
+const dk = '#A27B57';
+[{ n: [0, -1, 0], p: [[-V, 0, -0.3], [0, 0, -0.3], [0, 0, 0], [-V, 0, 0]] }, { n: [0, 1, 0], p: [[0, 6, -0.3], [-V, 6, -0.3], [-V, 6, 0], [0, 6, 0]] },
+{ n: [-1, 0, 0], p: [[-V, 6, -0.3], [-V, 0, -0.3], [-V, 0, 0], [-V, 6, 0]] }].forEach((f) => { if (vis(f.n)) face(f.p, shade(dk, f.n), 1); });
+face([[-V, 0, 0], [0, 0, 0], [0, 6, 0], [-V, 6, 0]], shade('#B48C66', [0, 0, 1]), 1);
+for (let i = 1; i < 20; i++) line3([-V, i * 0.3, 0.003], [0, i * 0.3, 0.003], 1, 'rgba(60,40,20,0.35)', 1);
+}
+const labels = [];
+if (mode === 'pl') {
+const pl = this.plan(st.pkg, st.ver);
+face([[-0.1, -0.1, 0], [L + 0.1, -0.1, 0], [L + 0.1, 6.1, 0], [-0.1, 6.1, 0]], '#C9CBC4', 1);
+pl.rooms.forEach((r) => face([[r[0], 6 - r[3], 0.002], [r[2], 6 - r[3], 0.002], [r[2], 6 - r[1], 0.002], [r[0], 6 - r[1], 0.002]], r[5], 1));
+const boxes = [];
+const bx = (x0, x1, y0, y1, z0, z1, top, side) => boxes.push({ b: [x0, x1, y0, y1, z0, z1], top: top, side: side });
+const HC = 1.0, tw = 0.1, cutCol = '#3A4248';
+const wallRun = (key, count, alongFn, fixed, isX) => {
+for (let i = 0; i < count; i++) {
+const a0 = alongFn(i), a1 = a0 + 1.2;
+const kind = op[key + i];
+const seg = (z0, z1, col, sideCol, t) => {
+if (isX) bx(a0, a1, fixed - t / 2, fixed + t / 2, z0, z1, col, sideCol);
+else bx(fixed - t / 2, fixed + t / 2, a0, a1, z0, z1, col, sideCol);
+};
+if (isB && key === 'A' && i >= 1 && i <= 3) { seg(0, HC, '#9CC3DD', '#9CC3DD', 0.03); continue; }
+if (kind === 'door') continue;
+if (kind === 'window') { seg(0, 0.9, cutCol, cl.wall, tw); seg(0.9, HC, '#9CC3DD', '#9CC3DD', 0.03); }
+else seg(0, HC, cutCol, cl.wall, tw);
+}
+};
+wallRun('F', NM, (i) => i * 1.2, 0, true);
+wallRun('B', NM, (i) => i * 1.2, 6, true);
+wallRun('A', 5, gAlong, 0, false);
+wallRun('G', 5, gAlong, L, false);
+const pt = 0.08;
+pl.parts.forEach((p) => {
+const x0 = p[0], y0 = 6 - p[3], x1 = p[2], y1 = 6 - p[1];
+if (x0 === x1) bx(x0 - pt / 2, x0 + pt / 2, y0, y1, 0, HC, cutCol, '#F4F4F1');
+else bx(x0, x1, y0 - pt / 2, y0 + pt / 2, 0, HC, cutCol, '#F4F4F1');
+});
+pl.items.forEach((it) => bx(it[0], it[2], 6 - it[3], 6 - it[1], 0, it[4], it[5], it[5]));
+posts.forEach((x) => { if (isB && x === 0) return; bx(Math.max(x - 0.05, -0.02), Math.min(x + 0.05, L + 0.02), 2.95, 3.05, 0, x === 0 || x === L ? HC : 2.2, steelCol, '#36414A'); });
+if (isB) { [[-V, 0], [-V, 6]].forEach((q) => bx(q[0] - 0.05, q[0] + 0.05, q[1] - 0.05, q[1] + 0.05, 0, 2.2, steelCol, '#36414A')); bx(-0.05, 0.05, 1.15, 1.25, 0, 2.2, steelCol, '#36414A'); bx(-0.05, 0.05, 4.75, 4.85, 0, 2.2, steelCol, '#36414A'); }
+const depthOf = (b) => proj([(b[0] + b[1]) / 2, (b[2] + b[3]) / 2, (b[4] + b[5]) / 2])[2];
+boxes.map((o) => ({ o: o, d: depthOf(o.b) })).sort((a, c) => c.d - a.d).forEach((e) => {
+const b = e.o.b, x0 = b[0], x1 = b[1], y0 = b[2], y1 = b[3], z0 = b[4], z1 = b[5];
+[{ n: [0, -1, 0], p: [[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]] },
+{ n: [0, 1, 0], p: [[x1, y1, z0], [x0, y1, z0], [x0, y1, z1], [x1, y1, z1]] },
+{ n: [-1, 0, 0], p: [[x0, y1, z0], [x0, y0, z0], [x0, y0, z1], [x0, y1, z1]] },
+{ n: [1, 0, 0], p: [[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]] }
+].forEach((s) => { if (vis(s.n)) face(s.p, shade(e.o.side, s.n), 1); });
+if (vis([0, 0, 1])) face([[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]], shade(e.o.top, [0, 0, 1]), 1);
+});
+pl.rooms.forEach((r) => {
+const P = proj([(r[0] + r[2]) / 2, 6 - (r[1] + r[3]) / 2, 0]);
+const area = (Math.round((r[2] - r[0]) * (r[3] - r[1]) * 10) / 10).toFixed(1) + ' m²';
+labels.push({ name: r[4], area: area, style: 'position:absolute;left:' + P[0].toFixed(1) + 'px;top:' + P[1].toFixed(1) + 'px;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 8px;background:rgba(255,255,255,0.86);border-radius:4px;font-size:12px;line-height:16px;color:#1F262B;white-space:nowrap' });
+});
+if (isB) { const P = proj([-V / 2, 3, 0]); labels.push({ name: 'Verandah', area: '14.4 m²', style: 'position:absolute;left:' + P[0].toFixed(1) + 'px;top:' + P[1].toFixed(1) + 'px;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 8px;background:rgba(255,255,255,0.86);border-radius:4px;font-size:12px;line-height:16px;color:#1F262B;white-space:nowrap' }); }
+}
+const frameLines = [], vLines = [], nodes = [];
+const tc = '#7F8A90';
+if (showSteel) {
+const add = (p, q, w, c) => frameLines.push({ p: p, q: q, w: w, c: c || '#36414A' });
+add([0, 0, 0], [L, 0, 0], 2.5, tc); add([0, 6, 0], [L, 6, 0], 2.5, tc); add([L, 0, 0], [L, 6, 0], 2.5, tc);
+if (isB) { add([0, 0, 0], [0, 1.2, 0], 2.5, tc); add([0, 4.8, 0], [0, 6, 0], 2.5, tc); } else add([0, 0, 0], [0, 6, 0], 2.5, tc);
+if (mode !== 'bd' || stg >= 3) {
+add([0, 0, 2.4], [L, 0, 2.4], 2.5, tc); add([0, 6, 2.4], [L, 6, 2.4], 2.5, tc);
+add([0, 0, 2.4], [0, 3, R], 2.5, tc); add([0, 6, 2.4], [0, 3, R], 2.5, tc); add([L, 0, 2.4], [L, 3, R], 2.5, tc); add([L, 6, 2.4], [L, 3, R], 2.5, tc);
+}
+const node = (p, w, h) => { const P = proj(p); nodes.push({ d: P[2], style: 'position:absolute;left:' + (P[0] - w / 2).toFixed(1) + 'px;top:' + (P[1] - h / 2).toFixed(1) + 'px;width:' + w + 'px;height:' + h + 'px;background:#C24A14' }); };
+posts.forEach((x) => {
+if (isB && x === 0) {
+add([0, 1.2, 0], [0, 1.2, 2.25], 5, steelCol); add([0, 4.8, 0], [0, 4.8, 2.25], 5, steelCol);
+add([0, 1.15, 2.2], [0, 4.85, 2.2], 9, steelCol);
+add([0, 3, 2.3], [0, 3, R - 0.2], 5, steelCol);
+node([0, 1.2, 0], 10, 6); node([0, 4.8, 0], 10, 6); node([0, 3, 2.3], 10, 6); node([0, 3, R - 0.2], 10, 6); node([0, 1.2, 2.2], 8, 8); node([0, 4.8, 2.2], 8, 8);
+} else {
+add([x, 3, 0], [x, 3, R - 0.2], 5);
+node([x, 3, 0], 10, 6); node([x, 3, R - 0.2], 10, 6);
+}
+});
+add([0, 3, R - 0.1], [L, 3, R - 0.1], 9, steelCol);
+}
+if (isB && (mode !== 'bd' || stg >= 2) && mode !== 'pl') {
+const vadd = (p, q, w) => vLines.push({ p: p, q: q, w: w });
+vadd([-V, 0, 0], [-V, 0, 2.4], 5); vadd([-V, 6, 0], [-V, 6, 2.4], 5);
+vadd([-V, 0, 2.4], [-V, 6, 2.4], 5); vadd([-V, 0, 2.4], [-V, 3, R], 5); vadd([-V, 6, 2.4], [-V, 3, R], 5);
+vadd([-V, 0, 2.4], [0, 0, 2.4], 5); vadd([-V, 6, 2.4], [0, 6, 2.4], 5);
+vadd([-V, 3, R - 0.1], [0, 3, R - 0.1], 9);
+}
+const drawSorted = (list, col) => {
+list.map((m) => { const P = proj(m.p), Q = proj(m.q); return { P: P, Q: Q, w: m.w, c: m.c || col, d: (P[2] + Q[2]) / 2 }; }).sort((a, b) => b.d - a.d).forEach((m) => line2(m.P, m.Q, m.w, m.c, 1));
+};
+const gableAvis = vis([-1, 0, 0]);
+if (mode === 'fr' || mode === 'bd') drawSorted(frameLines, '#36414A');
+if (isB && !gableAvis) drawSorted(vLines, steelCol);
+const winDoor = (k2, a, plane) => {
+if (k2 === 'door') {
+face(plane(a + 0.1, a + 1.1, 0, 2.15, 0.015), '#2E3439', fa);
+face(plane(a + 0.15, a + 1.05, 0, 2.1, 0.02), '#7A4A2E', fa);
+} else {
+face(plane(a + 0.05, a + 1.15, 0.85, 2.15, 0.015), '#2E3439', fa);
+face(plane(a + 0.1, a + 1.1, 0.9, 2.1, 0.02), '#86AECB', fa);
+}
+};
+const gableA = isB ? [[0, 6, 0], [0, 4.8, 0], [0, 4.8, 2.1], [0, 1.2, 2.1], [0, 1.2, 0], [0, 0, 0], [0, 0, 2.4], [0, 3, R], [0, 6, 2.4]] : [[0, 6, 0], [0, 0, 0], [0, 0, 2.4], [0, 3, R], [0, 6, 2.4]];
+const walls = [
+{ n: [0, -1, 0], pts: [[0, 0, 0], [L, 0, 0], [L, 0, 2.4], [0, 0, 2.4]], key: 'F', count: NM, along: (i) => i * 1.2,
+plane: (a0, a1, z0, z1, o) => [[a0, -o, z0], [a1, -o, z0], [a1, -o, z1], [a0, -o, z1]],
+seam: (s) => [[s, -0.01, 0], [s, -0.01, 2.4]], seams: NM },
+{ n: [0, 1, 0], pts: [[L, 6, 0], [0, 6, 0], [0, 6, 2.4], [L, 6, 2.4]], key: 'B', count: NM, along: (i) => i * 1.2,
+plane: (a0, a1, z0, z1, o) => [[a0, 6 + o, z0], [a1, 6 + o, z0], [a1, 6 + o, z1], [a0, 6 + o, z1]],
+seam: (s) => [[s, 6.01, 0], [s, 6.01, 2.4]], seams: NM },
+{ n: [-1, 0, 0], pts: gableA, key: 'A', count: 5, along: gAlong, gable: 'A',
+plane: (a0, a1, z0, z1, o) => [[-o, a0, z0], [-o, a1, z0], [-o, a1, z1], [-o, a0, z1]],
+seam: (s) => [[-0.01, s, isB && s > 1.1 && s < 4.9 ? 2.1 : 0], [-0.01, s, zTop(s)]], seams: 5 },
+{ n: [1, 0, 0], pts: [[L, 0, 0], [L, 6, 0], [L, 6, 2.4], [L, 3, R], [L, 0, 2.4]], key: 'G', count: 5, along: gAlong,
+plane: (a0, a1, z0, z1, o) => [[L + o, a0, z0], [L + o, a1, z0], [L + o, a1, z1], [L + o, a0, z1]],
+seam: (s) => [[L + 0.01, s, 0], [L + 0.01, s, zTop(s)]], seams: 5 }
+];
+if (showWalls) {
+walls.forEach((w) => {
+if (!vis(w.n)) return;
+face(w.pts, shade(cl.wall, w.n), fa);
+for (let i = 1; i < w.seams; i++) { const s = w.seam(i * 1.2); line3(s[0], s[1], 1.2, cl.seam, fa); }
+if (w.gable === 'A' && isB) {
+if (stg >= 5) {
+face([[-0.015, 1.2, 0], [-0.015, 4.8, 0], [-0.015, 4.8, 2.1], [-0.015, 1.2, 2.1]], '#2E3439', fa);
+face([[-0.02, 1.26, 0.04], [-0.02, 2.98, 0.04], [-0.02, 2.98, 2.05], [-0.02, 1.26, 2.05]], '#86AECB', fa);
+face([[-0.03, 3.02, 0.04], [-0.03, 4.74, 0.04], [-0.03, 4.74, 2.05], [-0.03, 3.02, 2.05]], '#7FA6C3', fa);
+} else face([[-0.015, 1.2, 0], [-0.015, 4.8, 0], [-0.015, 4.8, 2.1], [-0.015, 1.2, 2.1]], '#3A4248', fa);
+}
+if (stg >= 5) { for (let i = 0; i < w.count; i++) { const k2 = op[w.key + i]; if (k2) winDoor(k2, w.along(i), w.plane); } }
+});
+}
+if (isB && gableAvis) drawSorted(vLines, steelCol);
+const ts = 0.17, oh = 0.26, ze = 2.4 - 0.15 + ts, zr = R + ts, g = 0.15, xs = -V - g;
+if (showRoof) {
+const nF = [0, -0.5, 0.866], nB = [0, 0.5, 0.866];
+const slopes = [
+{ n: nB, pts: [[L + g, 6 + oh, ze], [xs, 6 + oh, ze], [xs, 3, zr], [L + g, 3, zr]], seam: (s) => [[s, 6 + oh, ze + 0.01], [s, 3, zr + 0.01]] },
+{ n: nF, pts: [[xs, -oh, ze], [L + g, -oh, ze], [L + g, 3, zr], [xs, 3, zr]], seam: (s) => [[s, -oh, ze + 0.01], [s, 3, zr + 0.01]] }
+];
+slopes.sort((a, b) => {
+const da = a.pts.reduce((s, p) => s + proj(p)[2], 0), db = b.pts.reduce((s, p) => s + proj(p)[2], 0);
+return db - da;
+});
+slopes.forEach((s) => {
+if (!vis(s.n)) return;
+face(s.pts, shade(cl.roof, s.n), fa);
+for (let x = -V; x <= L + 0.01; x += 1.2) { const q = s.seam(x); line3(q[0], q[1], 1.2, cl.seam, fa); }
+});
+[{ n: [0, -1, 0], pts: [[xs, -oh, ze - 0.12], [L + g, -oh, ze - 0.12], [L + g, -oh, ze], [xs, -oh, ze]] },
+{ n: [0, 1, 0], pts: [[L + g, 6 + oh, ze - 0.12], [xs, 6 + oh, ze - 0.12], [xs, 6 + oh, ze], [L + g, 6 + oh, ze]] },
+{ n: [-1, 0, 0], pts: [[xs, -oh, ze], [xs, 3, zr], [xs, 6 + oh, ze], [xs, 6 + oh, ze - 0.12], [xs, 3, zr - 0.12], [xs, -oh, ze - 0.12]] },
+{ n: [1, 0, 0], pts: [[L + g, -oh, ze], [L + g, 3, zr], [L + g, 6 + oh, ze], [L + g, 6 + oh, ze - 0.12], [L + g, 3, zr - 0.12], [L + g, -oh, ze - 0.12]] }
+].forEach((e) => { if (vis(e.n)) face(e.pts, shade('#3A4248', e.n), fa); });
+line3([xs, 3, zr + 0.02], [L + g, 3, zr + 0.02], 4, '#2A3237', fa);
+}
+if (mode === 'x') drawSorted(frameLines, '#36414A');
+const showNodes = (mode === 'x' || mode === 'fr' || (mode === 'bd' && stg <= 2)) ? nodes.sort((a, b) => b.d - a.d) : [];
+let nWin = 0;
+Object.keys(op).forEach((kk) => { if (op[kk] === 'window') nWin++; });
+const btn = (on) => 'min-height:44px;padding:0 12px;border-radius:4px;cursor:pointer;font-family:IBM Plex Sans,sans-serif;font-size:13px;' + (on ? 'background:#1F262B;color:#FFFFFF;border:1.5px solid #1F262B' : 'background:transparent;color:#1F262B;border:1.5px solid #8A9297');
+const swatches = Object.keys(clads).map((key) => ({ name: clads[key].name, pick: () => this.setState({ clad: key }), style: 'width:40px;height:40px;border-radius:20px;cursor:pointer;background:' + clads[key].wall + ';border:' + (st.clad === key ? '3px solid #1F262B' : '1.5px solid #8A9297') }));
+const presets = [['Front', 0], ['Corner A', 40], ['Gable A', 90], ['Back', 180], ['Corner B', 320]].map((p) => ({ label: p[0], go: () => this.setState({ yaw: p[1] }) }));
+const span = L / (posts.length - 1);
+const notesA = ['Slab or strip footing. The base U-track is bolted down round the edge; the pillar base plates are cast or bolted in.',
+'The only structural steel: ' + posts.length + ' pillars on the centre line, ' + span + ' m apart, carrying the 200×100 ridge beam (the spine).',
+'Wall panels stand in the base track and the top U-track caps them. The gable panels close round the end pillars.',
+'Roof panels span 3.46 m from the wall track up to the spine and are screwed at both ends.',
+'Windows and door go into panel openings. Finished.'];
+const notesB = ['Footing as version A, plus pads under the two door-frame legs and the two verandah posts, and the verandah deck.',
+'Gable A pillar is replaced by a welded door frame: two legs and a 200×100 head over a 3.6 m opening, with the pillar continuing from the head up to the spine. The spine runs 2.4 m further onto an open steel A-truss on two verandah posts.',
+'Wall panels as version A. Gable A has 1.2 m of solid panel each side of the opening and panel above the head.',
+'Roof panels run on over the verandah, 2.4 m further, carried by the truss and two eave beams.',
+'3.6 × 2.1 m sliding glass door in the steel frame, windows in the panels. Finished.'];
+return {
+faces: faces, nodes: showNodes, labels: labels,
+caption: (isB ? 'Version B · ' : 'Version A · ') + L + ' m × 6 m' + (isB ? ' + 2.4 m verandah' : '') + ' · spine on ' + posts.length + ' pillars at ' + span + ' m · ' + nWin + ' windows' + (isB ? ' + glass slider' : ' + 1 door'),
+yaw: st.yaw, pitch: st.pitch,
+onYaw: (e) => this.setState({ yaw: Number(e.target.value) }),
+onPitch: (e) => this.setState({ pitch: Number(e.target.value) }),
+vA: btn(!isB), vB: btn(isB), setA: () => this.setState({ ver: 'A' }), setB: () => this.setState({ ver: 'B' }),
+pkgOne: btn(st.pkg === 'one'), pkgTwo: btn(st.pkg === 'two'),
+setOne: () => this.setState({ pkg: 'one' }), setTwo: () => this.setState({ pkg: 'two' }),
+mFin: btn(mode === 'fin'), mPl: btn(mode === 'pl'), mX: btn(mode === 'x'), mFr: btn(mode === 'fr'),
+setFin: () => this.setState({ mode: 'fin' }), setX: () => this.setState({ mode: 'x' }), setFr: () => this.setState({ mode: 'fr' }),
+setPl: () => this.setState((s) => ({ mode: 'pl', pitch: s.pitch < 40 ? 55 : s.pitch, yaw: s.mode === 'pl' ? s.yaw : 25 })),
+stages: [['1 Footing', 1], ['2 Steel', 2], ['3 Walls', 3], ['4 Roof', 4], ['5 Glazing', 5]].map((gg) => ({ label: gg[0], style: btn(mode === 'bd' && st.stage === gg[1]), go: () => this.setState({ mode: 'bd', stage: gg[1] }) })),
+stageNote: mode !== 'bd' ? 'Pick a step to see the house go up layer by layer.' : (isB ? notesB : notesA)[st.stage - 1],
+swatches: swatches, cladName: cl.name, presets: presets,
+spin: () => this.toggleSpin(), spinLabel: st.spin ? 'Stop' : 'Spin',
+spinStyle: btn(st.spin)
+};
+}
+}
+
+const comp = new Component({});
+comp.quiet = true;
+if (!S.v3) S.v3 = { ver: 'B', yaw: 40, pitch: 22, mode: 'fin', stage: 2 };
+Object.assign(comp.state, S.v3, { pkg: S.pkg, clad: S.clad, spin: false });
+const baseOpenings = comp.openings.bind(comp);
+comp.openings = (pkg, ver) => (ver === 'A' ? S.open[pkg] : baseOpenings(pkg, ver));
+comp.quiet = false;
 let spinning = false, dragging = null, raf3d = 0;
-function req3d() { if (!raf3d) raf3d = requestAnimationFrame(() => { raf3d = 0; draw3d(); }); }
-function render3DControls() {
-  pkgButtons('pkg3d');
-  const m = S.view.mode, inside = m === 'in';
-  $('mode3d').innerHTML = [['fin', 'Finished'], ['in', 'Interior'], ['pl', 'Floor plan'], ['x', 'X-ray'], ['fr', 'Frame']].map((b) => `<button class="btn ${m === b[0] ? 'on' : ''}" data-action="mode" data-mode="${b[0]}">${b[1]}</button>`).join('');
-  $('clad3d').innerHTML = Object.keys(CLADS).map((k) => `<button class="swatch ${S.clad === k ? 'on' : ''}" style="background:${CLADS[k].wall}" data-action="clad" data-clad="${k}" aria-label="${CLADS[k].name}" title="${CLADS[k].name}"></button>`).join('') + `<span class="note" style="margin-left:6px">${CLADS[S.clad].name}</span>`;
-  $('steel3d').innerHTML = Object.keys(STEELS).map((k) => `<button class="swatch ${S.steel === k ? 'on' : ''}" style="background:${STEELS[k].col}" data-action="steel" data-steel="${k}" aria-label="${STEELS[k].name}" title="${STEELS[k].name}"></button>`).join('') + `<span class="note" style="margin-left:6px">${STEELS[S.steel].name}</span>`;
-  $('cladCtl').hidden = inside; $('inCtl').hidden = !inside;
-  $('yawLbl').textContent = inside ? 'Look left / right' : 'Rotate';
-  $('pitchLbl').textContent = inside ? 'Look up / down' : 'Tilt';
-  $('pitch').min = inside ? -15 : 6; $('pitch').max = inside ? 60 : 70;
-  $('presets').innerHTML = inside
-    ? insidePresets().map((p, i) => `<button class="btn" data-action="inPreset" data-i="${i}">${p[0]}</button>`).join('')
-    : [['Front', 0], ['Corner A', 35], ['Gable A', 90], ['Back', 180], ['Corner B', 325]].map((p) => `<button class="btn" data-action="yaw" data-yaw="${p[1]}">${p[0]}</button>`).join('');
-  $('spinBtn').textContent = spinning ? 'Stop spinning' : 'Spin';
-  $('spinBtn').classList.toggle('on', spinning);
+function req3d() { if (!raf3d) raf3d = requestAnimationFrame(() => { raf3d = 0; rerender3d(); }); }
+function sync3d() { const c = comp.state; S.v3 = { ver: c.ver, yaw: c.yaw, pitch: c.pitch, mode: c.mode, stage: c.stage }; S.clad = c.clad; save(); }
+function rerender3d() {
+  if (S.tab !== 'view3d') return;
+  comp.state.pkg = S.pkg;
+  const r = comp.renderVals(), c = comp.state;
+  const box = $('v3d'), inner = $('v3dInner'), sc = box.clientWidth / 1100;
+  box.style.height = Math.round(760 * sc) + 'px';
+  inner.style.transform = `scale(${sc})`;
+  inner.innerHTML = r.faces.map((f) => `<div style="${f.style}"></div>`).join('') + r.nodes.map((n) => `<div style="${n.style}"></div>`).join('') +
+    r.labels.map((l) => `<div style="${l.style}"><span style="font-weight:600">${esc(l.name)}</span><span style="font-family:var(--mono);font-size:11px;color:#5B656C">${esc(l.area)}</span></div>`).join('');
+  $('cap3d').textContent = r.caption;
+  $('ver3d').innerHTML = [['A', 'A · long-wall door'], ['B', 'B · glass gable + verandah']].map((v) => `<button class="btn ${c.ver === v[0] ? 'on' : ''}" data-action="v3" data-k="ver" data-v="${v[0]}">${v[1]}</button>`).join('');
+  pkgButtons('pkg3d', 'pkg');
+  $('mode3d').innerHTML = [['fin', 'Finished'], ['pl', 'Floor plan'], ['x', 'X-ray'], ['fr', 'Steel only']].map((m) => `<button class="btn ${c.mode === m[0] ? 'on' : ''}" data-action="v3mode" data-v="${m[0]}">${m[1]}</button>`).join('');
+  $('stage3d').innerHTML = r.stages.map((g, i) => `<button class="btn ${c.mode === 'bd' && c.stage === i + 1 ? 'on' : ''}" data-action="v3stage" data-v="${i + 1}">${g.label}</button>`).join('');
+  $('stageNote').textContent = r.stageNote;
+  $('clad3d').innerHTML = r.swatches.map((s, i) => `<button class="swatch ${Object.keys(CLADS)[i] === c.clad ? 'on' : ''}" style="background:${CLADS[Object.keys(CLADS)[i]].wall}" data-action="v3" data-k="clad" data-v="${Object.keys(CLADS)[i]}" aria-label="${s.name}" title="${s.name}"></button>`).join('') + `<span class="note" style="margin-left:6px">${r.cladName}</span>`;
+  $('presets').innerHTML = [['Front', 0], ['Corner A', 40], ['Gable A', 90], ['Back', 180], ['Corner B', 320]].map((p) => `<button class="btn" data-action="v3" data-k="yaw" data-v="${p[1]}">${p[0]}</button>`).join('');
+  $('yaw').value = Math.round(c.yaw); $('pitch').value = Math.round(c.pitch);
+  $('spinBtn').textContent = spinning ? 'Stop spinning' : 'Spin'; $('spinBtn').classList.toggle('on', spinning);
 }
-function draw3d() {
-  if (S.view.mode === 'in') { drawInside(); $('aiPrompt').textContent = aiPrompt(); return; }
-  $('aiPrompt').textContent = aiPrompt();
-  const cf = cfg(), st = S.view, pkg = cf.pkg, n = cf.n, L = cf.L, NM = cf.NM, op = S.open[cf.key], bay = cf.bay;
-  $('yaw').value = Math.round(st.yaw); $('pitch').value = Math.round(st.pitch);
-  const th = st.yaw * Math.PI / 180, ph = st.pitch * Math.PI / 180;
-  const ct = Math.cos(th), sn = Math.sin(th), cp = Math.cos(ph), sp = Math.sin(ph);
-  const mode = st.mode;
-  const cx = L / 2, cy = 3, cz = mode === 'pl' ? 0.6 : 1.6, k = mode === 'pl' ? 56 : 50, CX = 550, CY = 410;
-  const proj = (p) => { const dx = p[0] - cx, dy = p[1] - cy, dz = p[2] - cz; const xr = dx * ct - dy * sn, yr = dx * sn + dy * ct; return [CX + xr * k, CY - (dz * cp + yr * sp) * k, yr * cp - dz * sp]; };
-  const vis = (nv) => (-cp * (nv[0] * sn + nv[1] * ct) + sp * nv[2]) > 0.0001;
-  const Lt = [-0.45, -0.65, 0.62];
-  const shade = (hex, nv) => { const d = Math.max(0, nv[0] * Lt[0] + nv[1] * Lt[1] + nv[2] * Lt[2]); const I = 0.66 + 0.36 * d; const c = (i) => Math.max(0, Math.min(255, Math.round(parseInt(hex.slice(i, i + 2), 16) * I))); return `rgb(${c(1)},${c(3)},${c(5)})`; };
-  const out = [];
-  const poly2 = (P, color, a) => out.push(`<polygon points="${P.map((q) => q[0].toFixed(1) + ',' + q[1].toFixed(1)).join(' ')}" fill="${color}"${a < 1 ? ` fill-opacity="${a}"` : ''}/>`);
-  const face = (pts, color, a) => poly2(pts.map(proj), color, a === undefined ? 1 : a);
-  const line2 = (A, B, w, color, a) => out.push(`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${color}" stroke-width="${w}" stroke-linecap="round"${a < 1 ? ` stroke-opacity="${a}"` : ''}/>`);
-  const line3 = (p, q, w, color, a) => line2(proj(p), proj(q), w, color, a === undefined ? 1 : a);
-  const cl = CLADS[S.clad], fa = mode === 'x' ? 0.3 : 1;
-  const t30 = Math.tan(Math.PI / 6), R = 2.4 + 3 * t30;
-  const zTop = (y) => 2.4 + (y <= 3 ? y : 6 - y) * t30;
-  const gAlong = (j) => 6 - (j + 1) * 1.2;
-  face([[-8, -8, -0.3], [L + 8, -8, -0.3], [L + 8, 14, -0.3], [-8, 14, -0.3]], '#D7DACF');
-  if (mode === 'fin' || mode === 'x') face([[-0.3, -0.3, -0.3], [L + 0.3, -0.3, -0.3], [L + 1.4, 1.4, -0.3], [L + 1.4, 8.0, -0.3], [0.8, 8.0, -0.3], [-0.3, 6.3, -0.3]], 'rgba(31,38,43,0.16)');
-  [{ n: [0, -1, 0], p: [[-0.1, -0.1, -0.3], [L + 0.1, -0.1, -0.3], [L + 0.1, -0.1, 0], [-0.1, -0.1, 0]] },
-   { n: [0, 1, 0], p: [[L + 0.1, 6.1, -0.3], [-0.1, 6.1, -0.3], [-0.1, 6.1, 0], [L + 0.1, 6.1, 0]] },
-   { n: [-1, 0, 0], p: [[-0.1, 6.1, -0.3], [-0.1, -0.1, -0.3], [-0.1, -0.1, 0], [-0.1, 6.1, 0]] },
-   { n: [1, 0, 0], p: [[L + 0.1, -0.1, -0.3], [L + 0.1, 6.1, -0.3], [L + 0.1, 6.1, 0], [L + 0.1, -0.1, 0]] }
-  ].forEach((f) => { if (vis(f.n)) face(f.p, shade('#9C9E97', f.n)); });
-  const labels = [];
-  if (mode === 'pl') {
-    const pl = plan(cf);
-    face([[-0.1, -0.1, 0], [L + 0.1, -0.1, 0], [L + 0.1, 6.1, 0], [-0.1, 6.1, 0]], '#C9CBC4');
-    pl.rooms.forEach((r) => face([[r[0], 6 - r[3], 0.002], [r[2], 6 - r[3], 0.002], [r[2], 6 - r[1], 0.002], [r[0], 6 - r[1], 0.002]], r[6]));
-    const boxes = []; const bx = (b, top, side) => boxes.push({ b, top, side });
-    const HC = 1.0, tw = 0.1, cut = '#3A4248';
-    const run = (key, count, along, fixed, isX) => {
-      for (let i = 0; i < count; i++) {
-        const a0 = along(i), a1 = a0 + 1.2, kind = op[key + i];
-        const seg = (z0, z1, top, side, t) => bx(isX ? [a0, a1, fixed - t / 2, fixed + t / 2, z0, z1] : [fixed - t / 2, fixed + t / 2, a0, a1, z0, z1], top, side);
-        if (kind === 'door') continue;
-        if (kind === 'window') { seg(0, 0.9, cut, cl.wall, tw); seg(0.9, HC, '#9CC3DD', '#9CC3DD', 0.03); } else seg(0, HC, cut, cl.wall, tw);
-      }
-    };
-    run('F', NM, (i) => i * 1.2, 0, true); run('B', NM, (i) => i * 1.2, 6, true); run('A', 5, gAlong, 0, false); run('G', 5, gAlong, L, false);
-    pl.parts.forEach((q) => { const x0 = q[0], y0 = 6 - q[3], x1 = q[2], y1 = 6 - q[1]; if (x0 === x1) bx([x0 - 0.04, x0 + 0.04, y0, y1, 0, HC], cut, '#F4F4F1'); else bx([x0, x1, y0 - 0.04, y0 + 0.04, 0, HC], cut, '#F4F4F1'); });
-    pl.items.forEach((it) => bx([it[0], it[2], 6 - it[3], 6 - it[1], 0, it[5]], it[6], it[6]));
-    boxes.map((o) => ({ o, d: proj([(o.b[0] + o.b[1]) / 2, (o.b[2] + o.b[3]) / 2, (o.b[4] + o.b[5]) / 2])[2] })).sort((a, c) => c.d - a.d).forEach((e) => {
-      const [x0, x1, y0, y1, z0, z1] = e.o.b;
-      [{ n: [0, -1, 0], p: [[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]] }, { n: [0, 1, 0], p: [[x1, y1, z0], [x0, y1, z0], [x0, y1, z1], [x1, y1, z1]] },
-       { n: [-1, 0, 0], p: [[x0, y1, z0], [x0, y0, z0], [x0, y0, z1], [x0, y1, z1]] }, { n: [1, 0, 0], p: [[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]] }
-      ].forEach((s) => { if (vis(s.n)) face(s.p, shade(e.o.side, s.n)); });
-      if (vis([0, 0, 1])) face([[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]], shade(e.o.top, [0, 0, 1]));
-    });
-    pl.rooms.forEach((r) => { const P = proj([(r[0] + r[2]) / 2, 6 - (r[1] + r[3]) / 2, 0]); labels.push(`<text x="${P[0].toFixed(1)}" y="${P[1].toFixed(1)}" text-anchor="middle" font-size="15" font-weight="600" fill="#1F262B" stroke="#fff" stroke-width="4" paint-order="stroke">${esc(r[4])}</text><text x="${P[0].toFixed(1)}" y="${(P[1] + 18).toFixed(1)}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" fill="#3A444B" stroke="#fff" stroke-width="4" paint-order="stroke">${((r[2] - r[0]) * (r[3] - r[1])).toFixed(1)} m²</text>`); });
-  }
-  const winDoor = (kind, a, plane) => {
-    if (kind === 'door') { face(plane(a + 0.1, a + 1.1, 0, 2.15, 0.015), '#2E3439', fa); face(plane(a + 0.15, a + 1.05, 0, 2.1, 0.02), '#7A4A2E', fa); }
-    else { face(plane(a + 0.05, a + 1.15, 0.85, 2.15, 0.015), '#2E3439', fa); face(plane(a + 0.1, a + 1.1, 0.9, 2.1, 0.02), '#86AECB', fa); }
-  };
-  const walls = [
-    { n: [0, -1, 0], pts: [[0, 0, 0], [L, 0, 0], [L, 0, 2.4], [0, 0, 2.4]], key: 'F', count: NM, along: (i) => i * 1.2, plane: (a0, a1, z0, z1, o) => [[a0, -o, z0], [a1, -o, z0], [a1, -o, z1], [a0, -o, z1]], seam: (s) => [[s, -0.01, 0], [s, -0.01, 2.4]], seams: NM },
-    { n: [0, 1, 0], pts: [[L, 6, 0], [0, 6, 0], [0, 6, 2.4], [L, 6, 2.4]], key: 'B', count: NM, along: (i) => i * 1.2, plane: (a0, a1, z0, z1, o) => [[a0, 6 + o, z0], [a1, 6 + o, z0], [a1, 6 + o, z1], [a0, 6 + o, z1]], seam: (s) => [[s, 6.01, 0], [s, 6.01, 2.4]], seams: NM },
-    { n: [-1, 0, 0], pts: [[0, 6, 0], [0, 0, 0], [0, 0, 2.4], [0, 3, R], [0, 6, 2.4]], key: 'A', count: 5, along: gAlong, plane: (a0, a1, z0, z1, o) => [[-o, a0, z0], [-o, a1, z0], [-o, a1, z1], [-o, a0, z1]], seam: (s) => [[-0.01, s, 0], [-0.01, s, zTop(s)]], seams: 5 },
-    { n: [1, 0, 0], pts: [[L, 0, 0], [L, 6, 0], [L, 6, 2.4], [L, 3, R], [L, 0, 2.4]], key: 'G', count: 5, along: gAlong, plane: (a0, a1, z0, z1, o) => [[L + o, a0, z0], [L + o, a1, z0], [L + o, a1, z1], [L + o, a0, z1]], seam: (s) => [[L + 0.01, s, 0], [L + 0.01, s, zTop(s)]], seams: 5 }
-  ];
-  const ts = 0.17, oh = 0.26, ze = 2.4 - 0.15 + ts, zr = R + ts, g = 0.15;
-  if (mode === 'fin' || mode === 'x') {
-    walls.forEach((w) => {
-      if (!vis(w.n)) return;
-      face(w.pts, shade(cl.wall, w.n), fa);
-      for (let i = 1; i < w.seams; i++) { const s = w.seam(i * 1.2); line3(s[0], s[1], 1.2, cl.seam, fa); }
-      for (let i = 0; i < w.count; i++) { const kd = op[w.key + i]; if (kd) winDoor(kd, w.along(i), w.plane); }
-    });
-  }
-  const frameLines = [], nodes = [];
-  if (mode === 'x' || mode === 'fr') {
-    const add = (p, q, w) => frameLines.push({ p, q, w });
-    for (let f = 0; f <= n; f++) {
-      const x = r1(f * bay);
-      add([x, 0, 0], [x, 0, 2.4], 4); add([x, 6, 0], [x, 6, 2.4], 4); add([x, 0, 0], [x, 6, 0], 4); add([x, 0, 2.4], [x, 6, 2.4], 4);
-      add([x, 0, 2.4], [x, 3, R], 4); add([x, 6, 2.4], [x, 3, R], 4); add([x, 3, 2.4], [x, 3, R], 3);
-      [[x, 3, R], [x, 0, 2.4], [x, 6, 2.4], [x, 0, 0], [x, 6, 0]].forEach((p) => { const P = proj(p); nodes.push({ d: P[2], s: `<rect x="${(P[0] - 4).toFixed(1)}" y="${(P[1] - 4).toFixed(1)}" width="8" height="8" fill="#C24A14"/>` }); });
-    }
-    for (let b = 0; b < n; b++) {
-      const x0 = b * bay, x1 = x0 + bay, pz = 2.4 + 1.5 * t30;
-      add([x0, 3, R], [x1, 3, R], 4); add([x0, 0, 2.4], [x1, 0, 2.4], 4); add([x0, 6, 2.4], [x1, 6, 2.4], 4);
-      add([x0, 0, 0], [x1, 0, 0], 4); add([x0, 6, 0], [x1, 6, 0], 4); add([x0, 1.5, pz], [x1, 1.5, pz], 3); add([x0, 4.5, pz], [x1, 4.5, pz], 3);
-    }
-  }
-  const drawFrame = () => frameLines.map((m) => { const P = proj(m.p), Q = proj(m.q); return { P, Q, w: m.w, d: (P[2] + Q[2]) / 2 }; }).sort((a, b) => b.d - a.d).forEach((m) => line2(m.P, m.Q, m.w, '#36414A', 1));
-  if (mode === 'fr') drawFrame();
-  if (mode === 'fin' || mode === 'x') {
-    const NR = Math.round(L / 1.2);
-    const slopes = [
-      { n: [0, 0.5, 0.866], pts: [[L + g, 6 + oh, ze], [-g, 6 + oh, ze], [-g, 3, zr], [L + g, 3, zr]], seam: (s) => [[s, 6 + oh, ze + 0.01], [s, 3, zr + 0.01]] },
-      { n: [0, -0.5, 0.866], pts: [[-g, -oh, ze], [L + g, -oh, ze], [L + g, 3, zr], [-g, 3, zr]], seam: (s) => [[s, -oh, ze + 0.01], [s, 3, zr + 0.01]] }
-    ].sort((a, b) => b.pts.reduce((s, p) => s + proj(p)[2], 0) - a.pts.reduce((s, p) => s + proj(p)[2], 0));
-    slopes.forEach((s) => { if (!vis(s.n)) return; face(s.pts, shade(cl.roof, s.n), fa); for (let i = 0; i <= NR; i++) { const q = s.seam(i * 1.2); line3(q[0], q[1], 1.2, cl.seam, fa); } });
-    [{ n: [0, -1, 0], pts: [[-g, -oh, ze - 0.12], [L + g, -oh, ze - 0.12], [L + g, -oh, ze], [-g, -oh, ze]] },
-     { n: [0, 1, 0], pts: [[L + g, 6 + oh, ze - 0.12], [-g, 6 + oh, ze - 0.12], [-g, 6 + oh, ze], [L + g, 6 + oh, ze]] },
-     { n: [-1, 0, 0], pts: [[-g, -oh, ze], [-g, 3, zr], [-g, 6 + oh, ze], [-g, 6 + oh, ze - 0.12], [-g, 3, zr - 0.12], [-g, -oh, ze - 0.12]] },
-     { n: [1, 0, 0], pts: [[L + g, -oh, ze], [L + g, 3, zr], [L + g, 6 + oh, ze], [L + g, 6 + oh, ze - 0.12], [L + g, 3, zr - 0.12], [L + g, -oh, ze - 0.12]] }
-    ].forEach((e) => { if (vis(e.n)) face(e.pts, shade('#3A4248', e.n), fa); });
-    line3([-g, 3, zr + 0.02], [L + g, 3, zr + 0.02], 4, '#2A3237', fa);
-  }
-  if (mode === 'x') drawFrame();
-  if (mode === 'x' || mode === 'fr') nodes.sort((a, b) => b.d - a.d).forEach((nd) => out.push(nd.s));
-  $('v3d').innerHTML = `<svg viewBox="0 0 1100 760" role="img" aria-label="3D view of the house">${out.join('')}${labels.join('')}</svg>`;
-  const c = counts();
-  $('cap3d').textContent = `${L} m × 6 m · ${n + 1} frames at ${bay} m · ridge 4.13 m · ${c.win} windows · ${c.door} door${c.door === 1 ? '' : 's'}. Simplified model: 300 mm eave and 150 mm gable overhang, 300 mm plinth.`;
-}
-function spinLoop() {
-  if (!spinning) return;
-  if (S.view.mode === 'in') S.inside.h = (S.inside.h + 0.3) % 360; else S.view.yaw = (S.view.yaw + 0.6) % 360;
-  draw3d(); requestAnimationFrame(spinLoop);
-}
-
-/* ---------- interior: perspective camera standing inside ---------- */
-function clampInside() {
-  const L = cfg().L, I = S.inside;
-  I.x = Math.max(0.4, Math.min(L - 0.4, I.x)); I.y = Math.max(0.4, Math.min(5.6, I.y));
-  I.h = ((I.h % 360) + 360) % 360; I.t = Math.max(-15, Math.min(60, I.t));
-}
-function insidePresets() {
-  const c = cfg(), le = c.pkg === 'two' ? 10.8 : c.L, mid = (3.6 + le) / 2;
-  let dx = mid; const op = S.open[c.key];
-  for (let i = 0; i < c.NM; i++) if (op['F' + i] === 'door') { dx = i * 1.2 + 0.6; break; }
-  return [
-    ['Toward bedroom', { x: le - 0.5, y: 3.2, h: 180, t: 14 }],
-    ['Toward kitchen', { x: 4.0, y: 1.0, h: 22, t: 12 }],
-    ['From front door', { x: dx, y: 0.6, h: 90, t: 10 }],
-    ['Look up', { x: mid + c.bay / 2, y: 1.0, h: 160, t: 36 }]
-  ];
-}
-function drawInside() {
-  clampInside();
-  const cf = cfg(), L = cf.L, op = S.open[cf.key], I = S.inside;
-  $('yaw').value = Math.round(I.h); $('pitch').value = Math.round(I.t);
-  $('standX').value = Math.round((I.x - 0.4) / (L - 0.8) * 1000); $('standY').value = Math.round((I.y - 0.4) / 5.2 * 1000);
-  const hh = I.h * Math.PI / 180, tl = I.t * Math.PI / 180, C = [I.x, I.y, 1.6];
-  const f = [Math.cos(hh) * Math.cos(tl), Math.sin(hh) * Math.cos(tl), Math.sin(tl)];
-  const rt = [Math.sin(hh), -Math.cos(hh), 0];
-  const up = [rt[1] * f[2] - rt[2] * f[1], rt[2] * f[0] - rt[0] * f[2], rt[0] * f[1] - rt[1] * f[0]];
-  const FL = 600, CX = 550, CY = 380, NEAR = 0.05;
-  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-  const cam = (p) => { const d = [p[0] - C[0], p[1] - C[1], p[2] - C[2]]; return [dot(d, rt), dot(d, up), dot(d, f)]; };
-  const scr = (q) => [CX + FL * q[0] / q[2], CY - FL * q[1] / q[2]];
-  const cut = (a, b) => { const t = (NEAR - a[2]) / (b[2] - a[2]); return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, NEAR]; };
-  const clip = (P) => { const o = []; P.forEach((a, i) => { const b = P[(i + 1) % P.length], ai = a[2] >= NEAR, bi = b[2] >= NEAR; if (ai) o.push(a); if (ai !== bi) o.push(cut(a, b)); }); return o; };
-  const out = [];
-  const poly = (pts, color) => { const q = clip(pts.map(cam)); if (q.length < 3) return; out.push(`<polygon points="${q.map(scr).map((s) => s[0].toFixed(1) + ',' + s[1].toFixed(1)).join(' ')}" fill="${color}"/>`); };
-  const line = (p, q, w, color) => {
-    let a = cam(p), b = cam(q); if (a[2] < NEAR && b[2] < NEAR) return;
-    if (a[2] < NEAR) a = cut(a, b); else if (b[2] < NEAR) b = cut(b, a);
-    const A = scr(a), B = scr(b);
-    out.push(`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${color}" stroke-width="${w}"/>`);
-  };
-  const Lin = [0.35, -0.55, 0.75];
-  const shade = (hex, n) => { const k = 0.91 + 0.1 * dot(n, Lin); const ch = (i) => Math.max(0, Math.min(255, Math.round(parseInt(hex.slice(i, i + 2), 16) * k))); return `rgb(${ch(1)},${ch(3)},${ch(5)})`; };
-  const facing = (n, p) => dot(n, [C[0] - p[0], C[1] - p[1], C[2] - p[2]]) > 0;
-
-  // Shell: inner faces of walls, floor and the sloping ceiling (underside of the roof panels, on top of the rafters).
-  const e = 0.05, T30 = Math.tan(Math.PI / 6), zc = (y) => 2.446 + T30 * Math.min(y, 6 - y), Rz = zc(3), R = 2.4 + 3 * T30;
-  const WALL = '#EEEFEC', CEIL = '#F4F4F1', FLOOR = '#B9B4AA', SEAM = 'rgba(31,38,43,0.13)';
-  poly([[e, e, 0], [L - e, e, 0], [L - e, 6 - e, 0], [e, 6 - e, 0]], shade(FLOOR, [0, 0, 1]));
-  poly([[e, e, 0], [L - e, e, 0], [L - e, e, zc(e)], [e, e, zc(e)]], shade(WALL, [0, 1, 0]));
-  poly([[e, 6 - e, 0], [L - e, 6 - e, 0], [L - e, 6 - e, zc(e)], [e, 6 - e, zc(e)]], shade(WALL, [0, -1, 0]));
-  poly([[e, e, 0], [e, 6 - e, 0], [e, 6 - e, zc(e)], [e, 3, Rz], [e, e, zc(e)]], shade(WALL, [1, 0, 0]));
-  poly([[L - e, e, 0], [L - e, 6 - e, 0], [L - e, 6 - e, zc(e)], [L - e, 3, Rz], [L - e, e, zc(e)]], shade(WALL, [-1, 0, 0]));
-  poly([[e, e, zc(e)], [L - e, e, zc(e)], [L - e, 3, Rz], [e, 3, Rz]], shade(CEIL, [0, 0.5, -0.866]));
-  poly([[e, 6 - e, zc(e)], [L - e, 6 - e, zc(e)], [L - e, 3, Rz], [e, 3, Rz]], shade(CEIL, [0, -0.5, -0.866]));
-  for (let k = 1; k < cf.NM; k++) {
-    const x = k * 1.2;
-    line([x, e + 0.002, 0], [x, e + 0.002, zc(e)], 1, SEAM); line([x, 6 - e - 0.002, 0], [x, 6 - e - 0.002, zc(e)], 1, SEAM);
-    line([x, e, zc(e) - 0.002], [x, 3, Rz - 0.002], 1, SEAM); line([x, 6 - e, zc(e) - 0.002], [x, 3, Rz - 0.002], 1, SEAM);
-  }
-  for (let j = 1; j < 5; j++) { const y = j * 1.2; line([e + 0.002, y, 0], [e + 0.002, y, zc(y)], 1, SEAM); line([L - e - 0.002, y, 0], [L - e - 0.002, y, zc(y)], 1, SEAM); }
-  line([e, e + 0.002, 0.004], [L - e, e + 0.002, 0.004], 2, 'rgba(31,38,43,0.25)'); line([e, 6 - e - 0.002, 0.004], [L - e, 6 - e - 0.002, 0.004], 2, 'rgba(31,38,43,0.25)');
-
-  // Windows and doors on the inner wall faces. plane(a0, a1, z0, z1) gives the rectangle on that wall.
-  const o = 0.006, gAlong = (j) => 6 - (j + 1) * 1.2;
-  const walls = [
-    { key: 'F', count: cf.NM, along: (i) => i * 1.2, plane: (a0, a1, z0, z1, d) => [[a0, e + o + d, z0], [a1, e + o + d, z0], [a1, e + o + d, z1], [a0, e + o + d, z1]] },
-    { key: 'B', count: cf.NM, along: (i) => i * 1.2, plane: (a0, a1, z0, z1, d) => [[a0, 6 - e - o - d, z0], [a1, 6 - e - o - d, z0], [a1, 6 - e - o - d, z1], [a0, 6 - e - o - d, z1]] },
-    { key: 'A', count: 5, along: gAlong, plane: (a0, a1, z0, z1, d) => [[e + o + d, a0, z0], [e + o + d, a1, z0], [e + o + d, a1, z1], [e + o + d, a0, z1]] },
-    { key: 'G', count: 5, along: gAlong, plane: (a0, a1, z0, z1, d) => [[L - e - o - d, a0, z0], [L - e - o - d, a1, z0], [L - e - o - d, a1, z1], [L - e - o - d, a0, z1]] }
-  ];
-  walls.forEach((w) => {
-    for (let i = 0; i < w.count; i++) {
-      const kd = op[w.key + i], a = w.along(i); if (!kd) continue;
-      if (kd === 'door') { poly(w.plane(a + 0.12, a + 1.08, 0, 2.14, 0), '#2E3439'); poly(w.plane(a + 0.16, a + 1.04, 0, 2.1, 0.002), '#8A5A3A'); }
-      else {
-        poly(w.plane(a + 0.07, a + 1.13, 0.87, 2.13, 0), '#2E3439');
-        poly(w.plane(a + 0.11, a + 1.09, 0.91, 2.09, 0.002), '#D3E6F1');
-        poly(w.plane(a + 0.11, a + 1.09, 0.91, 1.32, 0.003), '#9FAF84');
-        poly(w.plane(a + 0.58, a + 0.62, 0.91, 2.09, 0.004), '#2E3439');
-      }
-    }
-  });
-
-  // Objects inside the room, drawn far to near.
-  const objs = [];
-  const boxFaces = (x0, x1, y0, y1, z0, z1, side, top) => [
-    { n: [0, -1, 0], p: [[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]], c: side }, { n: [0, 1, 0], p: [[x1, y1, z0], [x0, y1, z0], [x0, y1, z1], [x1, y1, z1]], c: side },
-    { n: [-1, 0, 0], p: [[x0, y1, z0], [x0, y0, z0], [x0, y0, z1], [x0, y1, z1]], c: side }, { n: [1, 0, 0], p: [[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]], c: side },
-    { n: [0, 0, 1], p: [[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]], c: top }, { n: [0, 0, -1], p: [[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0]], c: side }
-  ];
-  const addBox = (x0, x1, y0, y1, z0, z1, side, top) => objs.push({ ctr: [(x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2], faces: boxFaces(x0, x1, y0, y1, z0, z1, side, top || side) });
-  // A steel member from A to B, w wide and d deep, cut into short pieces so it sorts properly against everything else.
-  const member = (A, B, w, d, hint, col) => {
-    const ax = [B[0] - A[0], B[1] - A[1], B[2] - A[2]], len = Math.hypot(...ax), a = ax.map((v) => v / len);
-    let s = [a[1] * hint[2] - a[2] * hint[1], a[2] * hint[0] - a[0] * hint[2], a[0] * hint[1] - a[1] * hint[0]]; const sl = Math.hypot(...s); s = s.map((v) => v / sl);
-    const u = [s[1] * a[2] - s[2] * a[1], s[2] * a[0] - s[0] * a[2], s[0] * a[1] - s[1] * a[0]];
-    const N = Math.max(1, Math.ceil(len / 0.5));
-    for (let k = 0; k < N; k++) {
-      const P = A.map((v, i) => v + ax[i] * k / N), Q = A.map((v, i) => v + ax[i] * (k + 1) / N);
-      const cn = (base, ss, uu) => base.map((v, i) => v + s[i] * ss * w / 2 + u[i] * uu * d / 2);
-      const p00 = cn(P, -1, -1), p10 = cn(P, 1, -1), p11 = cn(P, 1, 1), p01 = cn(P, -1, 1), q00 = cn(Q, -1, -1), q10 = cn(Q, 1, -1), q11 = cn(Q, 1, 1), q01 = cn(Q, -1, 1);
-      const faces = [
-        { n: s, p: [p10, q10, q11, p11] }, { n: s.map((v) => -v), p: [p00, p01, q01, q00] },
-        { n: u, p: [p01, p11, q11, q01] }, { n: u.map((v) => -v), p: [p00, q00, q10, p10] }
-      ];
-      if (k === 0) faces.push({ n: a.map((v) => -v), p: [p00, p10, p11, p01] });
-      if (k === N - 1) faces.push({ n: a, p: [q00, q01, q11, q10] });
-      faces.forEach((fc) => { fc.c = col; });
-      objs.push({ ctr: P.map((v, i) => (v + Q[i]) / 2), faces });
-    }
-  };
-  const STL = STEELS[S.steel].col, Z = [0, 0, 1], X = [1, 0, 0];
-  // Frames inside the room; the two end frames are hidden in the gable walls.
-  for (let k = 1; k < cf.n; k++) {
-    const x = r1(k * cf.bay);
-    member([x, e, 2.4], [x, 6 - e, 2.4], 0.08, 0.08, Z, STL);
-    member([x, e, 2.4 + T30 * e], [x, 3, R], 0.08, 0.08, Z, STL);
-    member([x, 6 - e, 2.4 + T30 * e], [x, 3, R], 0.08, 0.08, Z, STL);
-    member([x, 3, 2.44], [x, 3, R - 0.04], 0.06, 0.06, X, STL);
-  }
-  const pd = cf.wide ? 0.125 : 0.1;
-  member([e, 3, R], [L - e, 3, R], 0.08, 0.08, Z, STL);
-  [1.5, 4.5].forEach((y) => member([e, y, zc(y) - pd / 2], [L - e, y, zc(y) - pd / 2], 0.05, pd, Z, STL));
-  // Partitions, 2.36 m high, in short pieces.
-  const pl = plan(cf);
-  pl.parts.forEach((q) => {
-    const x0 = q[0], x1 = q[2], y0 = 6 - q[3], y1 = 6 - q[1], alongX = x0 !== x1, len = alongX ? x1 - x0 : y1 - y0, N = Math.max(1, Math.ceil(len / 0.6));
-    for (let k = 0; k < N; k++) {
-      if (alongX) addBox(x0 + len * k / N, x0 + len * (k + 1) / N, y0 - 0.025, y0 + 0.025, 0, 2.36, '#EAEBE8');
-      else addBox(x0 - 0.025, x0 + 0.025, y0 + len * k / N, y0 + len * (k + 1) / N, 0, 2.36, '#EAEBE8');
-    }
-  });
-  const tall = { robe: 2.1 };
-  pl.items.forEach((it) => addBox(it[0], it[2], 6 - it[3], 6 - it[1], 0, tall[it[4]] || it[5], it[6], it[6]));
-  objs.map((ob) => ({ ob, d: Math.hypot(ob.ctr[0] - C[0], ob.ctr[1] - C[1], ob.ctr[2] - C[2]) })).sort((a, b) => b.d - a.d).forEach(({ ob }) => {
-    ob.faces.forEach((fc) => { if (facing(fc.n, fc.p[0])) poly(fc.p, shade(fc.c, fc.n)); });
-  });
-  $('v3d').innerHTML = `<svg viewBox="0 0 1100 760" role="img" aria-label="Interior view of the house">${out.join('')}</svg>`;
-  const inner = cf.n - 1;
-  $('cap3d').textContent = `Inside the ${cf.L} m house, frames every ${cf.bay} m: ${inner} frame${inner === 1 ? '' : 's'} cross the ceiling. The ceiling rises from 2.45 m at the walls to ${Rz.toFixed(2)} m at the ridge. Eye height 1.6 m. Simplified model: furniture shown as blocks.`;
-}
-
-/* ---------- picture and ChatGPT prompt ---------- */
-function aiPrompt() {
-  const c = cfg(), steel = STEELS[S.steel].name.toLowerCase(), ow = counts();
-  if (S.view.mode === 'in') return `Turn this simple 3D model into a photo-realistic interior photograph of a modern single-storey house in Zimbabwe. Keep exactly the same camera position and angle, the same room shape, and every window, door, wall and steel member exactly where it is in the model. Do not add or remove any beams, windows or doors.
-
-The house is ${c.L} m long and 6 m wide. There is no flat ceiling: the ceiling is the smooth white underside of insulated roof panels, sloping up at 30 degrees from 2.45 m at the walls to 4.2 m at the centre ridge. Exposed ${steel} square steel roof frames cross the room every ${c.bay} m. Each frame has a horizontal tie beam at 2.4 m, two sloping rafters, and a short vertical post in the middle up to the ridge. A steel ridge beam and two purlins run the length of the room, tight under the ceiling. The walls are smooth white panels with fine vertical joints every 1.2 m. The floor is polished grey concrete. The windows have dark aluminium frames, with a view of dry bush, msasa trees and granite kopjes outside.
-
-Replace the plain blocks with real furniture in the same places: an open-plan living, dining and kitchen space. Use natural materials: timber, linen, leather, woven baskets and a few plants. Warm late-afternoon light comes through the windows. Realistic architectural photography, wide-angle lens, natural colours.`;
-  return `Turn this simple 3D model into a photo-realistic architectural photograph. Keep exactly the same camera angle, house shape, roof pitch and the position of every window (${ow.win}) and door (${ow.door}). Do not add or remove windows or doors.
-
-The house is a single-storey kit-built home, ${c.L} m long and 6 m wide, with 2.4 m walls and a 30 degree gable roof. The walls and roof are ${CLADS[S.clad].name.toLowerCase()} IBR-profile insulated panels with a 300 mm eave overhang, dark aluminium windows and a timber front door. Set it in a dry Zimbabwean garden with aloes, rocks, gravel paths and msasa trees, with a granite kopje behind. Warm late-afternoon light, realistic architectural photography, natural colours.`;
-}
-function savePicture() {
-  const svg = $('v3d').querySelector('svg'), note = (s) => { $('picNote').textContent = s; };
-  if (!svg) return;
-  const W = 2200, H = 1520, cl = svg.cloneNode(true);
-  cl.setAttribute('xmlns', 'http://www.w3.org/2000/svg'); cl.setAttribute('width', W); cl.setAttribute('height', H);
-  const img = new Image();
-  img.onload = () => {
-    const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
-    const g = cv.getContext('2d'); g.fillStyle = '#E6ECEE'; g.fillRect(0, 0, W, H); g.drawImage(img, 0, 0, W, H);
-    cv.toBlob((blob) => {
-      if (!blob) { note('Could not make the picture. Take a screenshot instead.'); return; }
-      const name = `panel-house-${S.view.mode === 'in' ? 'interior' : 'exterior'}-${cfg().bay}m.png`;
-      const download = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); note('Picture saved to your downloads.'); };
-      const file = new File([blob], name, { type: 'image/png' });
-      if (matchMedia('(pointer: coarse)').matches && navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], title: 'Panel House' }).then(() => note('')).catch((err) => { if (err.name !== 'AbortError') download(); });
-      } else download();
-    }, 'image/png');
-  };
-  img.onerror = () => note('Could not make the picture. Take a screenshot instead.');
-  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(cl));
-}
+function spinLoop() { if (!spinning) return; comp.quiet = true; comp.state.yaw = (comp.state.yaw + 0.6) % 360; comp.quiet = false; rerender3d(); requestAnimationFrame(spinLoop); }
+window.addEventListener('resize', () => req3d());
 
 /* ---------- costing ---------- */
-function build(cf = cfg()) {
-  const { n, F, L, bay, wide } = cf, sp = 36 + 23 * (F - 2), c = counts();
-  // 2.4 m: rafter + post per length, rails two per length. 3.6 m: rail + post per length, rafters (80×80×4) one per length.
-  const steel = wide ? [
-    ['s80', 'Steel', 'Square tube 80×80×3', '6 m lengths', 2 * F + 5 * n + 1, 'lengths'],
-    ['s84', 'Steel', 'Square tube 80×80×4, rafters', '6 m lengths', 2 * F, 'lengths'],
-    ['s70', 'Steel', 'Square tube 70×70×3, spigots', '6 m lengths', Math.ceil(sp / 26), 'lengths'],
-    ['s60', 'Steel', 'Square tube 60×60×3, king posts', '6 m lengths', Math.ceil(F / 3), 'lengths'],
-    ['pur125', 'Steel', 'Lipped channel 125×50×2.5, purlins', '6 m lengths', 2 * n, 'lengths']
-  ] : [
-    ['s80', 'Steel', 'Square tube 80×80×3', '6 m lengths', 4 * F + Math.ceil(5 * n / 2) + 1, 'lengths'],
-    ['s70', 'Steel', 'Square tube 70×70×3, spigots', '6 m lengths', Math.ceil(sp / 26), 'lengths'],
-    ['s60', 'Steel', 'Square tube 60×60×3, king posts', '6 m lengths', Math.ceil(F / 3), 'lengths'],
-    ['pur', 'Steel', 'Lipped channel 100×50×2, purlins', '6 m lengths', n, 'lengths']
-  ];
+function build() {
+  const one = S.pkg === 'one', L = PKG[S.pkg].L, B = S.cver === 'B';
+  const posts = one ? [0, 6, 12] : [0, 4.8, 9.6, 14.4], NP = posts.length, span = L / (NP - 1);
+  const c = B ? { win: Object.values(Component.prototype.openings(S.pkg, 'B')).filter((v) => v === 'window').length, door: 0 } : counts();
   const rows = [
-    ...steel,
-    ['plt', 'Steel', 'Base plate 200×200×12', 'cut and drilled', 2 * F, 'pcs'],
-    ['fab', 'Fabrication', 'Weld nodes, hub + spigots', sp + ' spigots in total', 5 * F, 'nodes'],
-    ['clt', 'Fabrication', 'Weld cleats to members', 'flat bar / angle', 5 * F - 4, 'pcs'],
-    ['cut', 'Fabrication', 'Cut, drill and prime frame', 'per cutting list', 1, 'lot'],
-    ['pr', 'Panels', 'Roof panel 100 mm IBR / EPS', '3.8 m long', 7.6 * L, 'm²'],
-    ['pw', 'Panels', 'Wall panel 100 mm, 80 mm skin flaps', '2.4 m + flaps', 4.8 * L, 'm²'],
-    ['pg', 'Panels', 'End wall panel 100 mm, flapped', 'gable cut, to 4.1 m', 39.2, 'm²'],
-    ['pi', 'Panels', 'Internal partition panel 50 mm', '2.4 m high', cf.pkg === 'one' ? 23 : 46, 'm²'],
-    ['b16', 'Fixings', 'Bolt M16 × 120, 8.8, nut + washer', 'spigot joints', sp, 'sets'],
-    ['b12', 'Fixings', 'Bolt M12 × 90, 8.8, nut + washer', 'cleats', 2 * F + 8 * n, 'sets'],
-    ['hd', 'Fixings', 'Hold-down anchor M16', 'to suit foundation', 8 * F, 'pcs'],
-    ['scr', 'Fixings', 'Self-drilling screw 14 g + washer', 'panel to frame', Math.round(8.3 * L) * 10, 'pcs'],
-    ['tb', 'Fixings', 'Closed-cell foam tape 10 × 80 mm', 'thermal break', Math.round(18.3 * L), 'm'],
-    ['win', 'Openings', 'Aluminium window 1000 × 1200', 'to fit 100 mm panel', c.win, 'pcs'],
-    ['dr', 'Openings', 'External door 900 × 2100 + frame', '', c.door, 'pcs'],
-    ['idr', 'Openings', 'Internal door 800 × 2100 + frame', '', cf.pkg === 'one' ? 2 : 4, 'pcs'],
-    ['rc', 'Flashings', 'Ridge capping 0.5 mm', 'colour to match', L, 'm'],
+    ['rb', 'Steel', 'Ridge beam (spine) 200×100×4 RHS', '6 m lengths', (NP - 1) + (B ? 2 : 0), 'lengths'],
+    ['p80', 'Steel', 'Square tube 80×80×3, pillars' + (B ? ', door legs, verandah' : ''), '6 m lengths', B ? NP - 1 + 6 : NP, 'lengths'],
+    ['plt', 'Steel', 'Plates: pillar bases, caps, spine splices', '12 mm, cut and drilled', 2 * NP + (NP - 2) + (B ? 6 : 0), 'pcs'],
+    ['ut', 'Steel', 'Folded U-track, galvanised', 'top and base of walls', Math.round(4 * L + 26 - (B ? 3.6 : 0)), 'm'],
+    ['fab', 'Fabrication', 'Cut, drill, weld plates, prime', 'per cutting list', 1, 'lot']
+  ];
+  if (B) rows.push(['dfr', 'Fabrication', 'Welded door frame + verandah A-truss', 'see cutting list', 1, 'lot']);
+  rows.push(
+    ['pr', 'Panels', 'Roof panel 100 mm IBR / EPS', '3.8 m long', 7.6 * L + (B ? 18.2 : 0), 'm²'],
+    ['pw', 'Panels', 'Wall panel 100 mm', '2.4 m', 4.8 * L, 'm²'],
+    ['pg', 'Panels', 'End wall panel 100 mm', 'gable cut, to 4.1 m', B ? 31.6 : 39.2, 'm²'],
+    ['pi', 'Panels', 'Internal partition panel 50 mm', '2.4 m high', one ? 23 : 46, 'm²'],
+    ['b16', 'Fixings', 'Bolt M16, 8.8, nut + washer', 'caps, splices, frame', 4 * NP + (B ? 16 : 0), 'sets'],
+    ['hd', 'Fixings', 'Hold-down anchor M16', 'pillar and frame pads', 4 * NP + (B ? 12 : 0), 'pcs'],
+    ['ta', 'Fixings', 'Track anchor', 'base track @ 600', Math.round((2 * L + 12) / 0.6), 'pcs'],
+    ['scr', 'Fixings', 'Self-drilling screw 14 g + washer', 'panels to tracks and spine', Math.round(5.8 * L) * 10, 'pcs'],
+    ['win', 'Openings', 'Aluminium window 1000 × 1200', 'to fit 100 mm panel', c.win, 'pcs']
+  );
+  if (B) rows.push(['sl', 'Openings', 'Sliding glass door 3600 × 2100, 2 leaf', 'wind-rated', 1, 'pcs'], ['dk', 'Verandah', 'Timber deck incl. joists', '6 × 2.4 m', 14.4, 'm²']);
+  else rows.push(['dr', 'Openings', 'External door 900 × 2100 + frame', '', c.door, 'pcs']);
+  rows.push(
+    ['idr', 'Openings', 'Internal door 800 × 2100 + frame', '', one ? 2 : 4, 'pcs'],
+    ['rc', 'Flashings', 'Ridge capping 0.5 mm', 'colour to match', L + (B ? 2.4 : 0), 'm'],
     ['bg', 'Flashings', 'Barge flashing', '', 15.2, 'm'],
     ['cn', 'Flashings', 'External corner flashing', '', 9.6, 'm'],
     ['bt', 'Flashings', 'Base trim / drip', '', 2 * L + 12, 'm']
-  ].map((r) => ({ id: r[0], cat: r[1], item: r[2], spec: r[3], qty: r[4], unit: r[5] }));
-  const bl = r1(bay - 0.1);
-  const cuts = [['P', 'Wall post', '80×80×3', 2 * F, 2.30], ['B', 'Base tie', '80×80×3', F, 5.90], ['T', 'Eaves tie', '80×80×3', F, 5.90], ['R', 'Rafter', wide ? '80×80×4' : '80×80×3', 2 * F, 3.33],
-    ['RB', 'Ridge beam', '80×80×3', n, bl], ['ER', 'Eaves rail', '80×80×3', 2 * n, bl], ['BR', 'Base rail', '80×80×3', 2 * n, bl], ['H', 'Node hub', '80×80×3', 5 * F, 0.10],
-    ['SP', 'Spigot', '70×70×3', sp, 0.23], ['K', 'King post', '60×60×3', F, 1.63], ['PU', 'Purlin', wide ? '125×50 C' : '100×50 C', 2 * n, Math.round((bay - 0.12) * 100) / 100]];
-  return { rows, cuts };
+  );
+  const cuts = [['RB', 'Ridge beam (spine)', '200×100×4', NP - 1, span], ['P', 'Pillar', '80×80×3', B ? NP - 1 : NP, 3.93]];
+  if (B) cuts.push(['RX', 'Spine over verandah', '200×100×4', 1, 2.4], ['DH', 'Door head', '200×100×4', 1, 3.8], ['DL', 'Door leg', '80×80×3', 2, 2.25], ['SP', 'Pillar on door head', '80×80×3', 1, 1.6],
+    ['VP', 'Verandah post', '80×80×3', 2, 2.4], ['VR', 'Verandah truss rafter', '80×80×3', 2, 3.46], ['VT', 'Verandah truss tie', '80×80×3', 1, 6.0], ['VE', 'Verandah eave beam', '80×80×3', 2, 2.4]);
+  return { rows: rows.map((r) => ({ id: r[0], cat: r[1], item: r[2], spec: r[3], qty: r[4], unit: r[5] })), cuts };
 }
 function renderCosting() {
-  pkgButtons('pkgCost');
-  $('nestNote').textContent = cfg().wide
-    ? 'Nesting from 6 m lengths: one rail (3.5 m) + one post (2.3 m) from each length. Base and eaves ties one per length. Rafters (80×80×4) one per length; keep the 2.67 m offcuts. Purlins one per length. Hubs from offcuts. Lengths are approximate until the nodes are detailed.'
-    : 'Nesting from 6 m lengths: rafter + post from one length (5.63 m). Base and eaves ties one per length. Ridge, eaves and base rails two per length. Hubs from offcuts. Lengths are approximate until the nodes are detailed.';
+  pkgButtons('pkgCost', 'pkg');
+  if (!S.cver) S.cver = 'A';
+  $('verCost').innerHTML = [['A', 'Version A · long-wall door'], ['B', 'Version B · glass gable + verandah']].map((v) => `<button class="btn ${S.cver === v[0] ? 'on' : ''}" data-action="cver" data-v="${v[0]}">${v[1]}</button>`).join('');
   const b = build();
   let h = `<thead><tr><th>Item</th><th class="n">Qty</th>${[0, 1, 2].map((i) => `<th id="sh${i}">${esc(S.names[i])}</th>`).join('')}<th class="n">Best line</th></tr></thead><tbody>`;
   let last = '';
@@ -1075,7 +1044,7 @@ function updateCosting() {
   $('totBest').textContent = money(best);
   const full = [0, 1, 2].filter((i) => priced[i] === b.rows.length).sort((a, c) => sums[a] - sums[c]);
   $('bestNote').textContent = unpriced ? `Best-line total covers ${b.rows.length - unpriced} of ${b.rows.length} lines; ${unpriced} still need a price.` : (full.length ? `Cheapest single supplier for everything: ${S.names[full[0]]} at ${money(sums[full[0]])}. Mixing suppliers line by line: ${money(best)}.` : `Every line has at least one price. Mixing suppliers line by line: ${money(best)}.`);
-  const cf = cfg(), pkgLabel = `${cf.pkg === 'one' ? '1-bedroom' : '2-bedroom'}, ${cf.L} m x 6 m (frames at ${cf.bay} m)`;
+  const pkgLabel = (S.pkg === 'one' ? '1-bedroom, 12 m x 6 m' : '2-bedroom, 14.4 m x 6 m') + (S.cver === 'B' ? ' with glass gable and verandah' : '');
   const chosen = b.rows.filter((r) => S.cat === 'Everything' || r.cat === S.cat);
   let body = chosen.map((r) => `- ${r.item}${r.spec ? ' (' + r.spec + ')' : ''}: ${fmtQ(r.qty)} ${r.unit}`).join('\n');
   if (S.cat === 'Fabrication' || S.cat === 'Everything') body += '\n\nCutting list:\n' + b.cuts.map((c) => `- ${c[3]} x ${c[1]}, ${c[2]} @ ${c[4].toFixed(2)} m`).join('\n');
@@ -1089,11 +1058,9 @@ function showTab(t) {
   S.tab = t; save();
   document.querySelectorAll('nav.tabs button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === t)));
   document.querySelectorAll('section.tab').forEach((s) => s.classList.toggle('on', s.id === 'tab-' + t));
-  bayText();
   if (t === 'overview') renderOverview();
-  if (t === 'system') renderSystem();
   if (t === 'layout') renderLayout();
-  if (t === 'view3d') { render3DControls(); draw3d(); }
+  if (t === 'view3d') rerender3d();
   if (t === 'costing') renderCosting();
   if (t !== 'view3d') spinning = false;
   window.scrollTo(0, 0);
@@ -1102,7 +1069,7 @@ document.addEventListener('click', (e) => {
   const tabBtn = e.target.closest('nav.tabs button'); if (tabBtn) { showTab(tabBtn.dataset.tab); return; }
   const mod = e.target.closest('.mod');
   if (mod) {
-    const id = mod.dataset.id, op = S.open[cfg().key], cur = op[id] || 'panel';
+    const id = mod.dataset.id, op = S.open[S.pkg], cur = op[id] || 'panel';
     const nx = { panel: 'window', window: 'door', door: 'panel' }[cur];
     if (nx === 'panel') delete op[id]; else op[id] = nx;
     save(); renderLayout(); return;
@@ -1110,20 +1077,12 @@ document.addEventListener('click', (e) => {
   const a = e.target.closest('[data-action]'); if (!a) return;
   const act = a.dataset.action;
   if (act === 'pkg') { S.pkg = a.dataset.pkg; save(); showTab(S.tab); }
-  else if (act === 'resetLayout') { const k = cfg().key; S.open[k] = Object.assign({}, DEFAULTS[k]); save(); renderLayout(); }
-  else if (act === 'bay') { S.bay = Number(a.dataset.bay); clampInside(); save(); showTab(S.tab); }
-  else if (act === 'steel') { S.steel = a.dataset.steel; save(); render3DControls(); draw3d(); }
-  else if (act === 'inPreset') { Object.assign(S.inside, insidePresets()[Number(a.dataset.i)][1]); spinning = false; save(); render3DControls(); draw3d(); }
-  else if (act === 'savePic') savePicture();
-  else if (act === 'copyPrompt') {
-    const t = aiPrompt(), note = (s) => { $('picNote').textContent = s; };
-    if (navigator.clipboard) navigator.clipboard.writeText(t).then(() => note('Prompt copied. Paste it into ChatGPT.')).catch(() => note('Could not copy: press and hold the text below to copy it.'));
-    else note('Press and hold the text below to copy it.');
-  }
-  else if (act === 'mode') { const m = a.dataset.mode; if (m === 'pl' && S.view.mode !== 'pl') { S.view.yaw = 20; if (S.view.pitch < 40) S.view.pitch = 55; } if (S.view.mode === 'in' && m !== 'in') spinning = false; S.view.mode = m; save(); render3DControls(); draw3d(); }
-  else if (act === 'clad') { S.clad = a.dataset.clad; save(); render3DControls(); draw3d(); }
-  else if (act === 'yaw') { S.view.yaw = Number(a.dataset.yaw); save(); draw3d(); }
-  else if (act === 'spin') { spinning = !spinning; render3DControls(); if (spinning) requestAnimationFrame(spinLoop); else save(); }
+  else if (act === 'resetLayout') { S.open[S.pkg] = Object.assign({}, DEFAULTS[S.pkg]); save(); renderLayout(); }
+  else if (act === 'v3') { const k = a.dataset.k; comp.state[k] = k === 'yaw' ? Number(a.dataset.v) : a.dataset.v; sync3d(); rerender3d(); }
+  else if (act === 'v3mode') { const m = a.dataset.v; if (m === 'pl' && comp.state.mode !== 'pl') { comp.state.yaw = 25; if (comp.state.pitch < 40) comp.state.pitch = 55; } comp.state.mode = m; sync3d(); rerender3d(); }
+  else if (act === 'v3stage') { comp.state.mode = 'bd'; comp.state.stage = Number(a.dataset.v); sync3d(); rerender3d(); }
+  else if (act === 'spin') { spinning = !spinning; if (spinning) requestAnimationFrame(spinLoop); else sync3d(); rerender3d(); }
+  else if (act === 'cver') { S.cver = a.dataset.v; save(); renderCosting(); }
   else if (act === 'cat') { S.cat = a.dataset.cat; save(); document.querySelectorAll('#cats .btn').forEach((b) => b.classList.toggle('on', b.dataset.cat === S.cat)); updateCosting(); }
   else if (act === 'share') {
     const data = { title: 'Kit-Built Panel House', text: 'Concept for a kit-built steel and panel house', url: location.href.split('#')[0] };
@@ -1141,25 +1100,19 @@ document.addEventListener('input', (e) => {
   if (t.dataset.row) { const arr = (S.prices[t.dataset.row] || ['', '', '']).slice(); arr[Number(t.dataset.i)] = t.value; S.prices[t.dataset.row] = arr; save(); updateCosting(); }
   else if (t.dataset.name !== undefined) { S.names[Number(t.dataset.name)] = t.value; save(); updateCosting(); }
   else if (t.dataset.phone !== undefined) { S.phones[Number(t.dataset.phone)] = t.value; save(); updateCosting(); }
-  else if (t.id === 'yaw') { if (S.view.mode === 'in') S.inside.h = Number(t.value); else S.view.yaw = Number(t.value); req3d(); }
-  else if (t.id === 'pitch') { if (S.view.mode === 'in') S.inside.t = Number(t.value); else S.view.pitch = Number(t.value); req3d(); }
-  else if (t.id === 'standX') { S.inside.x = 0.4 + Number(t.value) / 1000 * (cfg().L - 0.8); req3d(); }
-  else if (t.id === 'standY') { S.inside.y = 0.4 + Number(t.value) / 1000 * 5.2; req3d(); }
+  else if (t.id === 'yaw') { comp.state.yaw = Number(t.value); req3d(); }
+  else if (t.id === 'pitch') { comp.state.pitch = Number(t.value); req3d(); }
 });
-document.addEventListener('change', (e) => { if (['yaw', 'pitch', 'standX', 'standY'].includes(e.target.id)) save(); });
+document.addEventListener('change', (e) => { if (e.target.id === 'yaw' || e.target.id === 'pitch') sync3d(); });
 const v3 = $('v3d');
-v3.addEventListener('pointerdown', (e) => { dragging = { x: e.clientX, y: e.clientY, yaw: S.view.yaw, pitch: S.view.pitch, h: S.inside.h, t: S.inside.t }; v3.setPointerCapture(e.pointerId); spinning = false; });
+v3.addEventListener('pointerdown', (e) => { dragging = { x: e.clientX, y: e.clientY, yaw: comp.state.yaw, pitch: comp.state.pitch }; v3.setPointerCapture(e.pointerId); spinning = false; });
 v3.addEventListener('pointermove', (e) => {
   if (!dragging) return;
-  const dx = e.clientX - dragging.x, dy = e.clientY - dragging.y;
-  if (S.view.mode === 'in') { S.inside.h = ((dragging.h + dx * 0.25) % 360 + 360) % 360; S.inside.t = Math.max(-15, Math.min(60, dragging.t + dy * 0.2)); }
-  else {
-    S.view.yaw = ((dragging.yaw - dx * 0.4) % 360 + 360) % 360;
-    S.view.pitch = Math.max(6, Math.min(70, dragging.pitch + dy * 0.25));
-  }
+  comp.state.yaw = ((dragging.yaw - (e.clientX - dragging.x) * 0.4) % 360 + 360) % 360;
+  comp.state.pitch = Math.max(6, Math.min(70, dragging.pitch + (e.clientY - dragging.y) * 0.25));
   req3d();
 });
-const endDrag = () => { if (dragging) { dragging = null; save(); render3DControls(); } };
+const endDrag = () => { if (dragging) { dragging = null; sync3d(); rerender3d(); } };
 v3.addEventListener('pointerup', endDrag); v3.addEventListener('pointercancel', endDrag);
 $('ver').textContent = APP_VERSION; $('ver2').textContent = APP_VERSION;
 showTab(S.tab || 'overview');

@@ -1,22 +1,21 @@
 # Kit-Built Panel House — PWA
 
-Concept app for the steel-kit + 100 mm IBR/EPS panel house. Version v2 · 15 Oct 2026.
+Concept app for the steel-kit + 100 mm IBR/EPS panel house. Version v4 · 18 Oct 2026 (spine + pillars, versions A and B, gallery, walkthrough).
 
 ## Tabs
 - **Overview** – render (artist's impression), key figures, assembly steps, Share button.
-- **System** – cutaway, end section, rail–panel–rail lock detail, 2.4 m vs 3.6 m frame spacing comparison, open questions for the factory.
+- **Gallery** – walkthrough video, 3D model views (living, both bedrooms), artist's impressions of interior and exterior finishes.
+- **System** – cutaway, end section, version A vs B comparison, open questions.
 - **Layout** – tap wall panels to make windows/doors; bracing check; front elevation.
-- **3D** – drag to rotate; Finished / Interior / Floor plan / X-ray / Frame; cladding and steel colours; Save picture + ChatGPT prompt for realistic renders.
-- **Costing** – price comparison for 3 suppliers, WhatsApp quote requests, steel cutting list.
+- **3D** – drag to rotate; versions A and B; build steps; Finished / Floor plan / X-ray / Steel only; cladding colours.
+- **Costing** – versions A and B, price comparison for 3 suppliers, WhatsApp quote requests, steel cutting list.
 - **Info** – version, clear saved data.
-
-Frame spacing switch (2.4 m or 3.6 m) on the Layout, 3D and Costing tabs. At 3.6 m the 1-bed is 10.8 m (3 bays) and rafters/purlins go up a size.
 
 Layout, prices, supplier names and numbers are saved on the device (localStorage).
 The 3D view and costing use whatever layout is set on the Layout tab.
 
 ## Files (keep them together in one folder)
-index.html · manifest.json · sw.js · render.jpg · icon-192.png · icon-512.png · apple-touch-icon.png
+index.html · manifest.json · sw.js · render.jpg · interior.jpg · finishes.jpg · walkthrough.mp4 · walkthrough-poster.jpg · model-living-B.jpg · model-bedroom-B.jpg · model-bedroom-A.jpg · icon-192.png · icon-512.png · apple-touch-icon.png
 
 ## Publish on GitHub Pages
 1. GitHub Desktop → File → New repository → name it `panel-house`.
@@ -34,3 +33,5 @@ Change the files, then bump the cache name in `sw.js` (`panelhouse-v1` → `pane
 ## Testing offline
 Open the link once online. Then airplane mode → close the app fully → reopen. All tabs should work;
 only the WhatsApp buttons need a connection.
+
+The walkthrough video is not cached for offline use (videos stream in pieces); it needs a connection.

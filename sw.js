@@ -1,11 +1,17 @@
 // Bump this on every release: it is what makes phones pick up new files.
-const CACHE = 'panelhouse-v2';
+const CACHE = 'panelhouse-v4';
 
 const CORE = [
   './',
   'index.html',
   'manifest.json',
   'render.jpg',
+  'interior.jpg',
+  'finishes.jpg',
+  'walkthrough-poster.jpg',
+  'model-living-B.jpg',
+  'model-bedroom-B.jpg',
+  'model-bedroom-A.jpg',
   'icon-192.png',
   'icon-512.png',
   'apple-touch-icon.png'
@@ -42,7 +48,7 @@ self.addEventListener('fetch', e => {
   const url = req.url;
 
   // Fonts and WhatsApp go straight to the network; never cached.
-  if (url.includes('fonts.googleapis') || url.includes('fonts.gstatic') || url.includes('wa.me')) return;
+  if (url.includes('fonts.googleapis') || url.includes('fonts.gstatic') || url.includes('wa.me') || url.endsWith('.mp4')) return;
   if (req.method !== 'GET') return;
 
   // Page loads: network first, cached shell when offline.
