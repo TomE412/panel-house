@@ -1,5 +1,5 @@
 // Bump this on every release: it is what makes phones pick up new files.
-const CACHE = 'panelhouse-v5';
+const CACHE = 'panelhouse-v6';
 
 const CORE = [
   './',

@@ -93,6 +93,16 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 .lightbox{position:fixed;inset:0;z-index:20;background:rgba(15,19,22,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;cursor:zoom-out}
 .lightbox img{max-width:100%;max-height:calc(100% - 48px);object-fit:contain}
 .lightbox p{color:#E1E4E2;font-size:14px;margin:12px 0 0;text-align:center}
+[hidden]{display:none!important}
+#m3d{background:#DCE6EC}
+#m3d svg{display:block;width:100%;height:100%}
+.mpad{position:absolute;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,48px);gap:6px}
+.mpad button{border:0;border-radius:8px;background:rgba(31,38,43,0.78);color:#fff;font-size:18px;touch-action:none;user-select:none;-webkit-user-select:none}
+.mpad button:active{background:rgba(31,38,43,0.95)}
+.mpad button[data-walk="f"]{grid-column:2}
+@media (max-width:600px){.mpad{right:6px;bottom:6px;grid-template-columns:repeat(3,38px);grid-template-rows:repeat(2,38px);gap:4px}.mpad button{font-size:15px}}
+.mroom{position:absolute;left:10px;top:10px;padding:4px 10px;border-radius:4px;background:rgba(255,255,255,0.88);font-size:13px;font-weight:600;color:var(--ink)}
+.minfo{min-height:40px;padding:8px 12px;margin:8px 0 0;border:1px solid var(--line);border-radius:4px;background:var(--card);font-size:14px;line-height:1.45}
 </style>
 </head>
 <body>
@@ -141,6 +151,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
     <img src="./miombo-board.jpg" alt="Artist's impressions of the Miombo House: garden-side exterior with glass sliders, two aerial cutaways of the layout, lounge, kitchen and dining, bedroom, bathroom and entrance-side exterior" width="1536" height="1024" data-zoom>
     <figcaption>Artist's impressions made from the 3D model. Finishes, furniture, lights and landscaping are illustrative.</figcaption>
   </figure>
+  <div class="row" style="margin:0 0 20px"><button class="btn primary" data-mbgo="orbit">Look around in 3D</button><button class="btn primary" data-mbgo="walk">Walk through in 3D</button></div>
   <div class="stats">
     <div><small>Length</small><strong>10.76 m</strong><em>9 panels of 1.195 m</em></div>
     <div><small>Depth</small><strong>≈ 8.3 m</strong><em>about 89 m² outside</em></div>
@@ -496,6 +507,44 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 <section class="tab" id="tab-view3d">
   <div class="eyebrow">3D view</div>
   <h1>Walk round the house</h1>
+  <div class="row" id="houseSel" style="margin:0 0 16px"><span class="note" style="margin-right:4px">House:</span><button class="btn" data-house="miombo">Miombo House</button><button class="btn" data-house="gable">Gable house (spine and pillar)</button></div>
+
+  <div id="miombo3d" hidden>
+    <p class="lead">Two ways to explore. <b>Look around</b>: drag to turn it, use the zoom, lift the roof off or see the steel through the walls, and tap any part to see what it is. <b>Walk through</b>: stand inside at eye height and walk room to room, or press Play for a guided tour.</p>
+    <div class="grid2">
+      <div>
+        <div class="v3d" id="m3d" style="aspect-ratio:1100/760">
+          <div id="m3dSvg" style="position:absolute;inset:0"></div>
+          <div class="mpad" id="mPad" hidden>
+            <button data-walk="f" aria-label="Walk forward">▲</button>
+            <button data-walk="l" aria-label="Turn left">◀</button><button data-walk="b" aria-label="Walk back">▼</button><button data-walk="r" aria-label="Turn right">▶</button>
+          </div>
+          <div class="mroom" id="mRoom" hidden></div>
+        </div>
+        <div class="minfo" id="mInfo">Tap any part of the house to see what it is.</div>
+        <p class="note" id="mCap"></p>
+      </div>
+      <div class="ctrl">
+        <div><label>View</label><div class="row" id="mView" style="margin-top:6px"></div></div>
+        <div id="mOrbitCtl" class="ctrl">
+          <div><label>Show</label><div class="row" id="mMode" style="margin-top:6px"></div></div>
+          <div><label>Cladding</label><div class="row" id="mClad" style="margin-top:6px"></div></div>
+          <div><label for="mYaw">Rotate</label><input id="mYaw" type="range" min="0" max="359" step="1"></div>
+          <div><label for="mPitch">Tilt</label><input id="mPitch" type="range" min="4" max="88" step="1"></div>
+          <div><label for="mZoom">Zoom</label><input id="mZoom" type="range" min="0" max="100" step="1"></div>
+          <div class="row" id="mPresets"></div>
+        </div>
+        <div id="mWalkCtl" class="ctrl" hidden>
+          <div class="row"><button class="btn primary" data-mb="tour" id="mTourBtn">▶ Play walkthrough</button></div>
+          <div><label>Go to</label><div class="row" id="mRooms" style="margin-top:6px"></div></div>
+          <div><label for="mLook">Look up / down</label><input id="mLook" type="range" min="-30" max="45" step="1"></div>
+          <p class="note" style="margin:0">Drag the picture to look around. Hold the arrows to walk and turn, or use the arrow keys or W A S D on a keyboard. Doors are open; windows and sliders are glass, so you can't walk through them.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="gable3d">
   <p class="lead">Drag the picture to turn it. Switch between version A and B, use the build steps to see it go up layer by layer, or lift the roof off with Floor plan. Version A uses your layout from the Layout tab.</p>
   <div class="grid2">
     <div><div class="v3d" id="v3d"><div id="v3dInner"></div></div><p class="note" id="cap3d"></p></div>
@@ -510,6 +559,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
       <div class="row" id="presets"></div>
       <button class="btn" data-action="spin" id="spinBtn">Spin</button>
     </div>
+  </div>
   </div>
 </section>
 
@@ -545,7 +595,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 
 </main>
 <script>
-const APP_VERSION = 'v5 · 26 Oct 2026 · Miombo House';
+const APP_VERSION = 'v6 · 26 Oct 2026 · Miombo 3D + walkthrough';
 const STORE = 'panelhouse.v1';
 const W_ = 'window';
 const DEFAULTS = {
@@ -1117,6 +1167,369 @@ function updateCosting() {
   $('msg').textContent = msgFor(S.names[0]);
 }
 
+/* ---------- Miombo House 3D: look around + walk through ---------- */
+// Plan metres: x along the house (0 = lounge end, 10.755 = bedroom end), y across (0 = entrance side, 8.3 = garden side).
+const MB = (() => {
+  const L = 10.755, D = 8.3, T = 0.1, H0 = 2.4, H1 = 3.382, BY = 4.15, OH = 0.3;
+  const zr = (y) => H0 + (H1 - H0) * y / D; // top of the walls = underside of the roof
+  const BEAM_TOP = zr(BY), BEAM_D = 0.2, e = T / 2;
+  const ROOMS = [
+    ['Kitchen', 0, 0, 3.56, 4.15, 14.1, '#DDD3C0'], ['Entrance', 3.56, 0, 5.12, 2.07, 2.9, '#D6CFC2'],
+    ['Toilet', 5.12, 0, 6.40, 2.07, 2.4, '#C9D5D1'], ['Bathroom', 6.40, 0, L, 2.07, 8.5, '#C9D5D1'],
+    ['Dining', 3.56, 2.07, 6.40, 4.15, 5.4, '#DDD6C8'], ['Lounge', 0, 4.15, 6.40, D, 25.6, '#DDD6C8'],
+    ['Bedroom', 6.40, 2.07, L, D, 26.2, '#B89A78']
+  ];
+  // Openings: [from, to (m along the wall from a), bottom, top, kind, label, door swing (+1/-1, interior walls only)]
+  const WALLS = [
+    { a: [0, e], b: [L, e], ext: true, info: 'Entrance-side wall: 100 mm insulated panel, 2.4 m high (the low side of the roof)', op: [
+      [1.6, 2.6, 1.2, 2.1, 'win', 'Kitchen window'], [3.95, 4.85, 0, 2.1, 'door', 'Front door, 900 × 2100'],
+      [5.5, 6.0, 1.5, 2.1, 'win', 'Toilet window'], [7.4, 8.0, 1.5, 2.1, 'win', 'Bathroom window'], [9.3, 9.9, 1.5, 2.1, 'win', 'Bathroom window']] },
+    { a: [0, D - e], b: [L, D - e], ext: true, info: 'Garden-side wall: 100 mm insulated panel, 3.38 m high (the tall side of the roof)', op: [
+      [0.15, 6.15, 0, 2.1, 'slide', 'Glass sliding door to the lounge, 6000 × 2100'], [7.1, 10.1, 0, 2.1, 'slide', 'Glass sliding door to the bedroom, 3000 × 2100']] },
+    { a: [e, T], b: [e, D - T], ext: true, info: 'Lounge-end wall: 100 mm insulated panel, rising from 2.4 m to 3.38 m', op: [
+      [4.8, 6.0, 1.0, 2.1, 'win', 'Lounge window']] },
+    { a: [L - e, T], b: [L - e, D - T], ext: true, info: 'Bedroom-end wall: 100 mm insulated panel, rising from 2.4 m to 3.38 m', op: [
+      [0.45, 1.35, 0, 2.1, 'door', 'Back door by the bathroom, 900 × 2100'], [1.45, 1.85, 1.5, 2.0, 'win', 'Bathroom window'], [4.9, 6.1, 1.0, 2.1, 'win', 'Bedroom window']] },
+    { a: [3.56, T], b: [3.56, 2.07], info: 'Internal wall between the kitchen and the entrance', op: [] },
+    { a: [5.12, T], b: [5.12, 2.07], info: 'Internal wall between the entrance and the toilet', op: [] },
+    { a: [5.12, 2.07], b: [6.40, 2.07], info: 'Toilet wall', op: [[0.28, 0.98, 0, 2.1, 'door', 'Toilet door', -1]] },
+    { a: [6.40, T], b: [6.40, 2.07], info: 'Internal wall between the toilet and the bathroom', op: [] },
+    { a: [6.40, 2.07], b: [L - T, 2.07], info: 'Internal wall between the bathroom and the bedroom', op: [[0.98, 1.78, 0, 2.1, 'door', 'Bathroom door, from the bedroom', -1]] },
+    { a: [6.40, 2.07], b: [6.40, D - T], info: 'Internal wall between the lounge and the bedroom', op: [[0.05, 0.95, 0, 2.1, 'door', 'Bedroom door, from the dining area', -1]] }
+  ];
+  // Furniture: [x0, x1, y0, y1, z0, z1, colour, label]
+  const FURN = [
+    [0.08, 3.5, 0.08, 0.66, 0, 0.9, '#6E5A48', 'Kitchen counter along the back wall'],
+    [0.85, 2.76, 2.13, 2.76, 0, 0.9, '#D6D0C4', 'Kitchen island'], [1.5, 2.1, 2.76, 3.56, 0, 0.9, '#D6D0C4', 'Kitchen island'],
+    [1.3, 2.0, 2.3, 2.6, 0.9, 0.915, '#22272B', 'Hob on the island'],
+    [4.24, 5.76, 2.77, 3.64, 0.71, 0.76, '#9A7D5E', 'Dining table'], [4.9, 5.1, 3.1, 3.3, 0, 0.71, '#7A6048', 'Dining table'],
+    [4.4, 4.85, 2.35, 2.72, 0, 0.46, '#5F4836', 'Dining chair'], [5.15, 5.6, 2.35, 2.72, 0, 0.46, '#5F4836', 'Dining chair'],
+    [4.4, 4.85, 3.69, 4.06, 0, 0.46, '#5F4836', 'Dining chair'], [5.15, 5.6, 3.69, 4.06, 0, 0.46, '#5F4836', 'Dining chair'],
+    [0.98, 3.6, 4.82, 5.61, 0, 0.42, '#6F8796', 'Sofa'], [0.98, 3.6, 4.6, 4.82, 0, 0.85, '#5E7584', 'Sofa'],
+    [1.69, 2.9, 6.06, 6.67, 0, 0.4, '#9A7D5E', 'Coffee table'],
+    [7.24, 9.92, 3.30, 3.91, 0, 1.1, '#7E6650', 'Headboard wall with storage'],
+    [7.78, 9.39, 3.91, 6.02, 0, 0.5, '#DAD4CA', 'Double bed'], [7.95, 9.22, 3.95, 4.35, 0.5, 0.6, '#EEEEEA', 'Pillows'],
+    [5.56, 5.96, 0.1, 0.77, 0, 0.45, '#F2F2F0', 'WC'],
+    [6.56, 7.72, 0.08, 0.61, 0, 0.85, '#E4E2DC', 'Vanity with basin'], [7.88, 9.58, 0.08, 0.85, 0, 0.85, '#ECECEA', 'Bathroom counter'],
+    [9.73, 10.63, 1.13, 2.0, 0, 0.05, '#BCD0DA', 'Shower tray']
+  ];
+  const CLADS = {
+    grey: { wall: '#C6CACA', roof: '#D3D6D6', name: 'Light grey panel' }, charcoal: { wall: '#41474C', roof: '#33383C', name: 'Charcoal' },
+    sand: { wall: '#CDBF9F', roof: '#3A3F44', name: 'Sand, dark roof' }, white: { wall: '#E4E7E6', roof: '#D3D6D6', name: 'White' }
+  };
+  const INWALL = '#DCDCD7', CEIL = '#E4E4DF', STEEL = '#2E363C', HOT = '#C24A14', GLASS = '#9DBFD3';
+  const PRESETS = [['Garden side', 90, 18], ['Entrance side', 270, 18], ['Lounge end', 180, 20], ['Bedroom end', 0, 20], ['Corner', 128, 32], ['From above', 100, 82]];
+  const GOTO = [['Garden', 5.4, 17, 270, 4], ['Front door', 4.4, -3.2, 90, 4], ['Entrance', 4.35, 0.7, 90, 0], ['Kitchen', 3.9, 4.5, 215, -8],
+    ['Dining', 5.95, 3.7, 180, -4], ['Lounge', 5.8, 5.2, 150, 0], ['Bedroom', 7.0, 7.6, 300, -2], ['Bathroom', 7.0, 1.0, 0, -6], ['Toilet', 5.76, 1.6, 270, -10]];
+  // Guided tour: [x, y, heading, look, seconds to get there]
+  const TOUR = [[4.4, -5, 90, 3, 0], [4.4, -1.0, 90, 3, 4], [4.4, 0.8, 90, 0, 2.5], [4.6, 2.9, 90, 0, 2.5], [4.6, 2.9, 200, -6, 2.5],
+    [4.6, 3.6, 150, 0, 2], [4.4, 5.6, 100, 2, 3], [4.4, 5.6, 190, 3, 3], [6.0, 4.6, 300, 0, 2.5], [6.0, 2.55, 0, 0, 2.5],
+    [7.0, 2.6, 0, 0, 1.5], [7.0, 7.3, 90, 0, 3.5], [7.0, 7.3, 330, 2, 2.5], [7.0, 7.3, 60, 3, 2.5], [7.0, 2.7, 270, 0, 3.5],
+    [7.8, 2.5, 270, 0, 1.5], [7.8, 1.2, 270, -4, 2], [7.8, 1.2, 0, -6, 2], [7.8, 1.2, 180, -4, 2.5]];
+
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+  const mul = (a, k) => [a[0] * k, a[1] * k, a[2] * k];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const unit = (v) => { const l = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / l, v[1] / l, v[2] / l]; };
+  const avg = (P) => mul(P.reduce((s, p) => add(s, p), [0, 0, 0]), 1 / P.length);
+  const roomAt = (x, y) => { const r = ROOMS.find((q) => x >= q[1] && x <= q[3] && y >= q[2] && y <= q[4]); return r ? r[0] : 'Outside'; };
+
+  const st = () => S.mb || (S.mb = { view: 'orbit', mode: 'fin', clad: 'grey', yaw: 128, pitch: 28, zoom: 50, x: 4.4, y: -3.2, h: 90, t: 4 });
+  let scene = null, sceneKey = '', infos = [], sel = -1;
+
+  function build(mode, clad) {
+    const cl = CLADS[clad] || CLADS.grey, sc = { under: [], ceil: [], objs: [], roof: [], labels: [] };
+    infos = [];
+    const info = (t) => { infos.push(t); return infos.length - 1; };
+    const wallOp = mode === 'x' ? 0.2 : mode === 'steel' ? 0.07 : 1;
+    const box = (x0, x1, y0, y1, z0, z1, side, top, k, op) => ({ k, ctr: [(x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2], faces: [
+      { n: [0, -1, 0], p: [[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]], c: side, op }, { n: [0, 1, 0], p: [[x1, y1, z0], [x0, y1, z0], [x0, y1, z1], [x1, y1, z1]], c: side, op },
+      { n: [-1, 0, 0], p: [[x0, y1, z0], [x0, y0, z0], [x0, y0, z1], [x0, y1, z1]], c: side, op }, { n: [1, 0, 0], p: [[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]], c: side, op },
+      { n: [0, 0, 1], p: [[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]], c: top || side, op }, { n: [0, 0, -1], p: [[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0]], c: side, op }] });
+    // Ground, slab and room floors.
+    sc.under.push({ k: -1, faces: [{ p: [[-40, -40, -0.151], [L + 40, -40, -0.151], [L + 40, D + 40, -0.151], [-40, D + 40, -0.151]], c: '#BAC3AE' }] });
+    sc.under.push(box(-0.05, L + 0.05, -0.05, D + 0.05, -0.15, 0, '#8C908A', '#8C908A', info('Concrete slab under the house')));
+    ROOMS.forEach((r) => {
+      const k = info(`${r[0]} · ${r[5]} m²`);
+      sc.under.push({ k, faces: [{ p: [[r[1], r[2], 0.002], [r[3], r[2], 0.002], [r[3], r[4], 0.002], [r[1], r[4], 0.002]], c: r[6], n: [0, 0, 1], st: mode === 'fin' ? '' : 'rgba(31,38,43,0.25)' }] });
+      if (mode !== 'fin') sc.labels.push({ p: [(r[1] + r[3]) / 2, (r[2] + r[4]) / 2, 0.05], name: r[0], area: r[5] + ' m²' });
+    });
+    // Walls, cut at panel joints (1.195 m) and round every opening.
+    WALLS.forEach((w) => {
+      const A = w.a, B = w.b, len = Math.hypot(B[0] - A[0], B[1] - A[1]), u = [(B[0] - A[0]) / len, (B[1] - A[1]) / len], n = [-u[1], u[0]];
+      const mid = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], outSign = w.ext ? (n[0] * (mid[0] - L / 2) + n[1] * (mid[1] - D / 2) > 0 ? 1 : -1) : 0;
+      const kWall = info(w.info);
+      const at = (s, off) => [A[0] + u[0] * s + n[0] * off, A[1] + u[1] * s + n[1] * off];
+      const piece = (s0, s1, zb, ztFixed, k) => {
+        const P = at(s0, 0), Q = at(s1, 0), h = T / 2;
+        const top = (p) => (ztFixed === null ? zr(p[1]) : ztFixed);
+        const Pp = at(s0, h), Pm = at(s0, -h), Qp = at(s1, h), Qm = at(s1, -h);
+        const v = (p, z) => [p[0], p[1], z];
+        const Ppb = v(Pp, zb), Pmb = v(Pm, zb), Qpb = v(Qp, zb), Qmb = v(Qm, zb), Ppt = v(Pp, top(Pp)), Pmt = v(Pm, top(Pm)), Qpt = v(Qp, top(Qp)), Qmt = v(Qm, top(Qm));
+        const cPlus = outSign === 1 ? cl.wall : INWALL, cMinus = outSign === -1 ? cl.wall : INWALL;
+        let tn = unit(cross(sub(Qpt, Ppt), sub(Pmt, Ppt))); if (tn[2] < 0) tn = mul(tn, -1);
+        const topCol = mode === 'fin' ? cl.wall : '#3A4248', stl = 'rgba(31,38,43,0.16)';
+        return { k, ctr: avg([Ppb, Qmt]), faces: [
+          { n: [n[0], n[1], 0], p: [Ppb, Qpb, Qpt, Ppt], c: cPlus, op: wallOp, st: stl }, { n: [-n[0], -n[1], 0], p: [Qmb, Pmb, Pmt, Qmt], c: cMinus, op: wallOp, st: stl },
+          { n: tn, p: [Ppt, Qpt, Qmt, Pmt], c: topCol, op: wallOp }, { n: [0, 0, -1], p: [Ppb, Qpb, Qmb, Pmb], c: INWALL, op: wallOp },
+          { n: [-u[0], -u[1], 0], p: [Pmb, Ppb, Ppt, Pmt], c: INWALL, op: wallOp }, { n: [u[0], u[1], 0], p: [Qpb, Qmb, Qmt, Qpt], c: INWALL, op: wallOp }] };
+      };
+      const cuts = new Set([0, len]);
+      for (let s = 1.195; s < len - 0.05; s += 1.195) cuts.add(Math.round(s * 1000) / 1000);
+      w.op.forEach((o) => { cuts.add(o[0]); cuts.add(o[1]); });
+      const cs = [...cuts].sort((a, b) => a - b);
+      for (let i = 0; i < cs.length - 1; i++) {
+        const s0 = cs[i], s1 = cs[i + 1]; if (s1 - s0 < 0.005) continue;
+        const o = w.op.find((q) => (s0 + s1) / 2 > q[0] && (s0 + s1) / 2 < q[1]);
+        if (!o) { sc.objs.push(piece(s0, s1, 0, null, kWall)); continue; }
+        if (o[2] > 0.01) sc.objs.push(piece(s0, s1, 0, o[2], kWall));
+        sc.objs.push(piece(s0, s1, o[3], null, kWall));
+      }
+      // Glass and doors in the openings.
+      w.op.forEach((o) => {
+        const k = info(o[5]);
+        if (o[4] === 'door') {
+          const inward = w.ext ? -outSign : (o[6] || 1), wd = o[1] - o[0], ang = 80 * Math.PI / 180;
+          const H = at(o[0], inward * 0.05), dir = [u[0] * Math.cos(ang) + n[0] * inward * Math.sin(ang), u[1] * Math.cos(ang) + n[1] * inward * Math.sin(ang)];
+          const E = [H[0] + dir[0] * wd, H[1] + dir[1] * wd];
+          sc.objs.push({ k, ctr: [(H[0] + E[0]) / 2, (H[1] + E[1]) / 2, 1.05], faces: [{ p: [[H[0], H[1], 0], [E[0], E[1], 0], [E[0], E[1], 2.05], [H[0], H[1], 2.05]], c: '#6B4A32', st: '#4A3322' }] });
+        } else {
+          const leaves = o[4] === 'slide' ? Math.max(2, Math.round((o[1] - o[0]) / 1.5)) : 2, lw = (o[1] - o[0]) / leaves;
+          for (let j = 0; j < leaves; j++) {
+            const P = at(o[0] + j * lw, 0), Q = at(o[0] + (j + 1) * lw, 0);
+            sc.objs.push({ k, ctr: [(P[0] + Q[0]) / 2, (P[1] + Q[1]) / 2, (o[2] + o[3]) / 2], faces: [{ p: [[P[0], P[1], o[2]], [Q[0], Q[1], o[2]], [Q[0], Q[1], o[3]], [P[0], P[1], o[3]]], c: GLASS, op: 0.42, st: '#2E3439', sw: 2.5 }] });
+          }
+        }
+      });
+    });
+    // Furniture.
+    if (mode !== 'steel') FURN.forEach((f) => sc.objs.push(box(f[0], f[1], f[2], f[3], f[4], f[5], f[6], f[6], info(f[7]))));
+    // Steel: beam down the middle on 3 columns; the lintel over the sliders shows in X-ray and Steel views.
+    const sCol = mode === 'x' || mode === 'steel' ? HOT : STEEL;
+    const kBeam = info('Steel beam down the middle of the house, carrying the roof. Sits on 3 columns. Size to be confirmed by the engineer.');
+    const kCol = info('Steel column under the middle beam');
+    for (let x = 0.1; x < L - 0.1; x += 1.3) { const x1 = Math.min(L - 0.1, x + 1.3); sc.objs.push(box(x, x1, BY - 0.05, BY + 0.05, BEAM_TOP - BEAM_D, BEAM_TOP - 0.005, sCol, sCol, kBeam)); }
+    [0.16, 6.40, L - 0.16].forEach((x) => sc.objs.push(box(x - 0.06, x + 0.06, BY - 0.06, BY + 0.06, 0, BEAM_TOP - BEAM_D, sCol, sCol, kCol)));
+    if (mode === 'x' || mode === 'steel') {
+      const kL = info('Lintel over the two sliders, with a post at each side of each slider');
+      for (let x = 0.1; x < L - 0.1; x += 1.3) { const x1 = Math.min(L - 0.1, x + 1.3); sc.objs.push(box(x, x1, D - 0.09, D - 0.01, 2.1, 2.3, HOT, HOT, kL)); }
+      [0.15, 6.15, 7.1, 10.1].forEach((x) => sc.objs.push(box(x - 0.05, x + 0.05, D - 0.09, D - 0.01, 0, 2.1, HOT, HOT, kL)));
+    }
+    // Roof: single slope, 0.12 m thick, 0.3 m overhang all round.
+    const kRoof = info('Roof: 100 mm insulated panels on a single slope, from 2.4 m on the entrance side up to 3.38 m on the garden side (about 7°), 300 mm overhang');
+    const x0 = -OH, x1 = L + OH, y0 = -OH, y1 = D + OH, rt = 0.12, ro = mode === 'x' ? 0.18 : 1;
+    const b00 = [x0, y0, zr(y0)], b10 = [x1, y0, zr(y0)], b11 = [x1, y1, zr(y1)], b01 = [x0, y1, zr(y1)];
+    const t00 = add(b00, [0, 0, rt]), t10 = add(b10, [0, 0, rt]), t11 = add(b11, [0, 0, rt]), t01 = add(b01, [0, 0, rt]);
+    const rn = unit([0, -(H1 - H0) / D, 1]);
+    if (mode === 'fin' || mode === 'x') {
+      sc.roof.push({ k: kRoof, ctr: avg([t00, t11]), faces: [{ n: rn, p: [t00, t10, t11, t01], c: cl.roof, op: ro, st: 'rgba(31,38,43,0.35)' }], seams: true });
+      [[[0, -1, 0], [b00, b10, t10, t00]], [[0, 1, 0], [b11, b01, t01, t11]], [[-1, 0, 0], [b01, b00, t00, t01]], [[1, 0, 0], [b10, b11, t11, t10]]]
+        .forEach((f) => sc.roof.push({ k: kRoof, ctr: avg(f[1]), faces: [{ n: f[0], p: f[1], c: '#2E3439', op: ro }] }));
+      sc.ceil.push({ k: kRoof, faces: [{ n: mul(rn, -1), p: [b00, b10, b11, b01], c: CEIL, st: 'rgba(31,38,43,0.1)' }] });
+    }
+    return sc;
+  }
+
+  function camera(W, H) {
+    const s = st();
+    if (s.view === 'walk') {
+      const h = s.h * Math.PI / 180, t = s.t * Math.PI / 180;
+      const f = [Math.cos(h) * Math.cos(t), Math.sin(h) * Math.cos(t), Math.sin(t)];
+      const r = unit(cross(f, [0, 0, 1])), u = cross(r, f);
+      return { C: [s.x, s.y, 1.6], f, r, u, FL: 560 };
+    }
+    const a = s.yaw * Math.PI / 180, p = s.pitch * Math.PI / 180, R = 30 - s.zoom * 0.21, Tg = [L / 2, D / 2, 1.0];
+    const C = add(Tg, mul([Math.cos(p) * Math.cos(a), Math.cos(p) * Math.sin(a), Math.sin(p)], R));
+    const f = unit(sub(Tg, C)), r = unit(cross(f, [0, 0, 1])), u = cross(r, f);
+    return { C, f, r, u, FL: 1000 };
+  }
+
+  function render() {
+    const s = st(), mode = s.view === 'walk' ? 'fin' : s.mode, key = mode + '|' + s.clad;
+    if (key !== sceneKey) { scene = build(mode, s.clad); sceneKey = key; }
+    const W = 1100, H = 760, CX = W / 2, CY = H / 2, NEAR = 0.05;
+    const cam = camera(W, H), C = cam.C;
+    const toCam = (p) => { const d = sub(p, C); return [dot(d, cam.r), dot(d, cam.u), dot(d, cam.f)]; };
+    const cut = (a, b) => { const t = (NEAR - a[2]) / (b[2] - a[2]); return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, NEAR]; };
+    const clip = (P) => { const o = []; P.forEach((a, i) => { const b = P[(i + 1) % P.length], ai = a[2] >= NEAR, bi = b[2] >= NEAR; if (ai) o.push(a); if (ai !== bi) o.push(cut(a, b)); }); return o; };
+    const scr = (q) => [CX + cam.FL * q[0] / q[2], CY - cam.FL * q[1] / q[2]];
+    const Lt = unit([0.35, 0.55, 0.75]);
+    const shade = (hex, n) => { if (!n || hex[0] !== '#') return hex; const k = 0.8 + 0.22 * Math.abs(dot(n, Lt)) * (dot(n, Lt) > 0 ? 1 : 0.6); const ch = (i) => Math.max(0, Math.min(255, Math.round(parseInt(hex.slice(i, i + 2), 16) * k))); return `rgb(${ch(1)},${ch(3)},${ch(5)})`; };
+    const out = [];
+    const face = (fc, k) => {
+      if (fc.n && dot(fc.n, sub(C, fc.p[0])) <= 0) return;
+      const q = clip(fc.p.map(toCam)); if (q.length < 3) return;
+      const pts = q.map(scr).map((v) => v[0].toFixed(1) + ',' + v[1].toFixed(1)).join(' ');
+      const hl = k >= 0 && k === sel;
+      out.push(`<polygon points="${pts}" fill="${shade(fc.c, fc.n)}"${fc.op !== undefined && fc.op < 1 ? ` fill-opacity="${fc.op}"` : ''}${hl ? ' stroke="#C24A14" stroke-width="3"' : fc.st ? ` stroke="${fc.st}" stroke-width="${fc.sw || 1}"` : ''}${k >= 0 ? ` data-k="${k}"` : ''}/>`);
+    };
+    const line = (p, q, color, w) => {
+      let a = toCam(p), b = toCam(q); if (a[2] < NEAR && b[2] < NEAR) return;
+      if (a[2] < NEAR) a = cut(a, b); else if (b[2] < NEAR) b = cut(b, a);
+      const A = scr(a), B = scr(b); out.push(`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${color}" stroke-width="${w}"/>`);
+    };
+    scene.under.forEach((o) => o.faces.forEach((fc) => face(fc, o.k)));
+    const underRoof = C[2] < zr(C[1]);
+    if (underRoof) scene.ceil.forEach((o) => o.faces.forEach((fc) => face(fc, o.k)));
+    const dist = (o) => Math.hypot(o.ctr[0] - C[0], o.ctr[1] - C[1], o.ctr[2] - C[2]);
+    const sorted = scene.objs.concat(underRoof ? scene.roof.filter((o) => !o.seams) : []).map((o) => ({ o, d: dist(o) })).sort((a, b) => b.d - a.d);
+    sorted.forEach(({ o }) => o.faces.forEach((fc) => face(fc, o.k)));
+    if (!underRoof) {
+      scene.roof.map((o) => ({ o, d: dist(o) })).sort((a, b) => b.d - a.d).forEach(({ o }) => {
+        o.faces.forEach((fc) => face(fc, o.k));
+        if (o.seams && dot(o.faces[0].n, sub(C, o.faces[0].p[0])) > 0) for (let x = 0; x <= L + 0.01; x += 1.195) line([x, -OH, zr(-OH) + 0.125], [x, D + OH, zr(D + OH) + 0.125], 'rgba(31,38,43,0.3)', 1);
+      });
+    }
+    scene.labels.forEach((lb) => {
+      const q = toCam(lb.p); if (q[2] < NEAR) return; const P = scr(q);
+      out.push(`<g font-family="IBM Plex Sans,sans-serif" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round"><text x="${P[0].toFixed(1)}" y="${P[1].toFixed(1)}" font-size="15" font-weight="600" fill="#1F262B">${lb.name}</text><text x="${P[0].toFixed(1)}" y="${(P[1] + 17).toFixed(1)}" font-size="12" fill="#3A444B" font-family="IBM Plex Mono,monospace">${lb.area}</text></g>`);
+    });
+    $('m3dSvg').innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="3D model of the Miombo House">${out.join('')}</svg>`;
+    if (s.view === 'walk') {
+      const rm = roomAt(s.x, s.y); $('mRoom').textContent = rm === 'Outside' ? 'Outside' : 'In the ' + rm.toLowerCase();
+      $('mLook').value = Math.round(s.t);
+      $('mCap').textContent = 'Eye height 1.6 m. Simplified block model: furniture is shown as blocks and finishes are not shown.';
+    } else {
+      $('mYaw').value = Math.round(((s.yaw % 360) + 360) % 360); $('mPitch').value = Math.round(s.pitch); $('mZoom').value = Math.round(s.zoom);
+      $('mCap').textContent = 'Miombo House · 10.76 × 8.3 m · single-slope roof 2.4 m → 3.38 m · beam on 3 columns. Simplified block model built from the wall layout drawing.';
+    }
+  }
+  let raf = 0;
+  const req = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); };
+
+  // Walking: hold-to-move with simple collision against walls (doors are open; glass blocks you) and furniture.
+  const SEGS = [];
+  WALLS.forEach((w) => {
+    const A = w.a, B = w.b, len = Math.hypot(B[0] - A[0], B[1] - A[1]), u = [(B[0] - A[0]) / len, (B[1] - A[1]) / len];
+    let s = 0; w.op.filter((o) => o[4] === 'door').sort((p, q) => p[0] - q[0]).forEach((o) => { if (o[0] > s) SEGS.push([s, o[0]]); s = o[1]; });
+    if (s < len) SEGS.push([s, len]);
+    for (let i = SEGS.length - 1; i >= 0 && SEGS[i].length === 2; i--) { const g = SEGS[i]; SEGS[i] = [A[0] + u[0] * g[0], A[1] + u[1] * g[0], A[0] + u[0] * g[1], A[1] + u[1] * g[1]]; }
+  });
+  const segDist = (p, g) => { const vx = g[2] - g[0], vy = g[3] - g[1], l2 = vx * vx + vy * vy || 1; const t = Math.max(0, Math.min(1, ((p[0] - g[0]) * vx + (p[1] - g[1]) * vy) / l2)); return Math.hypot(p[0] - g[0] - t * vx, p[1] - g[1] - t * vy); };
+  const blocked = (p) => SEGS.some((g) => segDist(p, g) < 0.22) ||
+    FURN.some((f) => f[4] < 0.6 && f[5] > 0.1 && p[0] > f[0] - 0.18 && p[0] < f[1] + 0.18 && p[1] > f[2] - 0.18 && p[1] < f[3] + 0.18) ||
+    [0.16, 6.40, L - 0.16].some((x) => Math.hypot(p[0] - x, p[1] - BY) < 0.25) || p[0] < -15 || p[0] > L + 15 || p[1] < -15 || p[1] > D + 15;
+  const move = (dx, dy) => { const s = st(); if (!blocked([s.x + dx, s.y + dy])) { s.x += dx; s.y += dy; } else if (!blocked([s.x + dx, s.y])) s.x += dx; else if (!blocked([s.x, s.y + dy])) s.y += dy; };
+  const keys = new Set(); let walkRaf = 0, lastT = 0;
+  function walkLoop(ts) {
+    if (!keys.size) { walkRaf = 0; save(); return; }
+    const dt = Math.min(0.05, (ts - (lastT || ts)) / 1000); lastT = ts;
+    const s = st(), h = s.h * Math.PI / 180, sp = 1.4 * dt;
+    if (keys.has('f')) move(Math.cos(h) * sp, Math.sin(h) * sp);
+    if (keys.has('b')) move(-Math.cos(h) * sp, -Math.sin(h) * sp);
+    if (keys.has('l')) s.h = (s.h + 75 * dt) % 360;
+    if (keys.has('r')) s.h = (s.h - 75 * dt + 360) % 360;
+    render(); walkRaf = requestAnimationFrame(walkLoop);
+  }
+  const press = (k) => { stopTour(); keys.add(k); if (!walkRaf) { lastT = 0; walkRaf = requestAnimationFrame(walkLoop); } };
+  const release = (k) => keys.delete(k);
+
+  // Guided tour along TOUR.
+  let tour = null;
+  const ease = (t) => t * t * (3 - 2 * t);
+  const angLerp = (a, b, t) => { const d = ((b - a + 540) % 360) - 180; return (a + d * t + 360) % 360; };
+  function tourLoop(ts) {
+    if (!tour) return;
+    if (!tour.t0) tour.t0 = ts;
+    let el = (ts - tour.t0) / 1000, i = 1;
+    while (i < TOUR.length && el > TOUR[i][4]) { el -= TOUR[i][4]; i++; }
+    const s = st();
+    if (i >= TOUR.length) { const w = TOUR[TOUR.length - 1]; Object.assign(s, { x: w[0], y: w[1], h: w[2], t: w[3] }); stopTour(); render(); return; }
+    const a = TOUR[i - 1], b = TOUR[i], k = ease(Math.min(1, el / b[4]));
+    s.x = a[0] + (b[0] - a[0]) * k; s.y = a[1] + (b[1] - a[1]) * k; s.h = angLerp(a[2], b[2], k); s.t = a[3] + (b[3] - a[3]) * k;
+    render(); tour.raf = requestAnimationFrame(tourLoop);
+  }
+  function startTour() { stopTour(); const w = TOUR[0]; Object.assign(st(), { x: w[0], y: w[1], h: w[2], t: w[3] }); tour = { t0: 0 }; tour.raf = requestAnimationFrame(tourLoop); $('mTourBtn').textContent = '■ Stop walkthrough'; }
+  function stopTour() { if (tour) { cancelAnimationFrame(tour.raf); tour = null; save(); } const b = $('mTourBtn'); if (b) b.textContent = '▶ Play walkthrough'; }
+
+  function controls() {
+    const s = st(), walk = s.view === 'walk';
+    $('mView').innerHTML = [['orbit', 'Look around'], ['walk', 'Walk through']].map((v) => `<button class="btn ${s.view === v[0] ? 'on' : ''}" data-mb="view" data-v="${v[0]}">${v[1]}</button>`).join('');
+    $('mMode').innerHTML = [['fin', 'Finished'], ['cut', 'Roof off'], ['x', 'X-ray'], ['steel', 'Steel only']].map((m) => `<button class="btn ${s.mode === m[0] ? 'on' : ''}" data-mb="mode" data-v="${m[0]}">${m[1]}</button>`).join('');
+    $('mClad').innerHTML = Object.keys(CLADS).map((k) => `<button class="swatch ${s.clad === k ? 'on' : ''}" style="background:${CLADS[k].wall}" data-mb="clad" data-v="${k}" aria-label="${CLADS[k].name}" title="${CLADS[k].name}"></button>`).join('') + `<span class="note" style="margin-left:6px">${CLADS[s.clad].name}</span>`;
+    $('mPresets').innerHTML = PRESETS.map((p, i) => `<button class="btn" data-mb="preset" data-v="${i}">${p[0]}</button>`).join('');
+    $('mRooms').innerHTML = GOTO.map((g, i) => `<button class="btn" data-mb="goto" data-v="${i}">${g[0]}</button>`).join('');
+    $('mOrbitCtl').hidden = walk; $('mWalkCtl').hidden = !walk; $('mPad').hidden = !walk; $('mRoom').hidden = !walk;
+    $('mInfo').hidden = walk;
+  }
+  function show() { stopTour(); controls(); render(); }
+  // On a phone the controls sit below the picture: bring the picture back into view after a jump.
+  function reveal() { const r = $('m3d').getBoundingClientRect(), top = 130; if (r.top < top || r.bottom > innerHeight) window.scrollBy({ top: r.top - top, behavior: 'smooth' }); }
+
+  // Events.
+  document.addEventListener('click', (ev) => {
+    const b = ev.target.closest('[data-mb]'); if (!b) return;
+    const s = st(), v = b.dataset.v;
+    if (b.dataset.mb === 'view') { stopTour(); s.view = v; sel = -1; $('mInfo').textContent = 'Tap any part of the house to see what it is.'; }
+    else if (b.dataset.mb === 'mode') { s.mode = v; sel = -1; }
+    else if (b.dataset.mb === 'clad') s.clad = v;
+    else if (b.dataset.mb === 'preset') { const p = PRESETS[Number(v)]; s.yaw = p[1]; s.pitch = p[2]; }
+    else if (b.dataset.mb === 'goto') { stopTour(); const g = GOTO[Number(v)]; Object.assign(s, { x: g[1], y: g[2], h: g[3], t: g[4] }); }
+    else if (b.dataset.mb === 'tour') { if (tour) stopTour(); else { startTour(); reveal(); } return; }
+    save(); controls(); render();
+    if (['preset', 'goto'].includes(b.dataset.mb)) reveal();
+  });
+  document.addEventListener('input', (ev) => {
+    const id = ev.target.id, s = st();
+    if (id === 'mYaw') s.yaw = Number(ev.target.value); else if (id === 'mPitch') s.pitch = Number(ev.target.value);
+    else if (id === 'mZoom') s.zoom = Number(ev.target.value); else if (id === 'mLook') s.t = Number(ev.target.value); else return;
+    req();
+  });
+  document.addEventListener('change', (ev) => { if (['mYaw', 'mPitch', 'mZoom', 'mLook'].includes(ev.target.id)) save(); });
+  const box3 = $('m3d'), ptrs = new Map(); let drag = null;
+  box3.addEventListener('pointerdown', (ev) => {
+    if (ev.target.closest('.mpad')) return;
+    ptrs.set(ev.pointerId, [ev.clientX, ev.clientY]); box3.setPointerCapture(ev.pointerId); stopTour();
+    const s = st(); drag = { x: ev.clientX, y: ev.clientY, yaw: s.yaw, pitch: s.pitch, h: s.h, t: s.t, zoom: s.zoom, moved: 0, pinch: 0 };
+    if (ptrs.size === 2) { const [p, q] = [...ptrs.values()]; drag.pinch = Math.hypot(p[0] - q[0], p[1] - q[1]); }
+  });
+  box3.addEventListener('pointermove', (ev) => {
+    if (!drag || !ptrs.has(ev.pointerId)) return;
+    ptrs.set(ev.pointerId, [ev.clientX, ev.clientY]);
+    const s = st();
+    if (ptrs.size === 2 && drag.pinch && s.view === 'orbit') { const [p, q] = [...ptrs.values()]; s.zoom = Math.max(0, Math.min(100, drag.zoom + (Math.hypot(p[0] - q[0], p[1] - q[1]) - drag.pinch) * 0.25)); drag.moved = 99; req(); return; }
+    const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; drag.moved = Math.max(drag.moved, Math.abs(dx) + Math.abs(dy));
+    if (s.view === 'walk') { s.h = ((drag.h + dx * 0.25) % 360 + 360) % 360; s.t = Math.max(-30, Math.min(45, drag.t + dy * 0.2)); }
+    else { s.yaw = drag.yaw - dx * 0.4; s.pitch = Math.max(4, Math.min(88, drag.pitch + dy * 0.3)); }
+    req();
+  });
+  const endDragM = (ev) => {
+    ptrs.delete(ev.pointerId); if (!drag) return;
+    if (drag.moved < 6 && ev.type === 'pointerup' && st().view === 'orbit') {
+      const hit = document.elementFromPoint(ev.clientX, ev.clientY), k = hit && hit.dataset ? Number(hit.dataset.k) : NaN;
+      sel = Number.isFinite(k) && hit.dataset.k !== undefined ? k : -1;
+      $('mInfo').textContent = sel >= 0 ? infos[sel] : 'Tap any part of the house to see what it is.';
+      render();
+    }
+    if (!ptrs.size) { drag = null; save(); }
+  };
+  box3.addEventListener('pointerup', endDragM); box3.addEventListener('pointercancel', endDragM);
+  box3.addEventListener('wheel', (ev) => { if (st().view !== 'orbit') return; ev.preventDefault(); const s = st(); s.zoom = Math.max(0, Math.min(100, s.zoom - ev.deltaY * 0.05)); req(); }, { passive: false });
+  document.querySelectorAll('#mPad [data-walk]').forEach((b) => {
+    b.addEventListener('pointerdown', (ev) => { ev.preventDefault(); b.setPointerCapture(ev.pointerId); press(b.dataset.walk); });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((t) => b.addEventListener(t, () => release(b.dataset.walk)));
+    b.addEventListener('contextmenu', (ev) => ev.preventDefault());
+  });
+  const KEYMAP = { ArrowUp: 'f', w: 'f', W: 'f', ArrowDown: 'b', s: 'b', S: 'b', ArrowLeft: 'l', a: 'l', A: 'l', ArrowRight: 'r', d: 'r', D: 'r' };
+  const walkKeysOn = (ev) => S.tab === 'view3d' && S.house === 'miombo' && st().view === 'walk' && !/INPUT|TEXTAREA/.test(ev.target.tagName);
+  document.addEventListener('keydown', (ev) => { const k = KEYMAP[ev.key]; if (!k || !walkKeysOn(ev)) return; ev.preventDefault(); press(k); });
+  document.addEventListener('keyup', (ev) => { const k = KEYMAP[ev.key]; if (k) release(k); });
+  window.addEventListener('resize', () => { if (S.tab === 'view3d' && S.house === 'miombo') req(); });
+  return { show, stopTour, setView: (v) => { st().view = v; } };
+})();
+function applyHouse() {
+  if (!S.house) S.house = 'miombo';
+  document.querySelectorAll('#houseSel [data-house]').forEach((b) => b.classList.toggle('on', b.dataset.house === S.house));
+  $('miombo3d').hidden = S.house !== 'miombo'; $('gable3d').hidden = S.house !== 'gable';
+  if (S.house === 'miombo') { spinning = false; MB.show(); } else { MB.stopTour(); rerender3d(); }
+}
+document.addEventListener('click', (e) => {
+  const h = e.target.closest('[data-house]'); if (h) { S.house = h.dataset.house; save(); applyHouse(); return; }
+  const g = e.target.closest('[data-mbgo]'); if (g) { S.house = 'miombo'; MB.setView(g.dataset.mbgo); save(); showTab('view3d'); }
+});
+
 /* ---------- tabs, events ---------- */
 function showTab(t) {
   S.tab = t; save();
@@ -1124,7 +1537,7 @@ function showTab(t) {
   document.querySelectorAll('section.tab').forEach((s) => s.classList.toggle('on', s.id === 'tab-' + t));
   if (t === 'overview') renderOverview();
   if (t === 'layout') renderLayout();
-  if (t === 'view3d') rerender3d();
+  if (t === 'view3d') { rerender3d(); applyHouse(); } else MB.stopTour();
   if (t === 'costing') renderCosting();
   if (t !== 'view3d') spinning = false;
   window.scrollTo(0, 0);
