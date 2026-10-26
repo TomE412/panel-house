@@ -86,6 +86,13 @@ a.wa{display:flex;align-items:center;justify-content:center;min-height:44px;padd
 .msg{white-space:pre-line;background:#fff;border:1px solid var(--line);border-radius:4px;padding:12px 14px;font-size:13px;line-height:1.5}
 ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 .mono{font-family:var(--mono)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:0 0 20px}
+.mgrid figure{margin:0;border:1px solid var(--line);background:#fff}
+.mgrid img{display:block;width:100%;height:auto;cursor:zoom-in}
+.mgrid figcaption{padding:6px 10px;font-size:12px;color:var(--muted)}
+.lightbox{position:fixed;inset:0;z-index:20;background:rgba(15,19,22,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;cursor:zoom-out}
+.lightbox img{max-width:100%;max-height:calc(100% - 48px);object-fit:contain}
+.lightbox p{color:#E1E4E2;font-size:14px;margin:12px 0 0;text-align:center}
 </style>
 </head>
 <body>
@@ -93,6 +100,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
   <div class="brand"><b>Spine-and-Pillar Panel House</b><span id="ver"></span></div>
   <nav class="tabs" role="tablist" aria-label="Sections">
     <button role="tab" data-tab="overview">Overview</button>
+    <button role="tab" data-tab="miombo">Miombo House</button>
     <button role="tab" data-tab="gallery">Gallery</button>
     <button role="tab" data-tab="system">System</button>
     <button role="tab" data-tab="layout">Layout</button>
@@ -112,6 +120,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
     <figcaption>Artist's impressions of version B. Option 1 is the base panel finish; plastered and colour options are upgrades. More in the Gallery tab.</figcaption>
   </figure>
   <div class="stats" id="ovStats"></div>
+  <div class="row" style="margin:0 0 8px"><button class="btn primary" data-goto="miombo">New: see the Miombo House</button></div>
   <h2>How it goes up</h2>
   <ol class="steps">
     <li>Footing: a slab or strip footing under all the walls, with a pad under each pillar. The base U-track is bolted down round the edge.</li>
@@ -122,6 +131,61 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
   </ol>
   <h2>Share</h2>
   <div class="row"><button class="btn primary" data-action="share">Share this app</button><span class="note" id="shareNote"></span></div>
+</section>
+
+<section class="tab" id="tab-miombo">
+  <div class="eyebrow">New · one-bedroom house, Harare</div>
+  <h1>Miombo House</h1>
+  <p class="lead">A one-bedroom panel house with a single-slope roof. The garden side is the tall side, with a 6 m glass slider to the lounge and a 3 m slider to the bedroom. The entrance side is lower and more closed, with the front door, kitchen, toilet and bathroom. A steel beam on three columns runs down the middle of the house, and a lintel spans over the sliders.</p>
+  <figure class="hero">
+    <img src="./miombo-board.jpg" alt="Artist's impressions of the Miombo House: garden-side exterior with glass sliders, two aerial cutaways of the layout, lounge, kitchen and dining, bedroom, bathroom and entrance-side exterior" width="1536" height="1024" data-zoom>
+    <figcaption>Artist's impressions made from the 3D model. Finishes, furniture, lights and landscaping are illustrative.</figcaption>
+  </figure>
+  <div class="stats">
+    <div><small>Length</small><strong>10.76 m</strong><em>9 panels of 1.195 m</em></div>
+    <div><small>Depth</small><strong>≈ 8.3 m</strong><em>about 89 m² outside</em></div>
+    <div><small>Walls</small><strong>2.4 → 3.38 m</strong><em>single-slope roof</em></div>
+    <div><small>Glass sliders</small><strong>6 m + 3 m</strong><em>2.1 m high, garden side</em></div>
+    <div><small>Steel</small><strong>1 beam</strong><em>on 3 columns + slider lintel</em></div>
+  </div>
+  <h2>Rooms</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Room</th><th class="n">Area</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Lounge</td><td class="n">25.6 m²</td><td>6 m slider to the garden</td></tr>
+      <tr><td>Bedroom</td><td class="n">26.2 m²</td><td>3 m slider to the garden</td></tr>
+      <tr><td>Kitchen</td><td class="n">14.1 m²</td><td>Island with hob, counter along the back wall</td></tr>
+      <tr><td>Dining</td><td class="n">5.4 m²</td><td>Open to lounge and kitchen</td></tr>
+      <tr><td>Bathroom</td><td class="n">8.5 m²</td><td>Shower, basin and vanity</td></tr>
+      <tr><td>Toilet</td><td class="n">2.4 m²</td><td>Separate WC by the entrance</td></tr>
+      <tr><td>Entrance</td><td class="n">2.9 m²</td><td>Front door on the low side</td></tr>
+      <tr class="tot"><td>Total rooms</td><td class="n">85.1 m²</td><td></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Sizes from the wall layout drawing and the 3D model. Tap any picture to see it full size.</p>
+  <h2>Outside</h2>
+  <div class="mgrid">
+    <figure><img src="./miombo-01-garden-side-street-level.jpg" alt="Garden side at eye level: tall wall with the two glass sliders" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Garden side, eye level</figcaption></figure>
+    <figure><img src="./miombo-02-garden-side-corner.jpg" alt="Garden side from the corner, showing the lounge and bedroom sliders and the bedroom-end wall" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Garden side, bedroom corner</figcaption></figure>
+    <figure><img src="./miombo-03-lounge-end-corner.jpg" alt="Lounge end and garden side from above the corner" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Lounge end corner</figcaption></figure>
+    <figure><img src="./miombo-04-entrance-side-street-level.jpg" alt="Entrance side at eye level: lower wall with front door and small windows" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Entrance side, eye level</figcaption></figure>
+    <figure><img src="./miombo-05-entrance-side-corner.jpg" alt="Entrance side from above the corner, roof sloping down towards the front door" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Entrance side corner</figcaption></figure>
+    <figure><img src="./miombo-06-roof-off-aerial.jpg" alt="Aerial view with the roof removed, showing all rooms and the steel beam down the middle" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Roof off, from above</figcaption></figure>
+  </div>
+  <h2>Inside</h2>
+  <div class="mgrid">
+    <figure><img src="./miombo-08-lounge-to-garden.jpg" alt="Lounge looking out through the 6 m slider" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Lounge, towards the garden</figcaption></figure>
+    <figure><img src="./miombo-09-kitchen-and-dining.jpg" alt="From the lounge towards the kitchen island, dining table and front door, with the steel beam overhead" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Kitchen and dining</figcaption></figure>
+    <figure><img src="./miombo-10-front-door-view.jpg" alt="From the front door past the dining table to the lounge slider" width="3600" height="2592" loading="lazy" data-zoom><figcaption>From the front door</figcaption></figure>
+    <figure><img src="./miombo-11-bedroom.jpg" alt="Bedroom with the bed against a low headboard wall, steel beam and column overhead" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Bedroom</figcaption></figure>
+    <figure><img src="./miombo-12-bedroom-to-garden.jpg" alt="Bedroom looking out through the 3 m slider" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Bedroom, towards the garden</figcaption></figure>
+    <figure><img src="./miombo-13-bathroom.jpg" alt="Bathroom with basin counter, shower tray and door" width="3600" height="2592" loading="lazy" data-zoom><figcaption>Bathroom</figcaption></figure>
+  </div>
+  <h2>Plan, structure and colour</h2>
+  <figure class="hero">
+    <img src="./miombo-views.jpg" alt="Model views: exterior, labelled plan with room areas, structure view showing the beam on 3 columns and the lintel over the sliders, lounge, kitchen, bedroom, and a charcoal exterior" width="1206" height="1742" loading="lazy" data-zoom style="max-width:720px;margin:0 auto">
+    <figcaption>3D model views. Top right: labelled plan with room areas. Middle left: the structure, a beam on 3 columns down the middle and a lintel over the sliders. Bottom: the house in charcoal cladding.</figcaption>
+  </figure>
 </section>
 
 <section class="tab" id="tab-gallery">
@@ -481,7 +545,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 
 </main>
 <script>
-const APP_VERSION = 'v4 · 18 Oct 2026 · walkthrough + bedroom views';
+const APP_VERSION = 'v5 · 26 Oct 2026 · Miombo House';
 const STORE = 'panelhouse.v1';
 const W_ = 'window';
 const DEFAULTS = {
@@ -1114,6 +1178,18 @@ v3.addEventListener('pointermove', (e) => {
 });
 const endDrag = () => { if (dragging) { dragging = null; sync3d(); rerender3d(); } };
 v3.addEventListener('pointerup', endDrag); v3.addEventListener('pointercancel', endDrag);
+// Tap a Miombo picture to see it full size; tap again or press Escape to close.
+const closeZoom = () => { const lb = document.querySelector('.lightbox'); if (lb) lb.remove(); };
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.lightbox')) { closeZoom(); return; }
+  const go = e.target.closest('[data-goto]'); if (go) { showTab(go.dataset.goto); return; }
+  const img = e.target.closest('img[data-zoom]'); if (!img) return;
+  const fig = img.closest('figure'), cap = fig && fig.querySelector('figcaption');
+  const lb = document.createElement('div'); lb.className = 'lightbox'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-label', img.alt);
+  lb.innerHTML = `<img src="${img.getAttribute('src')}" alt="${esc(img.alt)}">${cap ? `<p>${esc(cap.textContent)}</p>` : ''}`;
+  document.body.appendChild(lb);
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeZoom(); });
 $('ver').textContent = APP_VERSION; $('ver2').textContent = APP_VERSION;
 showTab(S.tab || 'overview');
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch((err) => console.warn('SW failed', err)));

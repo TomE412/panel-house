@@ -1,9 +1,10 @@
 # Kit-Built Panel House — PWA
 
-Concept app for the steel-kit + 100 mm IBR/EPS panel house. Version v4 · 18 Oct 2026 (spine + pillars, versions A and B, gallery, walkthrough).
+Concept app for the steel-kit + 100 mm IBR/EPS panel house. Version v5 · 26 Oct 2026 (adds the Miombo House tab; spine + pillars versions A and B, gallery, walkthrough).
 
 ## Tabs
 - **Overview** – render (artist's impression), key figures, assembly steps, Share button.
+- **Miombo House** – one-bedroom single-slope design: board of impressions, key sizes, rooms, 12 model renders (tap to enlarge), plan + structure sheet.
 - **Gallery** – walkthrough video, 3D model views (living, both bedrooms), artist's impressions of interior and exterior finishes.
 - **System** – cutaway, end section, version A vs B comparison, open questions.
 - **Layout** – tap wall panels to make windows/doors; bracing check; front elevation.
@@ -15,7 +16,7 @@ Layout, prices, supplier names and numbers are saved on the device (localStorage
 The 3D view and costing use whatever layout is set on the Layout tab.
 
 ## Files (keep them together in one folder)
-index.html · manifest.json · sw.js · render.jpg · interior.jpg · finishes.jpg · walkthrough.mp4 · walkthrough-poster.jpg · model-living-B.jpg · model-bedroom-B.jpg · model-bedroom-A.jpg · icon-192.png · icon-512.png · apple-touch-icon.png
+index.html · manifest.json · sw.js · miombo-*.jpg · render.jpg · interior.jpg · finishes.jpg · walkthrough.mp4 · walkthrough-poster.jpg · model-living-B.jpg · model-bedroom-B.jpg · model-bedroom-A.jpg · icon-192.png · icon-512.png · apple-touch-icon.png
 
 ## Publish on GitHub Pages
 1. GitHub Desktop → File → New repository → name it `panel-house`.
