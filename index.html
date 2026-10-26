@@ -595,7 +595,7 @@ ul.qs{margin:0;padding-left:20px;line-height:1.55;max-width:760px}
 
 </main>
 <script>
-const APP_VERSION = 'v6 · 26 Oct 2026 · Miombo 3D + walkthrough';
+const APP_VERSION = 'v7 · 26 Oct 2026 · Miombo 3D matches the drawing';
 const STORE = 'panelhouse.v1';
 const W_ = 'window';
 const DEFAULTS = {
@@ -1218,7 +1218,8 @@ const MB = (() => {
     sand: { wall: '#CDBF9F', roof: '#3A3F44', name: 'Sand, dark roof' }, white: { wall: '#E4E7E6', roof: '#D3D6D6', name: 'White' }
   };
   const INWALL = '#DCDCD7', CEIL = '#E4E4DF', STEEL = '#2E363C', HOT = '#C24A14', GLASS = '#9DBFD3';
-  const PRESETS = [['Garden side', 90, 18], ['Entrance side', 270, 18], ['Lounge end', 180, 20], ['Bedroom end', 0, 20], ['Corner', 128, 32], ['From above', 100, 82]];
+  // Orbit angle of the camera in the 3D world: 270 = garden side, 90 = entrance side. "From above" shows it as on the drawing.
+  const PRESETS = [['Garden side', 270, 18], ['Entrance side', 90, 18], ['Lounge end', 180, 20], ['Bedroom end', 0, 20], ['Corner', 232, 32], ['From above', 270, 84]];
   const GOTO = [['Garden', 5.4, 17, 270, 4], ['Front door', 4.4, -3.2, 90, 4], ['Entrance', 4.35, 0.7, 90, 0], ['Kitchen', 3.9, 4.5, 215, -8],
     ['Dining', 5.95, 3.7, 180, -4], ['Lounge', 5.8, 5.2, 150, 0], ['Bedroom', 7.0, 7.6, 300, -2], ['Bathroom', 7.0, 1.0, 0, -6], ['Toilet', 5.76, 1.6, 270, -10]];
   // Guided tour: [x, y, heading, look, seconds to get there]
@@ -1236,7 +1237,11 @@ const MB = (() => {
   const avg = (P) => mul(P.reduce((s, p) => add(s, p), [0, 0, 0]), 1 / P.length);
   const roomAt = (x, y) => { const r = ROOMS.find((q) => x >= q[1] && x <= q[3] && y >= q[2] && y <= q[4]); return r ? r[0] : 'Outside'; };
 
-  const st = () => S.mb || (S.mb = { view: 'orbit', mode: 'fin', clad: 'grey', yaw: 128, pitch: 28, zoom: 50, x: 4.4, y: -3.2, h: 90, t: 4 });
+  const st = () => {
+    if (!S.mb) S.mb = { view: 'orbit', mode: 'fin', clad: 'grey', yaw: 232, pitch: 28, zoom: 50, x: 4.4, y: -3.2, h: 90, t: 4 };
+    if (!S.mb.flip) { S.mb.flip = 1; S.mb.yaw = 232; } // v6 saved views were taken from the mirrored model
+    return S.mb;
+  };
   let scene = null, sceneKey = '', infos = [], sel = -1;
 
   function build(mode, clad) {
@@ -1329,6 +1334,14 @@ const MB = (() => {
         .forEach((f) => sc.roof.push({ k: kRoof, ctr: avg(f[1]), faces: [{ n: f[0], p: f[1], c: '#2E3439', op: ro }] }));
       sc.ceil.push({ k: kRoof, faces: [{ n: mul(rn, -1), p: [b00, b10, b11, b01], c: CEIL, st: 'rgba(31,38,43,0.1)' }] });
     }
+    // The plan is entered as drawn (entrance at the top of the page, y running down). Flip y into the 3D world
+    // (y running up) so the model matches the blueprint instead of its mirror image.
+    const fp = (p) => [p[0], D - p[1], p[2]];
+    [sc.under, sc.ceil, sc.objs, sc.roof].forEach((list) => list.forEach((o) => {
+      if (o.ctr) o.ctr = fp(o.ctr);
+      o.faces.forEach((fc) => { fc.p = fc.p.map(fp); if (fc.n) fc.n = [fc.n[0], -fc.n[1], fc.n[2]]; });
+    }));
+    sc.labels.forEach((lb) => { lb.p = fp(lb.p); });
     return sc;
   }
 
@@ -1336,9 +1349,10 @@ const MB = (() => {
     const s = st();
     if (s.view === 'walk') {
       const h = s.h * Math.PI / 180, t = s.t * Math.PI / 180;
-      const f = [Math.cos(h) * Math.cos(t), Math.sin(h) * Math.cos(t), Math.sin(t)];
+      // Position and heading are kept in plan terms; flip y for the 3D world (see build).
+      const f = [Math.cos(h) * Math.cos(t), -Math.sin(h) * Math.cos(t), Math.sin(t)];
       const r = unit(cross(f, [0, 0, 1])), u = cross(r, f);
-      return { C: [s.x, s.y, 1.6], f, r, u, FL: 560 };
+      return { C: [s.x, D - s.y, 1.6], f, r, u, FL: 560 };
     }
     const a = s.yaw * Math.PI / 180, p = s.pitch * Math.PI / 180, R = 30 - s.zoom * 0.21, Tg = [L / 2, D / 2, 1.0];
     const C = add(Tg, mul([Math.cos(p) * Math.cos(a), Math.cos(p) * Math.sin(a), Math.sin(p)], R));
@@ -1371,7 +1385,7 @@ const MB = (() => {
       const A = scr(a), B = scr(b); out.push(`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${color}" stroke-width="${w}"/>`);
     };
     scene.under.forEach((o) => o.faces.forEach((fc) => face(fc, o.k)));
-    const underRoof = C[2] < zr(C[1]);
+    const underRoof = C[2] < zr(D - C[1]);
     if (underRoof) scene.ceil.forEach((o) => o.faces.forEach((fc) => face(fc, o.k)));
     const dist = (o) => Math.hypot(o.ctr[0] - C[0], o.ctr[1] - C[1], o.ctr[2] - C[2]);
     const sorted = scene.objs.concat(underRoof ? scene.roof.filter((o) => !o.seams) : []).map((o) => ({ o, d: dist(o) })).sort((a, b) => b.d - a.d);
@@ -1379,7 +1393,7 @@ const MB = (() => {
     if (!underRoof) {
       scene.roof.map((o) => ({ o, d: dist(o) })).sort((a, b) => b.d - a.d).forEach(({ o }) => {
         o.faces.forEach((fc) => face(fc, o.k));
-        if (o.seams && dot(o.faces[0].n, sub(C, o.faces[0].p[0])) > 0) for (let x = 0; x <= L + 0.01; x += 1.195) line([x, -OH, zr(-OH) + 0.125], [x, D + OH, zr(D + OH) + 0.125], 'rgba(31,38,43,0.3)', 1);
+        if (o.seams && dot(o.faces[0].n, sub(C, o.faces[0].p[0])) > 0) for (let x = 0; x <= L + 0.01; x += 1.195) line([x, D + OH, zr(-OH) + 0.125], [x, -OH, zr(D + OH) + 0.125], 'rgba(31,38,43,0.3)', 1);
       });
     }
     scene.labels.forEach((lb) => {
@@ -1419,8 +1433,8 @@ const MB = (() => {
     const s = st(), h = s.h * Math.PI / 180, sp = 1.4 * dt;
     if (keys.has('f')) move(Math.cos(h) * sp, Math.sin(h) * sp);
     if (keys.has('b')) move(-Math.cos(h) * sp, -Math.sin(h) * sp);
-    if (keys.has('l')) s.h = (s.h + 75 * dt) % 360;
-    if (keys.has('r')) s.h = (s.h - 75 * dt + 360) % 360;
+    if (keys.has('l')) s.h = (s.h - 75 * dt + 360) % 360;
+    if (keys.has('r')) s.h = (s.h + 75 * dt) % 360;
     render(); walkRaf = requestAnimationFrame(walkLoop);
   }
   const press = (k) => { stopTour(); keys.add(k); if (!walkRaf) { lastT = 0; walkRaf = requestAnimationFrame(walkLoop); } };
@@ -1491,7 +1505,7 @@ const MB = (() => {
     const s = st();
     if (ptrs.size === 2 && drag.pinch && s.view === 'orbit') { const [p, q] = [...ptrs.values()]; s.zoom = Math.max(0, Math.min(100, drag.zoom + (Math.hypot(p[0] - q[0], p[1] - q[1]) - drag.pinch) * 0.25)); drag.moved = 99; req(); return; }
     const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; drag.moved = Math.max(drag.moved, Math.abs(dx) + Math.abs(dy));
-    if (s.view === 'walk') { s.h = ((drag.h + dx * 0.25) % 360 + 360) % 360; s.t = Math.max(-30, Math.min(45, drag.t + dy * 0.2)); }
+    if (s.view === 'walk') { s.h = ((drag.h - dx * 0.25) % 360 + 360) % 360; s.t = Math.max(-30, Math.min(45, drag.t + dy * 0.2)); }
     else { s.yaw = drag.yaw - dx * 0.4; s.pitch = Math.max(4, Math.min(88, drag.pitch + dy * 0.3)); }
     req();
   });

@@ -1,6 +1,6 @@
 # Kit-Built Panel House — PWA
 
-Concept app for the steel-kit + 100 mm IBR/EPS panel house. Version v6 · 26 Oct 2026 (Miombo House tab and Miombo 3D look-around + walkthrough; spine + pillars versions A and B, gallery, walkthrough).
+Concept app for the steel-kit + 100 mm IBR/EPS panel house. Version v7 · 26 Oct 2026 (Miombo House tab and Miombo 3D look-around + walkthrough; spine + pillars versions A and B, gallery, walkthrough).
 
 ## Tabs
 - **Overview** – render (artist's impression), key figures, assembly steps, Share button.
